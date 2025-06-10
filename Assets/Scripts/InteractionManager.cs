@@ -1,13 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 public class InteractionManager : MonoBehaviour
 {
     public float rayDistance = 5f;
     public InspectUIManager uiManager;
     public ObjectInspector inspector;
-
     public PlayerController playerController;
 
     private GameObject currentTarget;
@@ -32,15 +32,6 @@ public class InteractionManager : MonoBehaviour
         };
     }
 
-    void ExitInspectMode()
-    {
-        isInspecting = false;
-        inspector.EndInspection();
-
-        // Re-enable player controller
-        if (playerController != null) playerController.enabled = true;
-    }
-
     void OnEnable() => controls.Enable();
     void OnDisable() => controls.Disable();
 
@@ -55,7 +46,7 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
-            if (hitObject.CompareTag("Interactable"))
+            if (hitObject.CompareTag("Interactable") || hitObject.CompareTag("SceneChanger"))
             {
                 if (hitObject != currentTarget)
                 {
@@ -81,7 +72,20 @@ public class InteractionManager : MonoBehaviour
 
     void TryInspect()
     {
-        if (currentTarget != null && !isInspecting)
+        if (currentTarget == null || isInspecting) return;
+
+        if (currentTarget.CompareTag("SceneChanger"))
+        {
+            SceneTransitionObject transition = currentTarget.GetComponent<SceneTransitionObject>();
+            if (transition != null)
+            {
+                transition.LoadScene();
+                return;
+            }
+        }
+
+        // If it's a normal interactable object
+        if (currentTarget.CompareTag("Interactable"))
         {
             isInspecting = true;
             uiManager.ShowPrompt(false);
@@ -90,6 +94,15 @@ public class InteractionManager : MonoBehaviour
             // Disable player controller to stop movement & look
             if (playerController != null) playerController.enabled = false;
         }
+    }
+
+    void ExitInspectMode()
+    {
+        isInspecting = false;
+        inspector.EndInspection();
+
+        if (playerController != null)
+            playerController.enabled = true;
     }
 
     void ClearHighlight()
