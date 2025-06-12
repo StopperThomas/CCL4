@@ -3,6 +3,8 @@ using UnityEngine;
 public class CrosshairRaycaster : MonoBehaviour
 {
     public float rayDistance = 5f;
+    public InspectUIManager uiManager;
+
     private GameObject currentTarget;
 
     void Update()
@@ -12,23 +14,38 @@ public class CrosshairRaycaster : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
-            if (hit.collider.CompareTag("Interactable"))
+            GameObject hitObj = hit.collider.gameObject;
+
+            bool isInteractable = hitObj.CompareTag("Interactable");
+            bool isScrew = hitObj.GetComponent<Screw>() != null;
+            bool isScrewdriver = hitObj.CompareTag("Screwdriver");
+            bool isDoor = hitObj.CompareTag("SceneChanger");
+
+            if (isInteractable || isScrew || isScrewdriver || isDoor)
             {
-                if (hit.collider.gameObject != currentTarget)
+                if (hitObj != currentTarget)
                 {
                     ClearHighlight();
-                    currentTarget = hit.collider.gameObject;
+                    currentTarget = hitObj;
                     ApplyHighlight(currentTarget);
                 }
+
+                // Show prompt based on type
+                if (isInteractable || isDoor)
+                    uiManager.ShowPrompt(true, "E");
+                else if (isScrew || isScrewdriver)
+                    uiManager.ShowPrompt(true, "LMB");
             }
             else
             {
                 ClearHighlight();
+                uiManager.ShowPrompt(false);
             }
         }
         else
         {
             ClearHighlight();
+            uiManager.ShowPrompt(false);
         }
     }
 

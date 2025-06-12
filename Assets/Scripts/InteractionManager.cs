@@ -15,20 +15,36 @@ public class InteractionManager : MonoBehaviour
 
     private PlayerInputActions controls;
 
+    private Screwdriver equippedScrewdriver;
+
+    public void SetEquippedScrewdriver(Screwdriver screwdriver)
+    {
+        equippedScrewdriver = screwdriver;
+    }
+
+
     void Awake()
     {
         controls = new PlayerInputActions();
 
-        controls.Player.Inspect.performed += ctx => {
+        controls.Player.Inspect.performed += ctx =>
+        {
             if (isInspecting)
                 ExitInspectMode();
             else
                 TryInspect();
         };
 
-        controls.Player.Cancel.performed += ctx => {
+        controls.Player.Cancel.performed += ctx =>
+        {
             if (isInspecting)
                 ExitInspectMode();
+        };
+
+        controls.Player.Click.performed += ctx =>
+        {
+            if (!isInspecting)
+                TryClick();
         };
     }
 
@@ -54,19 +70,15 @@ public class InteractionManager : MonoBehaviour
                     currentTarget = hitObject;
                     EnableOutline(currentTarget, true);
                 }
-
-                uiManager.ShowPrompt(true);
             }
             else
             {
                 ClearHighlight();
-                uiManager.ShowPrompt(false);
             }
         }
         else
         {
             ClearHighlight();
-            uiManager.ShowPrompt(false);
         }
     }
 
@@ -88,11 +100,17 @@ public class InteractionManager : MonoBehaviour
         if (currentTarget.CompareTag("Interactable"))
         {
             isInspecting = true;
-            uiManager.ShowPrompt(false);
             inspector.StartInspection(currentTarget);
 
             // Disable player controller to stop movement & look
             if (playerController != null) playerController.enabled = false;
+        }
+
+        Screw screw = currentTarget.GetComponent<Screw>();
+        if (screw != null)
+        {
+            screw.TryUnscrew(equippedScrewdriver);
+            return;
         }
     }
 
@@ -120,6 +138,37 @@ public class InteractionManager : MonoBehaviour
         if (outline != null)
         {
             outline.enabled = enable;
+        }
+    }
+    
+    void TryClick()
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, rayDistance))
+        {
+            GameObject hitObject = hit.collider.gameObject;
+
+            // Check if it's a screw
+            Screw screw = hitObject.GetComponent<Screw>();
+            if (screw != null)
+            {
+                screw.TryUnscrew(equippedScrewdriver);
+                return;
+            }
+
+            // Check if it's a screwdriver
+            Screwdriver screwdriver = hitObject.GetComponent<Screwdriver>();
+            if (screwdriver != null)
+            {
+                SetEquippedScrewdriver(screwdriver);
+                Debug.Log("Equipped screwdriver: " + screwdriver.name);
+
+                // Optionally, give player some feedback here, like UI update
+
+                return;
+            }
         }
     }
 }
