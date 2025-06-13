@@ -2,8 +2,19 @@ using UnityEngine;
 
 public class Screw : MonoBehaviour
 {
+    public string screwID;          // Unique ID, set in inspector
     public ScrewType screwType;
     public bool isUnscrewed = false;
+
+    void Start()
+    {
+        // Check if this screw was already unscrewed from saved state
+        if (GameStateManager.Instance != null && GameStateManager.Instance.IsScrewUnscrewed(screwID))
+        {
+            isUnscrewed = true;
+            gameObject.SetActive(false);  // Hide it because it's already unscrewed
+        }
+    }
 
     public void TryUnscrew(Screwdriver equippedScrewdriver)
     {
@@ -13,13 +24,12 @@ public class Screw : MonoBehaviour
         {
             Debug.Log("Correct screwdriver! Unscrewing...");
             isUnscrewed = true;
-            // Add unscrew animation, sound, or hide the screw
-            gameObject.SetActive(false); // Example behavior
+            GameStateManager.Instance.MarkScrewUnscrewed(screwID);  // Save this state
+            gameObject.SetActive(false); // Hide screw after unscrewing
         }
         else
         {
             Debug.Log("Wrong screwdriver. Try a different one.");
-            // Optionally play a failure sound or UI feedback
         }
     }
 }

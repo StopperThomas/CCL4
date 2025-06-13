@@ -422,6 +422,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cdb567f2b17a548b5e824f09a34d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screwID: screw2
   screwType: 1
   isUnscrewed: 0
 --- !u!1 &248305947
@@ -805,6 +806,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -930,6 +932,20 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &330585548
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdb41134855b81c4f8c4f90f8f614527, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rayDistance: 5
+  uiManager: {fileID: 2103586278}
 --- !u!4 &330935803 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8d0ce38f0cddfd446912feab00c3add7,
@@ -1341,6 +1357,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScrewDriverY
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 0107af42ba621d044b27698b07f03bc6,
+        type: 3}
+      propertyPath: m_TagString
+      value: Screwdriver
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1361,6 +1382,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 500300774}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0107af42ba621d044b27698b07f03bc6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 500300780}
   m_SourcePrefab: {fileID: 100100000, guid: 0107af42ba621d044b27698b07f03bc6, type: 3}
 --- !u!4 &500300772 stripped
 Transform:
@@ -1434,7 +1459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e8d28d3f50a8e4ab4532b05ca324b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screwdriver: {fileID: 0}
+  screwdriver: {fileID: 500300777}
 --- !u!114 &500300777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1447,7 +1472,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b748dceea6d3b14fbe65f61b8ffef35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screwdriverID: screwdriver4
   screwType: 3
+--- !u!114 &500300780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500300773}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &503771354
 GameObject:
   m_ObjectHideFlags: 0
@@ -2160,7 +2204,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 164.52518, w: 19.93512}
+  m_margin: {x: 0, y: 0, z: 132.19394, w: 19.93512}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -2519,6 +2563,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScrewDriverMinus
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_TagString
+      value: Screwdriver
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2539,6 +2588,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 936202797}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 936202803}
   m_SourcePrefab: {fileID: 100100000, guid: a2fa3b5fb733f664eafdfc2995a05770, type: 3}
 --- !u!4 &936202795 stripped
 Transform:
@@ -2612,7 +2665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e8d28d3f50a8e4ab4532b05ca324b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screwdriver: {fileID: 0}
+  screwdriver: {fileID: 936202800}
 --- !u!114 &936202800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2625,7 +2678,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b748dceea6d3b14fbe65f61b8ffef35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screwdriverID: screwdriver1
   screwType: 0
+--- !u!114 &936202803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936202796}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &941549882
 GameObject:
   m_ObjectHideFlags: 0
@@ -2639,6 +2711,7 @@ GameObject:
   - component: {fileID: 941549885}
   - component: {fileID: 941549884}
   - component: {fileID: 941549883}
+  - component: {fileID: 941549888}
   m_Layer: 0
   m_Name: Door
   m_TagString: SceneChanger
@@ -2745,6 +2818,24 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &941549888
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941549882}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1001 &1007201301
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2886,6 +2977,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cdb567f2b17a548b5e824f09a34d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screwID: screw3
   screwType: 2
   isUnscrewed: 0
 --- !u!1001 &1042532081
@@ -2971,6 +3063,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScrewDriverPlus
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cd36b9b3361f03d48aa08ca4ba89dabc,
+        type: 3}
+      propertyPath: m_TagString
+      value: Screwdriver
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2991,6 +3088,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1042532084}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: cd36b9b3361f03d48aa08ca4ba89dabc,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1042532090}
   m_SourcePrefab: {fileID: 100100000, guid: cd36b9b3361f03d48aa08ca4ba89dabc, type: 3}
 --- !u!4 &1042532082 stripped
 Transform:
@@ -3064,7 +3165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e8d28d3f50a8e4ab4532b05ca324b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screwdriver: {fileID: 0}
+  screwdriver: {fileID: 1042532087}
 --- !u!114 &1042532087
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3077,7 +3178,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b748dceea6d3b14fbe65f61b8ffef35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screwdriverID: screwdriver2
   screwType: 1
+--- !u!114 &1042532090
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1042532083}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1087420017
 GameObject:
   m_ObjectHideFlags: 0
@@ -3441,6 +3561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cdb567f2b17a548b5e824f09a34d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screwID: screw4
   screwType: 3
   isUnscrewed: 0
 --- !u!1001 &1168456149
@@ -3545,7 +3666,7 @@ GameObject:
   - component: {fileID: 1259422760}
   m_Layer: 0
   m_Name: Table
-  m_TagString: SceneChanger
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3848,6 +3969,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ScrewDriverTorx
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: aa3eca12d61e4554790e34d6dd0d9b87,
+        type: 3}
+      propertyPath: m_TagString
+      value: Screwdriver
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3868,6 +3994,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1323055301}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: aa3eca12d61e4554790e34d6dd0d9b87,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1323055307}
   m_SourcePrefab: {fileID: 100100000, guid: aa3eca12d61e4554790e34d6dd0d9b87, type: 3}
 --- !u!4 &1323055299 stripped
 Transform:
@@ -3941,7 +4071,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90e8d28d3f50a8e4ab4532b05ca324b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screwdriver: {fileID: 0}
+  screwdriver: {fileID: 1323055304}
 --- !u!114 &1323055304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3954,7 +4084,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b748dceea6d3b14fbe65f61b8ffef35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screwdriverID: screwdriver3
   screwType: 2
+--- !u!114 &1323055307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1323055300}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 4
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
 --- !u!1 &1395321810
 GameObject:
   m_ObjectHideFlags: 0
@@ -4203,6 +4352,50 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1264037827}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1619574914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1619574916}
+  - component: {fileID: 1619574915}
+  m_Layer: 0
+  m_Name: GameStateManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1619574915
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619574914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbc8444e479cf21469502bc71044ea3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1619574916
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1619574914}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.921512, y: 1.0025473, z: -3.1909308}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1649043790
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4492,6 +4685,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cdb567f2b17a548b5e824f09a34d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  screwID: screw1
   screwType: 0
   isUnscrewed: 0
 --- !u!4 &1867723332 stripped
@@ -4529,10 +4723,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 500300772}
+  - {fileID: 936202795}
   - {fileID: 1042532082}
   - {fileID: 1323055299}
-  - {fileID: 936202795}
+  - {fileID: 500300772}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1956267887 stripped
@@ -4827,6 +5021,7 @@ SceneRoots:
   - {fileID: 2103586279}
   - {fileID: 1158073740}
   - {fileID: 853638738}
+  - {fileID: 1619574916}
   - {fileID: 941549887}
   - {fileID: 352103193}
   - {fileID: 1868930178}

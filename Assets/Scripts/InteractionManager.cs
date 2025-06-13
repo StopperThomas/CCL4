@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -16,12 +15,6 @@ public class InteractionManager : MonoBehaviour
     private PlayerInputActions controls;
 
     private Screwdriver equippedScrewdriver;
-
-    public void SetEquippedScrewdriver(Screwdriver screwdriver)
-    {
-        equippedScrewdriver = screwdriver;
-    }
-
 
     void Awake()
     {
@@ -46,6 +39,24 @@ public class InteractionManager : MonoBehaviour
             if (!isInspecting)
                 TryClick();
         };
+    }
+
+    void Start()
+    {
+        // Restore equipped screwdriver from saved state
+        if (GameStateManager.Instance != null)
+        {
+            string savedID = GameStateManager.Instance.GetEquippedScrewdriver();
+            if (!string.IsNullOrEmpty(savedID))
+            {
+                Screwdriver found = FindScrewdriverByID(savedID);
+                if (found != null)
+                {
+                    equippedScrewdriver = found;
+                    Debug.Log("Equipped screwdriver restored: " + savedID);
+                }
+            }
+        }
     }
 
     void OnEnable() => controls.Enable();
@@ -96,13 +107,11 @@ public class InteractionManager : MonoBehaviour
             }
         }
 
-        // If it's a normal interactable object
         if (currentTarget.CompareTag("Interactable"))
         {
             isInspecting = true;
             inspector.StartInspection(currentTarget);
 
-            // Disable player controller to stop movement & look
             if (playerController != null) playerController.enabled = false;
         }
 
@@ -140,7 +149,7 @@ public class InteractionManager : MonoBehaviour
             outline.enabled = enable;
         }
     }
-    
+
     void TryClick()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -150,7 +159,6 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
-            // Check if it's a screw
             Screw screw = hitObject.GetComponent<Screw>();
             if (screw != null)
             {
@@ -158,17 +166,35 @@ public class InteractionManager : MonoBehaviour
                 return;
             }
 
-            // Check if it's a screwdriver
             Screwdriver screwdriver = hitObject.GetComponent<Screwdriver>();
             if (screwdriver != null)
             {
                 SetEquippedScrewdriver(screwdriver);
                 Debug.Log("Equipped screwdriver: " + screwdriver.name);
-
-                // Optionally, give player some feedback here, like UI update
-
                 return;
             }
         }
+    }
+
+    public void SetEquippedScrewdriver(Screwdriver screwdriver)
+    {
+        equippedScrewdriver = screwdriver;
+
+        if (GameStateManager.Instance != null && screwdriver != null)
+        {
+            GameStateManager.Instance.SetEquippedScrewdriver(screwdriver.screwdriverID);
+        }
+    }
+
+    // Helper method to find a screwdriver in the scene by its ID
+    Screwdriver FindScrewdriverByID(string id)
+    {
+        Screwdriver[] all = FindObjectsOfType<Screwdriver>();
+        foreach (var sd in all)
+        {
+            if (sd.screwdriverID == id)
+                return sd;
+        }
+        return null;
     }
 }
