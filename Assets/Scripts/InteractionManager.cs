@@ -13,8 +13,12 @@ public class InteractionManager : MonoBehaviour
     private bool isInspecting = false;
 
     private PlayerInputActions controls;
-
     private Screwdriver equippedScrewdriver;
+
+    public void SetEquippedScrewdriver(Screwdriver screwdriver)
+    {
+        equippedScrewdriver = screwdriver;
+    }
 
     void Awake()
     {
@@ -38,6 +42,13 @@ public class InteractionManager : MonoBehaviour
         {
             if (!isInspecting)
                 TryClick();
+        };
+
+
+        controls.Player.AddToInventory.performed += ctx =>
+        {
+            if (isInspecting && currentTarget != null)
+                TryPickupItem(currentTarget);
         };
     }
 
@@ -73,7 +84,7 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
-            if (hitObject.CompareTag("Interactable") || hitObject.CompareTag("SceneChanger"))
+            if (hitObject.CompareTag("Interactable") || hitObject.CompareTag("InventoryItem"))
             {
                 if (hitObject != currentTarget)
                 {
@@ -107,11 +118,10 @@ public class InteractionManager : MonoBehaviour
             }
         }
 
-        if (currentTarget.CompareTag("Interactable"))
+        if (currentTarget.CompareTag("Interactable") || currentTarget.CompareTag("InventoryItem"))
         {
             isInspecting = true;
             inspector.StartInspection(currentTarget);
-
             if (playerController != null) playerController.enabled = false;
         }
 
@@ -120,6 +130,18 @@ public class InteractionManager : MonoBehaviour
         {
             screw.TryUnscrew(equippedScrewdriver);
             return;
+        }
+    }
+
+    void TryPickupItem(GameObject target)
+    {
+        if (!target.CompareTag("InventoryItem")) return;
+
+        PickupItem pickup = target.GetComponent<PickupItem>();
+        if (pickup != null)
+        {
+            pickup.OnPickup();
+            ExitInspectMode();
         }
     }
 
@@ -171,6 +193,13 @@ public class InteractionManager : MonoBehaviour
             {
                 SetEquippedScrewdriver(screwdriver);
                 Debug.Log("Equipped screwdriver: " + screwdriver.name);
+                return;
+            }
+
+            ToolPickup tool = hitObject.GetComponent<ToolPickup>();
+            if (tool != null)
+            {
+                tool.EquipTool();
                 return;
             }
         }
