@@ -6,11 +6,12 @@ TagManager:
   tags:
   - Interactable
   - SceneChanger
+  - InventoryItem
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ItemRendererLayer
   - Water
   - UI
   - 

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
 using UnityEngine.SceneManagement;
 
@@ -14,14 +13,12 @@ public class InteractionManager : MonoBehaviour
     private bool isInspecting = false;
 
     private PlayerInputActions controls;
-
     private Screwdriver equippedScrewdriver;
 
     public void SetEquippedScrewdriver(Screwdriver screwdriver)
     {
         equippedScrewdriver = screwdriver;
     }
-
 
     void Awake()
     {
@@ -46,6 +43,12 @@ public class InteractionManager : MonoBehaviour
             if (!isInspecting)
                 TryClick();
         };
+
+        controls.Player.AddToInventory.performed += ctx =>
+        {
+            if (isInspecting && currentTarget != null)
+                TryPickupItem(currentTarget);
+        };
     }
 
     void OnEnable() => controls.Enable();
@@ -62,7 +65,7 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
-            if (hitObject.CompareTag("Interactable") || hitObject.CompareTag("SceneChanger"))
+            if (hitObject.CompareTag("Interactable") || hitObject.CompareTag("InventoryItem"))
             {
                 if (hitObject != currentTarget)
                 {
@@ -96,13 +99,10 @@ public class InteractionManager : MonoBehaviour
             }
         }
 
-        // If it's a normal interactable object
-        if (currentTarget.CompareTag("Interactable"))
+        if (currentTarget.CompareTag("Interactable") || currentTarget.CompareTag("InventoryItem"))
         {
             isInspecting = true;
             inspector.StartInspection(currentTarget);
-
-            // Disable player controller to stop movement & look
             if (playerController != null) playerController.enabled = false;
         }
 
@@ -111,6 +111,18 @@ public class InteractionManager : MonoBehaviour
         {
             screw.TryUnscrew(equippedScrewdriver);
             return;
+        }
+    }
+
+    void TryPickupItem(GameObject target)
+    {
+        if (!target.CompareTag("InventoryItem")) return;
+
+        PickupItem pickup = target.GetComponent<PickupItem>();
+        if (pickup != null)
+        {
+            pickup.OnPickup();
+            ExitInspectMode();
         }
     }
 
@@ -140,7 +152,7 @@ public class InteractionManager : MonoBehaviour
             outline.enabled = enable;
         }
     }
-    
+
     void TryClick()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
@@ -150,7 +162,6 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
-            // Check if it's a screw
             Screw screw = hitObject.GetComponent<Screw>();
             if (screw != null)
             {
@@ -158,15 +169,18 @@ public class InteractionManager : MonoBehaviour
                 return;
             }
 
-            // Check if it's a screwdriver
             Screwdriver screwdriver = hitObject.GetComponent<Screwdriver>();
             if (screwdriver != null)
             {
                 SetEquippedScrewdriver(screwdriver);
                 Debug.Log("Equipped screwdriver: " + screwdriver.name);
+                return;
+            }
 
-                // Optionally, give player some feedback here, like UI update
-
+            ToolPickup tool = hitObject.GetComponent<ToolPickup>();
+            if (tool != null)
+            {
+                tool.EquipTool();
                 return;
             }
         }

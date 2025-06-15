@@ -6,9 +6,13 @@ public class ObjectInspector : MonoBehaviour
 
     private GameObject currentObject;
     private bool inspecting = false;
+    private bool isInventoryInspection = false;
+
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Transform originalParent;
+
+    
 
     void Update()
     {
@@ -24,6 +28,12 @@ public class ObjectInspector : MonoBehaviour
         {
             EndInspection();
         }
+
+        if (Input.GetKeyDown(KeyCode.E) && isInventoryInspection)
+        {
+            // Toggle rotation on/off with E during inventory inspection
+            inspecting = !inspecting;
+        }
     }
 
     public void StartInspection(GameObject obj)
@@ -31,6 +41,7 @@ public class ObjectInspector : MonoBehaviour
         if (inspecting) return;
 
         inspecting = true;
+        isInventoryInspection = false;
 
         originalPosition = obj.transform.position;
         originalRotation = obj.transform.rotation;
@@ -39,29 +50,51 @@ public class ObjectInspector : MonoBehaviour
         currentObject = obj;
         currentObject.GetComponent<Collider>().enabled = false;
 
-        // Detach from any parent so it doesn't inherit unexpected transforms
         currentObject.transform.SetParent(null);
 
-        // Position the object directly in front of the camera at a fixed distance
         Transform cam = Camera.main.transform;
-        float inspectDistance = 2f; // Adjust distance as needed
-
+        float inspectDistance = 2f;
         currentObject.transform.position = cam.position + cam.forward * inspectDistance;
-        currentObject.transform.rotation = Quaternion.identity; // Or any rotation you want
+        currentObject.transform.rotation = Quaternion.identity;
     }
+    public void StartInventoryInspection(GameObject obj)
+    {
+        if (currentObject != null)
+            Destroy(currentObject);
+
+        isInventoryInspection = true;
+        inspecting = true;
+
+        currentObject = obj;
+    }
+
 
     public void EndInspection()
     {
-        if (!inspecting) return;
+        if (!inspecting && !isInventoryInspection) return;
+
+        if (!isInventoryInspection)
+        {
+            // Restore world object
+            currentObject.transform.SetParent(originalParent);
+            currentObject.transform.position = originalPosition;
+            currentObject.transform.rotation = originalRotation;
+            currentObject.GetComponent<Collider>().enabled = true;
+
+            FindObjectOfType<InteractionManager>().enabled = true;
+        }
+        else
+        {
+            // Destroy UI-inspected render
+            if (currentObject != null)
+            {
+                Destroy(currentObject);
+                currentObject = null;
+            }
+        }
 
         inspecting = false;
-
-        currentObject.transform.SetParent(originalParent);
-        currentObject.transform.position = originalPosition;
-        currentObject.transform.rotation = originalRotation;
-        currentObject.GetComponent<Collider>().enabled = true;
-
+        isInventoryInspection = false;
         currentObject = null;
-        FindObjectOfType<InteractionManager>().enabled = true;
     }
 }
