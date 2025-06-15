@@ -20,8 +20,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("Inventory Settings")]
     [SerializeField] private UI_Inventory uiInventory;
-    [SerializeField] private GameObject inventoryUI; 
-    [SerializeField] private GameObject inspectionUI;        
+    [SerializeField] private GameObject inventoryUI;
+    [SerializeField] private GameObject inspectionUI;
 
     private CharacterController controller;
     private PlayerInputActions inputActions;
@@ -34,7 +34,7 @@ public class PlayerController : MonoBehaviour
     private float xRotation = 0f;
     private bool isGrounded;
     private bool jumpPressed = false;
-    private bool isInventoryOpen = false; 
+    private bool isInventoryOpen = false;
 
     private void Awake()
     {
@@ -57,7 +57,8 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Jump.performed += ctx => jumpPressed = true;
         inputActions.Player.Jump.canceled += ctx => jumpPressed = false;
 
-        inputActions.Player.Inventory.performed += ctx => ToggleInventory(); // <-- NEW
+        inputActions.Player.Inventory.performed += ctx => ToggleInventory();
+        inputActions.Player.DropItem.performed += ctx => TryDropSelectedItem(); // ✅ NEW
     }
 
     private void OnDisable()
@@ -67,12 +68,13 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Jump.performed -= ctx => jumpPressed = true;
         inputActions.Player.Jump.canceled -= ctx => jumpPressed = false;
 
-        inputActions.Player.Inventory.performed -= ctx => ToggleInventory(); // <-- NEW
+        inputActions.Player.Inventory.performed -= ctx => ToggleInventory();
+        inputActions.Player.DropItem.performed -= ctx => TryDropSelectedItem(); // ✅ NEW
     }
 
     private void Update()
     {
-        if (isInventoryOpen) return; // Disable movement/look if inventory is open
+        if (isInventoryOpen) return;
 
         HandleGroundCheck();
         HandleJump();
@@ -125,26 +127,39 @@ public class PlayerController : MonoBehaviour
         controller.Move(velocity * Time.deltaTime);
     }
 
-private void ToggleInventory()
-{
-    isInventoryOpen = !isInventoryOpen;
-
-    inventoryUI.SetActive(isInventoryOpen);
-    inspectionUI.SetActive(isInventoryOpen);
-
-    Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
-    Cursor.visible = isInventoryOpen;
-
-    
-    var interactionManager = FindObjectOfType<InteractionManager>();
-    if (interactionManager != null)
-        interactionManager.enabled = !isInventoryOpen;
-
-    
-    if (!isInventoryOpen)
+    private void ToggleInventory()
     {
+        isInventoryOpen = !isInventoryOpen;
+
+        inventoryUI.SetActive(isInventoryOpen);
+        inspectionUI.SetActive(isInventoryOpen);
+
+        Cursor.lockState = isInventoryOpen ? CursorLockMode.None : CursorLockMode.Locked;
+        Cursor.visible = isInventoryOpen;
+
+        var interactionManager = FindObjectOfType<InteractionManager>();
+        if (interactionManager != null)
+            interactionManager.enabled = !isInventoryOpen;
+
+        if (!isInventoryOpen)
+        {
+            FindObjectOfType<ItemInspectorUI>()?.HideItem();
+        }
+    }
+
+    private void TryDropSelectedItem()
+    {
+        if (!isInventoryOpen) return;
+
+        Item selectedItem = uiInventory.GetSelectedItem();
+        if (selectedItem == null || selectedItem.prefab3D == null) return;
+
+        InventoryManager.Instance.inventory.RemoveItem(selectedItem);
+
+        Vector3 dropPosition = transform.position + transform.forward * 1.5f;
+        Instantiate(selectedItem.prefab3D, dropPosition, Quaternion.identity);
+
+        Debug.Log("⬇️ Dropped item: " + selectedItem.itemName);
         FindObjectOfType<ItemInspectorUI>()?.HideItem();
     }
-}
-
 }

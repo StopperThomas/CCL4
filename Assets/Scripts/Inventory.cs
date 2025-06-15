@@ -21,7 +21,24 @@ public class Inventory
         Debug.Log("Item added: " + item.itemType + " Amount: " + item.amount);
         InventoryManager.Instance.uiInventory.RefreshInventoryItems();
     }
-    
+
+    public void RemoveItem(Item item)
+    {
+        if (item.itemType == Item.ItemType.Gear)
+        {
+            item.amount--;
+            if (item.amount <= 0)
+                itemList.Remove(item);
+        }
+        else
+        {
+            itemList.Remove(item);
+        }
+
+        Debug.Log("Removed item: " + item.itemName);
+        InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+    }
+
     public List<Item> GetItemList()
     {
         return itemList;

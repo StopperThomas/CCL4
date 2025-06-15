@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class UI_Inventory : MonoBehaviour
 {
     private Inventory inventory;
+
     [SerializeField] private Transform itemSlotContainer;
     [SerializeField] private Transform itemSlotTemplate;
 
+    private Item selectedItem; // ✅ Track currently selected item
 
     private void Awake()
     {
@@ -24,12 +26,10 @@ public class UI_Inventory : MonoBehaviour
             Debug.LogError(" itemSlotTemplate not found. Check hierarchy or assign manually.");
     }
 
-
     public void SetInventory(Inventory inventory)
     {
         this.inventory = inventory;
         RefreshInventoryItems();
-
     }
 
     public void RefreshInventoryItems()
@@ -53,15 +53,20 @@ public class UI_Inventory : MonoBehaviour
             Image image = itemSlot.Find("image").GetComponent<Image>();
             image.sprite = item.GetSprite();
 
-            
-
             // Add click listener to inspect
             Button button = itemSlot.GetComponent<Button>();
             button.onClick.RemoveAllListeners(); // Prevent duplicates
             button.onClick.AddListener(() =>
             {
+                selectedItem = item; // ✅ Store selected item
                 FindObjectOfType<ItemInspectorUI>()?.ShowItem(item);
             });
         }
+    }
+
+    // ✅ Expose selected item for PlayerController
+    public Item GetSelectedItem()
+    {
+        return selectedItem;
     }
 }
