@@ -52,6 +52,30 @@ public class CogwheelManager : MonoBehaviour
                     Debug.Log("Wrong cogwheel size or spot already occupied.");
                 }
             }
+
+            // Try pick up key
+            KeyPickup key = hit.collider.GetComponent<KeyPickup>();
+            if (key != null)
+            {
+                key.PickUp();
+                return;
+            }
+
+            // Try unlock lock
+            BoxLock lockComponent = hit.collider.GetComponent<BoxLock>();
+            if (lockComponent != null)
+            {
+                lockComponent.TryUnlock();
+                return;
+            }
+
+            // Try open box
+            Box box = hit.collider.GetComponent<Box>();
+            if (box != null)
+            {
+                box.TryOpen();
+                return;
+            }
         }
     }
 

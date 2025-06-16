@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class CrosshairRaycaster : MonoBehaviour
 {
@@ -6,6 +7,16 @@ public class CrosshairRaycaster : MonoBehaviour
     public InspectUIManager uiManager;
 
     private GameObject currentTarget;
+    private PlayerInputActions inputActions;
+
+    private void Awake()
+    {
+        inputActions = new PlayerInputActions();
+        inputActions.Player.Interact.performed += ctx => InteractWithObject();
+    }
+
+    private void OnEnable() => inputActions.Enable();
+    private void OnDisable() => inputActions.Disable();
 
     void Update()
     {
@@ -15,23 +26,20 @@ public class CrosshairRaycaster : MonoBehaviour
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
             GameObject hitObj = hit.collider.gameObject;
+            currentTarget = hitObj;
 
             bool isInteractable = hitObj.CompareTag("Interactable");
             bool isScrew = hitObj.GetComponent<Screw>() != null;
             bool isScrewdriver = hitObj.CompareTag("Screwdriver");
             bool isDoor = hitObj.CompareTag("SceneChanger");
+            bool isBox = hitObj.GetComponent<Box>() != null;
 
-            if (isInteractable || isScrew || isScrewdriver || isDoor)
+            if (isInteractable || isScrew || isScrewdriver || isDoor || isBox)
             {
-                if (hitObj != currentTarget)
-                {
-                    ClearHighlight();
-                    currentTarget = hitObj;
-                    ApplyHighlight(currentTarget);
-                }
+                ApplyHighlight(hitObj);
 
-                // Show prompt based on type
-                if (isInteractable || isDoor)
+                // Show appropriate UI prompt
+                if (isInteractable || isDoor || isBox)
                     uiManager.ShowPrompt(true, "E");
                 else if (isScrew || isScrewdriver)
                     uiManager.ShowPrompt(true, "LMB");
@@ -47,6 +55,21 @@ public class CrosshairRaycaster : MonoBehaviour
             ClearHighlight();
             uiManager.ShowPrompt(false);
         }
+    }
+
+    void InteractWithObject()
+    {
+        if (currentTarget == null) return;
+
+        // Handle Box interaction
+        Box box = currentTarget.GetComponent<Box>();
+        if (box != null)
+        {
+            box.TryOpen();
+            return;
+        }
+
+        // Add other interaction logic here as needed (e.g., screws, scene changers)
     }
 
     void ApplyHighlight(GameObject obj)
