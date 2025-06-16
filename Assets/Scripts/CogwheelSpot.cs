@@ -5,41 +5,51 @@ public class CogwheelSpot : MonoBehaviour
     public CogwheelType requiredType;
     private bool isOccupied = false;
 
-    // Call this when a cogwheel is placed
-    public bool TryPlaceCogwheel(Item equippedItem)
+    public bool TryPlaceEquippedCogwheel(Item item)
     {
-        if (isOccupied) return false;
-        if (equippedItem == null || equippedItem.itemType != ItemType.Cogwheel) return false;
-        if (equippedItem.cogwheelType != requiredType) return false;
-
-        if (equippedItem.prefab3D != null)
+        if (isOccupied)
         {
-            Instantiate(equippedItem.prefab3D, transform.position, transform.rotation, transform);
+            Debug.Log("Spot already occupied.");
+            return false;
         }
 
+        if (item == null || item.itemType != ItemType.Cogwheel)
+        {
+            Debug.Log("Not a valid cogwheel.");
+            return false;
+        }
+
+        if (item.cogwheelType != requiredType)
+        {
+            Debug.Log("Wrong cogwheel type.");
+            return false;
+        }
+
+        GameObject cogwheelObj = Instantiate(item.prefab3D, transform.position, transform.rotation);
+        cogwheelObj.transform.SetParent(transform);
         isOccupied = true;
 
-        if (equippedItem.amount > 1)
-        {
-            equippedItem.amount--;
-        }
-        else
-        {
-            InventoryManager.Instance.inventory.RemoveItem(equippedItem);
-            FindObjectOfType<InteractionManager>()?.UnequipItem();
-        }
-
-        InventoryManager.Instance.uiInventory.RefreshInventoryItems();
-
-        // ✅ Notify puzzle manager
+        Debug.Log("Cogwheel placed successfully.");
         PuzzleDoor.Instance?.CheckPuzzleCompletion();
 
         return true;
     }
 
-    // ✅ This method is what PuzzleDoor.cs expects to call
     public bool HasCorrectCogwheel()
-    {
-        return isOccupied;
-    }
+{
+    if (!isOccupied) return false;
+
+    Transform child = transform.GetChild(0); // assuming placed cogwheel is parented
+    if (child == null) return false;
+
+    Cogwheel cog = child.GetComponent<Cogwheel>();
+    if (cog == null) return false;
+
+    return cog.size == requiredType;
+}
+
+
+
+
+    public bool IsOccupied() => isOccupied;
 }

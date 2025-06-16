@@ -142,9 +142,15 @@ public class InteractionManager : MonoBehaviour
 
             // Try cogwheel placement
             CogwheelSpot spot = hitObject.GetComponent<CogwheelSpot>();
-            if (spot != null)
+            if (spot != null && equippedItem != null && equippedItem.itemType == ItemType.Cogwheel)
             {
-                bool placed = spot.TryPlaceCogwheel(equippedItem);
+                bool placed = spot.TryPlaceEquippedCogwheel(equippedItem);
+                if (placed)
+                {
+                    InventoryManager.Instance.inventory.RemoveItem(equippedItem);
+                    InventoryManager.Instance.uiInventory.UpdateEquippedSlot(null);
+                    equippedItem = null;
+                }
                 return;
             }
 
