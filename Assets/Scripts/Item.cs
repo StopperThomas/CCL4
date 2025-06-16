@@ -18,6 +18,9 @@ public class Item
     public string description;
     public GameObject prefab3D;
 
+    public ScrewType screwType;
+
+
     public Sprite GetSprite()
     {
         switch (itemType)

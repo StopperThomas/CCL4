@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     private CharacterController controller;
     private PlayerInputActions inputActions;
+    private InteractionManager interactionManager;
 
     private Inventory inventory;
 
@@ -40,6 +41,7 @@ public class PlayerController : MonoBehaviour
     {
         inputActions = new PlayerInputActions();
         controller = GetComponent<CharacterController>();
+        interactionManager = FindObjectOfType<InteractionManager>();
 
         inventory = InventoryManager.Instance.inventory;
         if (uiInventory != null)
@@ -49,8 +51,10 @@ public class PlayerController : MonoBehaviour
     private void OnEnable()
     {
         inputActions.Player.Enable();
+
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+
         inputActions.Player.Look.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Look.canceled += ctx => lookInput = Vector2.zero;
 
@@ -58,18 +62,29 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Jump.canceled += ctx => jumpPressed = false;
 
         inputActions.Player.Inventory.performed += ctx => ToggleInventory();
-        inputActions.Player.DropItem.performed += ctx => TryDropSelectedItem(); // ✅ NEW
+        inputActions.Player.DropItem.performed += ctx => TryDropSelectedItem();
+        inputActions.Player.EquipItem.performed += ctx => TryEquipInspectedItem();
+        inputActions.Player.UnequipItem.performed += ctx => interactionManager?.UnequipItem();
+
+
     }
 
     private void OnDisable()
     {
-        inputActions.Player.Disable();
+        inputActions.Player.Move.performed -= ctx => moveInput = ctx.ReadValue<Vector2>();
+        inputActions.Player.Move.canceled -= ctx => moveInput = Vector2.zero;
+
+        inputActions.Player.Look.performed -= ctx => lookInput = ctx.ReadValue<Vector2>();
+        inputActions.Player.Look.canceled -= ctx => lookInput = Vector2.zero;
 
         inputActions.Player.Jump.performed -= ctx => jumpPressed = true;
         inputActions.Player.Jump.canceled -= ctx => jumpPressed = false;
 
         inputActions.Player.Inventory.performed -= ctx => ToggleInventory();
-        inputActions.Player.DropItem.performed -= ctx => TryDropSelectedItem(); // ✅ NEW
+        inputActions.Player.DropItem.performed -= ctx => TryDropSelectedItem();
+        inputActions.Player.EquipItem.performed -= ctx => TryEquipInspectedItem();
+        inputActions.Player.UnequipItem.performed -= ctx => interactionManager?.UnequipItem();
+        inputActions.Player.Disable();
     }
 
     private void Update()
@@ -159,7 +174,18 @@ public class PlayerController : MonoBehaviour
         Vector3 dropPosition = transform.position + transform.forward * 1.5f;
         Instantiate(selectedItem.prefab3D, dropPosition, Quaternion.identity);
 
-        Debug.Log("⬇️ Dropped item: " + selectedItem.itemName);
+        Debug.Log("Dropped item: " + selectedItem.itemName);
         FindObjectOfType<ItemInspectorUI>()?.HideItem();
+    }
+
+    private void TryEquipInspectedItem()
+    {
+        if (!isInventoryOpen) return;
+
+        var inspector = FindObjectOfType<ItemInspectorUI>();
+        if (inspector != null)
+        {
+            inspector.TryEquipInspectedItem();
+        }
     }
 }

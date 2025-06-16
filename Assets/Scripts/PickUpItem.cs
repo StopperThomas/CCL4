@@ -5,21 +5,40 @@ public class PickupItem : MonoBehaviour
     public Item.ItemType itemType;
     public int amount = 1;
 
-public Item GetItem()
-{
-    Item item = new Item
+    [Header("Optional Custom Data")]
+    public string customName;
+    [TextArea] public string customDescription;
+    public GameObject custom3DPrefab;
+
+    public Item GetItem()
     {
-        itemType = itemType,
-        amount = amount,
-        itemName = itemType.ToString(),
-        description = "Description for " + itemType,
-        prefab3D = null 
-    };
+        Item item = new Item
+        {
+            itemType = itemType,
+            amount = amount,
+            itemName = string.IsNullOrEmpty(customName) ? itemType.ToString() : customName,
+            description = string.IsNullOrWhiteSpace(customDescription)
+                ? "Description for " + itemType
+                : customDescription,
+            prefab3D = ItemAssets.Instance.GetPrefab(itemType)
+        };
 
-    item.prefab3D = item.GetPrefab(); 
-    return item;
-}
+        // Special handling for screwdrivers
+        if (itemType == Item.ItemType.ScrewDriver)
+        {
+            Screwdriver screwdriverComponent = GetComponent<Screwdriver>();
+            if (screwdriverComponent != null)
+            {
+                item.screwType = screwdriverComponent.screwType;
+            }
+            else
+            {
+                Debug.LogWarning("Screwdriver component missing on PickupItem.");
+            }
+        }
 
+        return item;
+    }
 
     public void OnPickup()
     {

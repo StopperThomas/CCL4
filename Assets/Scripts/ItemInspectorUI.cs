@@ -150,4 +150,25 @@ public class ItemInspectorUI : MonoBehaviour
                 SetLayerRecursively(child.gameObject, newLayer);
         }
     }
+
+    public void TryEquipInspectedItem()
+{
+    if (currentItem != null && currentItem.itemType == Item.ItemType.ScrewDriver)
+    {
+        var ui = FindObjectOfType<UI_Inventory>();
+        if (ui != null)
+        {
+            ui.UpdateEquippedSlot(currentItem);
+        }
+
+        var interaction = FindObjectOfType<InteractionManager>();
+        if (interaction != null)
+        {
+            interaction.EquipFromUI(currentItem);
+        }
+
+        Debug.Log("Equipped from inspector: " + currentItem.itemName);
+    }
+}
+
 }

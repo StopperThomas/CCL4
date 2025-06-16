@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class InteractionManager : MonoBehaviour
 {
     public float rayDistance = 5f;
-    public InspectUIManager uiManager;
+
     public ObjectInspector inspector;
     public PlayerController playerController;
 
@@ -13,12 +13,7 @@ public class InteractionManager : MonoBehaviour
     private bool isInspecting = false;
 
     private PlayerInputActions controls;
-    private Screwdriver equippedScrewdriver;
-
-    public void SetEquippedScrewdriver(Screwdriver screwdriver)
-    {
-        equippedScrewdriver = screwdriver;
-    }
+    private Item equippedItem;
 
     void Awake()
     {
@@ -44,30 +39,11 @@ public class InteractionManager : MonoBehaviour
                 TryClick();
         };
 
-
         controls.Player.AddToInventory.performed += ctx =>
         {
             if (isInspecting && currentTarget != null)
                 TryPickupItem(currentTarget);
         };
-    }
-
-    void Start()
-    {
-        // Restore equipped screwdriver from saved state
-        if (GameStateManager.Instance != null)
-        {
-            string savedID = GameStateManager.Instance.GetEquippedScrewdriver();
-            if (!string.IsNullOrEmpty(savedID))
-            {
-                Screwdriver found = FindScrewdriverByID(savedID);
-                if (found != null)
-                {
-                    equippedScrewdriver = found;
-                    Debug.Log("Equipped screwdriver restored: " + savedID);
-                }
-            }
-        }
     }
 
     void OnEnable() => controls.Enable();
@@ -128,8 +104,28 @@ public class InteractionManager : MonoBehaviour
         Screw screw = currentTarget.GetComponent<Screw>();
         if (screw != null)
         {
-            screw.TryUnscrew(equippedScrewdriver);
+            screw.TryUnscrew(equippedItem);
             return;
+        }
+    }
+
+    void TryClick()
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit, rayDistance))
+        {
+            GameObject hitObject = hit.collider.gameObject;
+
+            Screw screw = hitObject.GetComponent<Screw>();
+            if (screw != null)
+            {
+                screw.TryUnscrew(equippedItem);
+                return;
+            }
+
+
         }
     }
 
@@ -172,58 +168,46 @@ public class InteractionManager : MonoBehaviour
         }
     }
 
-    void TryClick()
+    public void EquipFromUI(Item item)
     {
-        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        if (item.itemType != Item.ItemType.ScrewDriver)
         {
-            GameObject hitObject = hit.collider.gameObject;
-
-            Screw screw = hitObject.GetComponent<Screw>();
-            if (screw != null)
-            {
-                screw.TryUnscrew(equippedScrewdriver);
-                return;
-            }
-
-            Screwdriver screwdriver = hitObject.GetComponent<Screwdriver>();
-            if (screwdriver != null)
-            {
-                SetEquippedScrewdriver(screwdriver);
-                Debug.Log("Equipped screwdriver: " + screwdriver.name);
-                return;
-            }
-
-            ToolPickup tool = hitObject.GetComponent<ToolPickup>();
-            if (tool != null)
-            {
-                tool.EquipTool();
-                return;
-            }
+            Debug.LogWarning("Tried to equip non-screwdriver item.");
+            return;
         }
+
+        equippedItem = item;
+        Debug.Log("Equipped screwdriver: " + item.itemName + " Type: " + item.screwType);
     }
 
-    public void SetEquippedScrewdriver(Screwdriver screwdriver)
+    public Item GetEquippedItem()
     {
-        equippedScrewdriver = screwdriver;
-
-        if (GameStateManager.Instance != null && screwdriver != null)
-        {
-            GameStateManager.Instance.SetEquippedScrewdriver(screwdriver.screwdriverID);
-        }
+        return equippedItem;
+    }
+    public void UnequipItem()
+{
+    if (equippedItem == null)
+    {
+        Debug.Log("No item equipped to unequip.");
+        return;
     }
 
-    // Helper method to find a screwdriver in the scene by its ID
-    Screwdriver FindScrewdriverByID(string id)
+    
+    Inventory inventory = InventoryManager.Instance?.inventory;
+    if (inventory != null && !inventory.GetItemList().Contains(equippedItem))
     {
-        Screwdriver[] all = FindObjectsOfType<Screwdriver>();
-        foreach (var sd in all)
-        {
-            if (sd.screwdriverID == id)
-                return sd;
-        }
-        return null;
+        inventory.AddItem(equippedItem);
     }
+
+    Debug.Log("Unequipped item: " + equippedItem.itemName);
+
+    equippedItem = null;
+
+   
+    if (InventoryManager.Instance != null && InventoryManager.Instance.uiInventory != null)
+    {
+        InventoryManager.Instance.uiInventory.UpdateEquippedSlot(null);
+    }
+}
+
 }

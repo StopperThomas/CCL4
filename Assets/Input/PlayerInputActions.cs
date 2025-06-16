@@ -107,6 +107,24 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""26cbcd53-d9dd-4a43-a86f-bdc5ba648a51"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UnequipItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""063a268a-b8c0-40ab-946c-6895f003d6bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -252,6 +270,28 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""DropItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12914501-729b-47d8-9ca3-5f02a615bb0e"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8638626-fbfc-4ee2-8006-04320d610f9f"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UnequipItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -269,6 +309,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_AddToInventory = m_Player.FindAction("AddToInventory", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
+        m_Player_EquipItem = m_Player.FindAction("EquipItem", throwIfNotFound: true);
+        m_Player_UnequipItem = m_Player.FindAction("UnequipItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -339,6 +381,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_AddToInventory;
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_DropItem;
+    private readonly InputAction m_Player_EquipItem;
+    private readonly InputAction m_Player_UnequipItem;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -352,6 +396,8 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @AddToInventory => m_Wrapper.m_Player_AddToInventory;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
+        public InputAction @EquipItem => m_Wrapper.m_Player_EquipItem;
+        public InputAction @UnequipItem => m_Wrapper.m_Player_UnequipItem;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -388,6 +434,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @DropItem.started += instance.OnDropItem;
             @DropItem.performed += instance.OnDropItem;
             @DropItem.canceled += instance.OnDropItem;
+            @EquipItem.started += instance.OnEquipItem;
+            @EquipItem.performed += instance.OnEquipItem;
+            @EquipItem.canceled += instance.OnEquipItem;
+            @UnequipItem.started += instance.OnUnequipItem;
+            @UnequipItem.performed += instance.OnUnequipItem;
+            @UnequipItem.canceled += instance.OnUnequipItem;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -419,6 +471,12 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @DropItem.started -= instance.OnDropItem;
             @DropItem.performed -= instance.OnDropItem;
             @DropItem.canceled -= instance.OnDropItem;
+            @EquipItem.started -= instance.OnEquipItem;
+            @EquipItem.performed -= instance.OnEquipItem;
+            @EquipItem.canceled -= instance.OnEquipItem;
+            @UnequipItem.started -= instance.OnUnequipItem;
+            @UnequipItem.performed -= instance.OnUnequipItem;
+            @UnequipItem.canceled -= instance.OnUnequipItem;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -447,5 +505,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnAddToInventory(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);
+        void OnEquipItem(InputAction.CallbackContext context);
+        void OnUnequipItem(InputAction.CallbackContext context);
     }
 }

@@ -14,27 +14,28 @@ public class ObjectInspector : MonoBehaviour
 
     
 
-    void Update()
+   void Update()
+{
+    if (!inspecting || currentObject == null) return;
+
+    float rotX = Input.GetAxis("Mouse X") * 5f;
+    float rotY = Input.GetAxis("Mouse Y") * 5f;
+
+    currentObject.transform.Rotate(Vector3.up, -rotX, Space.World);
+    currentObject.transform.Rotate(Vector3.right, rotY, Space.World);
+
+    if (Input.GetKeyDown(KeyCode.Escape))
     {
-        if (!inspecting) return;
-
-        float rotX = Input.GetAxis("Mouse X") * 5f;
-        float rotY = Input.GetAxis("Mouse Y") * 5f;
-
-        currentObject.transform.Rotate(Vector3.up, -rotX, Space.World);
-        currentObject.transform.Rotate(Vector3.right, rotY, Space.World);
-
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            EndInspection();
-        }
-
-        if (Input.GetKeyDown(KeyCode.E) && isInventoryInspection)
-        {
-            // Toggle rotation on/off with E during inventory inspection
-            inspecting = !inspecting;
-        }
+        EndInspection();
     }
+
+    if (Input.GetKeyDown(KeyCode.E) && isInventoryInspection)
+    {
+    
+        inspecting = !inspecting;
+    }
+}
+
 
     public void StartInspection(GameObject obj)
     {
@@ -75,7 +76,7 @@ public class ObjectInspector : MonoBehaviour
 
         if (!isInventoryInspection)
         {
-            // Restore world object
+            
             currentObject.transform.SetParent(originalParent);
             currentObject.transform.position = originalPosition;
             currentObject.transform.rotation = originalRotation;
@@ -85,7 +86,7 @@ public class ObjectInspector : MonoBehaviour
         }
         else
         {
-            // Destroy UI-inspected render
+            
             if (currentObject != null)
             {
                 Destroy(currentObject);
