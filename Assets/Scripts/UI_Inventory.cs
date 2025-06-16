@@ -37,36 +37,43 @@ public class UI_Inventory : MonoBehaviour
     }
 
     public void RefreshInventoryItems()
+{
+    if (inventory == null)
     {
-        foreach (Transform child in itemSlotContainer)
-        {
-            if (child == itemSlotTemplate) continue;
-            Destroy(child.gameObject);
-        }
-
-        List<Item> itemList = inventory.GetItemList();
-        Debug.Log("Refreshing UI. Items in inventory: " + itemList.Count);
-
-        foreach (Item item in itemList)
-        {
-            Debug.Log("Adding item: " + item.itemName + ", amount: " + item.amount);
-
-            Transform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
-            itemSlot.gameObject.SetActive(true);
-
-            Image image = itemSlot.Find("image").GetComponent<Image>();
-            image.sprite = item.GetSprite();
-
-            // Add click listener to inspect
-            Button button = itemSlot.GetComponent<Button>();
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() =>
-            {
-                selectedItem = item;
-                FindObjectOfType<ItemInspectorUI>()?.ShowItem(item);
-            });
-        }
+        Debug.LogError("UI_Inventory: inventory is null! Did you forget to call SetInventory()?");
+        return;
     }
+
+    foreach (Transform child in itemSlotContainer)
+    {
+        if (child == itemSlotTemplate) continue;
+        Destroy(child.gameObject);
+    }
+
+    List<Item> itemList = inventory.GetItemList();
+    Debug.Log("Refreshing UI. Items in inventory: " + itemList.Count);
+
+    foreach (Item item in itemList)
+    {
+        Debug.Log("Adding item: " + item.itemName + ", amount: " + item.amount);
+
+        Transform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
+        itemSlot.gameObject.SetActive(true);
+
+        Image image = itemSlot.Find("image").GetComponent<Image>();
+        image.sprite = item.GetSprite();
+
+        // Add click listener to inspect
+        Button button = itemSlot.GetComponent<Button>();
+        button.onClick.RemoveAllListeners();
+        button.onClick.AddListener(() =>
+        {
+            selectedItem = item;
+            FindObjectOfType<ItemInspectorUI>()?.ShowItem(item);
+        });
+    }
+}
+
 
    public void UpdateEquippedSlot(Item item)
 {

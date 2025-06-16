@@ -7,18 +7,23 @@ public class InventoryManager : MonoBehaviour
     public UI_Inventory uiInventory;
 
 
-    void Awake()
+private void Awake()
 {
-    if (Instance != null && Instance != this)
+    if (Instance == null)
+    {
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+
+        if (inventory == null)
+        {
+            Debug.LogWarning("⚠️ Inventory was null. Creating new one.");
+            inventory = new Inventory(); // or ScriptableObject.CreateInstance<Inventory>();
+        }
+    }
+    else
     {
         Destroy(gameObject);
-        return;
     }
-
-    Instance = this;
-    DontDestroyOnLoad(gameObject);
-
-    inventory = new Inventory();
 }
 
 }
