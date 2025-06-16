@@ -60,7 +60,9 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
-            if (hitObject.CompareTag("Interactable") || hitObject.CompareTag("InventoryItem"))
+            if (hitObject.CompareTag("Interactable") ||
+    hitObject.CompareTag("InventoryItem") ||
+    hitObject.CompareTag("SceneChanger"))
             {
                 if (hitObject != currentTarget)
                 {
@@ -185,29 +187,29 @@ public class InteractionManager : MonoBehaviour
         return equippedItem;
     }
     public void UnequipItem()
-{
-    if (equippedItem == null)
     {
-        Debug.Log("No item equipped to unequip.");
-        return;
+        if (equippedItem == null)
+        {
+            Debug.Log("No item equipped to unequip.");
+            return;
+        }
+
+
+        Inventory inventory = InventoryManager.Instance?.inventory;
+        if (inventory != null && !inventory.GetItemList().Contains(equippedItem))
+        {
+            inventory.AddItem(equippedItem);
+        }
+
+        Debug.Log("Unequipped item: " + equippedItem.itemName);
+
+        equippedItem = null;
+
+
+        if (InventoryManager.Instance != null && InventoryManager.Instance.uiInventory != null)
+        {
+            InventoryManager.Instance.uiInventory.UpdateEquippedSlot(null);
+        }
     }
-
-    
-    Inventory inventory = InventoryManager.Instance?.inventory;
-    if (inventory != null && !inventory.GetItemList().Contains(equippedItem))
-    {
-        inventory.AddItem(equippedItem);
-    }
-
-    Debug.Log("Unequipped item: " + equippedItem.itemName);
-
-    equippedItem = null;
-
-   
-    if (InventoryManager.Instance != null && InventoryManager.Instance.uiInventory != null)
-    {
-        InventoryManager.Instance.uiInventory.UpdateEquippedSlot(null);
-    }
-}
 
 }
