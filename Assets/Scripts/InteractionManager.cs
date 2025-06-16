@@ -46,8 +46,20 @@ public class InteractionManager : MonoBehaviour
         };
     }
 
-    void OnEnable() => controls.Enable();
-    void OnDisable() => controls.Disable();
+    void OnEnable()
+    {
+        if (controls != null)
+        {
+            controls.Enable();
+        }
+    }
+    void OnDisable()
+    {
+        if (controls != null)
+        {
+            controls.Disable();
+        }
+    }
 
     void Update()
     {
@@ -120,6 +132,7 @@ public class InteractionManager : MonoBehaviour
         {
             GameObject hitObject = hit.collider.gameObject;
 
+            // Try unscrewing screws
             Screw screw = hitObject.GetComponent<Screw>();
             if (screw != null)
             {
@@ -127,9 +140,33 @@ public class InteractionManager : MonoBehaviour
                 return;
             }
 
+            // Try cogwheel placement
+            CogwheelSpot spot = hitObject.GetComponent<CogwheelSpot>();
+            if (spot != null)
+            {
+                bool placed = spot.TryPlaceCogwheel(equippedItem);
+                return;
+            }
 
+            // Try unlocking a lock with equipped item
+            BoxLock lockComponent = hitObject.GetComponent<BoxLock>();
+            if (lockComponent != null)
+            {
+                Debug.Log("Attempting to unlock with equipped item: " + (equippedItem != null ? equippedItem.itemName : "null"));
+                lockComponent.TryUnlock(equippedItem);
+                return;
+            }
+
+            // Try opening a box
+            Box box = hitObject.GetComponent<Box>();
+            if (box != null)
+            {
+                box.TryOpen();
+                return;
+            }
         }
     }
+
 
     void TryPickupItem(GameObject target)
     {
@@ -172,15 +209,26 @@ public class InteractionManager : MonoBehaviour
 
     public void EquipFromUI(Item item)
     {
-        if (item.itemType != Item.ItemType.ScrewDriver)
+        if (item == null ||
+            (item.itemType != ItemType.ScrewDriver &&
+             item.itemType != ItemType.Key &&
+             item.itemType != ItemType.Screw &&
+             item.itemType != ItemType.Cogwheel))
         {
-            Debug.LogWarning("Tried to equip non-screwdriver item.");
+            Debug.LogWarning("Tried to equip invalid item.");
+            return;
+        }
+
+        if (!InventoryManager.Instance.inventory.GetItemList().Contains(item))
+        {
+            Debug.LogWarning("Item not in inventory anymore.");
             return;
         }
 
         equippedItem = item;
-        Debug.Log("Equipped screwdriver: " + item.itemName + " Type: " + item.screwType);
+        Debug.Log("Equipped item in interaction manager: " + item.itemName);
     }
+
 
     public Item GetEquippedItem()
     {

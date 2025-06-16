@@ -9,8 +9,7 @@ public class Box : MonoBehaviour
 
     public void TryOpen()
     {
-        if (isOpen)
-            return;
+        if (isOpen) return;
 
         if (boxLock == null || boxLock.IsUnlocked())
         {
@@ -21,6 +20,7 @@ public class Box : MonoBehaviour
         else
         {
             Debug.Log("Box is still locked.");
+            FindObjectOfType<InspectUIManager>()?.ShowPrompt(true, "The box is locked.", true);
         }
     }
 
@@ -32,7 +32,7 @@ public class Box : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("HingeBack not assigned!");
+            Debug.LogWarning("Hinge not assigned.");
         }
     }
 }

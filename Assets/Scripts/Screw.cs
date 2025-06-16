@@ -4,6 +4,7 @@ public class Screw : MonoBehaviour
 {
     public string screwID;
     public ScrewType screwType;
+    public ItemType itemType;
     public bool isUnscrewed = false;
 
     public int amount = 1;
@@ -34,21 +35,21 @@ public class Screw : MonoBehaviour
         Debug.Log($"  Screw Type: {screwType}");
         Debug.Log($"  Equipped Item: {equippedItem.itemName}, Type: {equippedItem.itemType}, ScrewType: {equippedItem.screwType}");
 
-        if (equippedItem.itemType == Item.ItemType.ScrewDriver && equippedItem.screwType == screwType)
+        if (equippedItem.itemType == ItemType.ScrewDriver && equippedItem.screwType == screwType)
         {
             Debug.Log("Correct screwdriver! Unscrewing...");
             isUnscrewed = true;
 
             GameStateManager.Instance?.MarkScrewUnscrewed(screwID);
 
-            // Add screw to inventory
+            
             Item screwItem = new Item
             {
-                itemType = Item.ItemType.Screw,
+                itemType = itemType,
                 amount = amount,
                 itemName = "Screw",
                 description = "A regular screw.",
-                prefab3D = ItemAssets.Instance.screwPrefab,
+                prefab3D = ItemAssets.Instance.GetScrewPrefab(screwType),
                 screwType = screwType
             };
 

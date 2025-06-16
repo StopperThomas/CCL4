@@ -82,15 +82,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Interact"",
-                    ""type"": ""Button"",
-                    ""id"": ""6d447427-9016-40ad-be43-1e5c6ac26798"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
                     ""name"": ""AddToInventory"",
                     ""type"": ""Button"",
                     ""id"": ""695eeb8d-b085-4050-8cd7-7a2f8b7cb267"",
@@ -249,17 +240,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
-                    ""id"": ""eb457855-bc05-4f1f-8526-8b444016cb4c"",
-                    ""path"": ""<Mouse>/leftButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Interact"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
                     ""id"": ""d3f641e1-b77d-4b10-8525-20a6283b579b"",
                     ""path"": ""<Keyboard>/x"",
                     ""interactions"": """",
@@ -326,7 +306,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Inspect = m_Player.FindAction("Inspect", throwIfNotFound: true);
         m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
-        m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
         m_Player_AddToInventory = m_Player.FindAction("AddToInventory", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
         m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
@@ -399,7 +378,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Inspect;
     private readonly InputAction m_Player_Cancel;
     private readonly InputAction m_Player_Click;
-    private readonly InputAction m_Player_Interact;
     private readonly InputAction m_Player_AddToInventory;
     private readonly InputAction m_Player_Inventory;
     private readonly InputAction m_Player_DropItem;
@@ -415,7 +393,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Inspect => m_Wrapper.m_Player_Inspect;
         public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
         public InputAction @Click => m_Wrapper.m_Player_Click;
-        public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputAction @AddToInventory => m_Wrapper.m_Player_AddToInventory;
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
@@ -448,9 +425,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Click.started += instance.OnClick;
             @Click.performed += instance.OnClick;
             @Click.canceled += instance.OnClick;
-            @Interact.started += instance.OnInteract;
-            @Interact.performed += instance.OnInteract;
-            @Interact.canceled += instance.OnInteract;
             @AddToInventory.started += instance.OnAddToInventory;
             @AddToInventory.performed += instance.OnAddToInventory;
             @AddToInventory.canceled += instance.OnAddToInventory;
@@ -488,9 +462,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Click.started -= instance.OnClick;
             @Click.performed -= instance.OnClick;
             @Click.canceled -= instance.OnClick;
-            @Interact.started -= instance.OnInteract;
-            @Interact.performed -= instance.OnInteract;
-            @Interact.canceled -= instance.OnInteract;
             @AddToInventory.started -= instance.OnAddToInventory;
             @AddToInventory.performed -= instance.OnAddToInventory;
             @AddToInventory.canceled -= instance.OnAddToInventory;
@@ -531,7 +502,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnInspect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
-        void OnInteract(InputAction.CallbackContext context);
         void OnAddToInventory(InputAction.CallbackContext context);
         void OnInventory(InputAction.CallbackContext context);
         void OnDropItem(InputAction.CallbackContext context);

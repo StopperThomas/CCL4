@@ -27,6 +27,11 @@ public class ItemInspectorUI : MonoBehaviour
         {
             TryDropItemInput();
         }
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            TryEquipInspectedItem();
+        }
     }
 
     public void ShowItem(Item item)
@@ -37,8 +42,8 @@ public class ItemInspectorUI : MonoBehaviour
 
         if (dropHintText != null)
         {
-            dropHintText.gameObject.SetActive(true);
             dropHintText.text = "Press Y to drop item";
+            dropHintText.gameObject.SetActive(true);
         }
 
         if (currentRender != null)
@@ -58,8 +63,7 @@ public class ItemInspectorUI : MonoBehaviour
             FitItemInView(currentRender);
 
             ObjectInspector inspector = FindObjectOfType<ObjectInspector>();
-            if (inspector != null)
-                inspector.StartInventoryInspection(currentRender);
+            inspector?.StartInventoryInspection(currentRender);
 
             Debug.Log("Item shown: " + item.itemName);
         }
@@ -79,42 +83,76 @@ public class ItemInspectorUI : MonoBehaviour
 
     private void DropItem(Item item)
     {
-        if (item.prefab3D == null)
-        {
-            Debug.LogWarning("No prefab assigned to this item.");
+        if (item == null || item.prefab3D == null || !InventoryManager.Instance.inventory.GetItemList().Contains(item))
             return;
-        }
 
         Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
-        GameObject dropped = GameObject.Instantiate(item.prefab3D, dropPosition, Quaternion.identity);
-
-        // If you want, tag it as interactable again:
-        dropped.tag = "InvenontoryItem";
+        GameObject dropped = Instantiate(item.prefab3D, dropPosition, Quaternion.identity);
+        dropped.tag = "InventoryItem";
 
         InventoryManager.Instance.inventory.RemoveItem(item);
         InventoryManager.Instance.uiInventory.RefreshInventoryItems();
-
         HideItem();
-        Debug.Log("🔁 Dropped item: " + item.itemName);
+    }
+    public void HideItem()
+{
+    if (currentRender != null)
+    {
+        Destroy(currentRender);
+        currentRender = null;
     }
 
-    public void HideItem()
+    if (renderAnchor != null)
     {
-        if (currentRender != null)
+        foreach (Transform child in renderAnchor)
         {
-            Destroy(currentRender);
-            currentRender = null;
+            Destroy(child.gameObject);
         }
+    }
 
-        if (dropHintText != null)
-        {
-            dropHintText.text = "";
-            dropHintText.gameObject.SetActive(false);
-        }
+    if (dropHintText != null)
+    {
+        dropHintText.text = "";
+        dropHintText.gameObject.SetActive(false);
+    }
 
+    if (nameText != null)
+    {
         nameText.text = "";
+    }
+
+    if (descriptionText != null)
+    {
         descriptionText.text = "";
-        currentItem = null;
+    }
+
+    currentItem = null;
+
+    Debug.Log("ItemInspectorUI: Cleared all item data.");
+}
+
+
+
+    public void TryEquipInspectedItem()
+    {
+        if (currentItem != null && IsEquipable(currentItem))
+        {
+            var ui = FindObjectOfType<UI_Inventory>();
+            ui?.UpdateEquippedSlot(currentItem);
+
+            var interaction = FindObjectOfType<InteractionManager>();
+            interaction?.EquipFromUI(currentItem);
+
+            Debug.Log("Equipped from inspector: " + currentItem.itemName);
+        }
+    }
+
+    private bool IsEquipable(Item item)
+    {
+        return item.itemType == ItemType.ScrewDriver ||
+               item.itemType == ItemType.Key ||
+               item.itemType == ItemType.Screw ||
+               item.itemType == ItemType.Cogwheel;
     }
 
     private void FitItemInView(GameObject obj)
@@ -151,24 +189,9 @@ public class ItemInspectorUI : MonoBehaviour
         }
     }
 
-    public void TryEquipInspectedItem()
-{
-    if (currentItem != null && currentItem.itemType == Item.ItemType.ScrewDriver)
+    public Item GetCurrentItem()
     {
-        var ui = FindObjectOfType<UI_Inventory>();
-        if (ui != null)
-        {
-            ui.UpdateEquippedSlot(currentItem);
-        }
-
-        var interaction = FindObjectOfType<InteractionManager>();
-        if (interaction != null)
-        {
-            interaction.EquipFromUI(currentItem);
-        }
-
-        Debug.Log("Equipped from inspector: " + currentItem.itemName);
+        return currentItem;
     }
-}
 
 }

@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class CrosshairRaycaster : MonoBehaviour
 {
@@ -8,7 +7,6 @@ public class CrosshairRaycaster : MonoBehaviour
     public InspectUIManager uiManager;
 
     private GameObject lastHighlighted;
-    private GameObject currentTarget;
 
     void Start()
     {
@@ -16,26 +14,16 @@ public class CrosshairRaycaster : MonoBehaviour
         {
             interactionManager = FindObjectOfType<InteractionManager>();
             if (interactionManager == null)
-                Debug.LogError("⚠️ InteractionManager not found!");
+                Debug.LogError("InteractionManager not found!");
         }
 
         if (uiManager == null)
         {
             uiManager = FindObjectOfType<InspectUIManager>();
             if (uiManager == null)
-                Debug.LogWarning("⚠️ InspectUIManager not assigned!");
+                Debug.LogWarning("InspectUIManager not assigned!");
         }
     }
-    private PlayerInputActions inputActions;
-
-    private void Awake()
-    {
-        inputActions = new PlayerInputActions();
-        inputActions.Player.Interact.performed += ctx => InteractWithObject();
-    }
-
-    private void OnEnable() => inputActions.Enable();
-    private void OnDisable() => inputActions.Disable();
 
     void Update()
     {
@@ -47,17 +35,35 @@ public class CrosshairRaycaster : MonoBehaviour
         if (Physics.Raycast(ray, out hit, rayDistance))
         {
             GameObject hitObj = hit.collider.gameObject;
-            currentTarget = hitObj;
+
+            BoxLock boxLock = hitObj.GetComponent<BoxLock>();
+            if (boxLock != null)
+            {
+                var equipped = interactionManager.GetEquippedItem();
+                // Highlight logic for locked boxes
+                if (equipped != null && equipped.itemType == ItemType.Key)
+                {
+
+                    Highlight(hitObj);
+                    uiManager?.ShowPrompt(true, "LMB");
+                }// Show prompt for unlocking
+                else
+                {
+                    RemoveHighlight();
+                    uiManager?.ShowPrompt(false);
+                }
+                return;
+            }
 
             // Highlight logic
             Screw screw = hitObj.GetComponent<Screw>();
             if (screw != null)
             {
                 var equipped = interactionManager.GetEquippedItem();
-                if (equipped != null && equipped.itemType == Item.ItemType.ScrewDriver)
+                if (equipped != null && equipped.itemType == ItemType.ScrewDriver)
                 {
-                    ApplyHighlight(hitObj);
-                    uiManager?.ShowPrompt(true, "LMB"); // Show prompt for unscrewing
+                    Highlight(hitObj);
+                    uiManager?.ShowPrompt(true, "LMB"); 
                 }
                 else
                 {
@@ -70,14 +76,14 @@ public class CrosshairRaycaster : MonoBehaviour
             // Inventory items or doors
             if (hitObj.CompareTag("InventoryItem"))
             {
-                ApplyHighlight(hitObj);
+                Highlight(hitObj);
                 uiManager?.ShowPrompt(true, "E");
                 return;
             }
 
             if (hitObj.CompareTag("SceneChanger"))
             {
-                ApplyHighlight(hitObj);
+                Highlight(hitObj);
                 uiManager?.ShowPrompt(true, "E");
                 return;
             }
@@ -93,22 +99,7 @@ public class CrosshairRaycaster : MonoBehaviour
         }
     }
 
-    void InteractWithObject()
-    {
-        if (currentTarget == null) return;
-
-        // Handle Box interaction
-        Box box = currentTarget.GetComponent<Box>();
-        if (box != null)
-        {
-            box.TryOpen();
-            return;
-        }
-
-        // Add other interaction logic here as needed (e.g., screws, scene changers)
-    }
-
-    void ApplyHighlight(GameObject obj)
+    void Highlight(GameObject obj)
     {
         if (lastHighlighted != null && lastHighlighted != obj)
         {

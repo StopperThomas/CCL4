@@ -2,53 +2,44 @@ using UnityEngine;
 
 public class CogwheelSpot : MonoBehaviour
 {
-    public CogwheelSize requiredSize;
-
+    public CogwheelType requiredType;
     private bool isOccupied = false;
-    private Cogwheel placedCogwheel;
 
-    public bool IsCorrectlyFilled
+    // Call this when a cogwheel is placed
+    public bool TryPlaceCogwheel(Item equippedItem)
     {
-        get { return isOccupied && placedCogwheel != null && placedCogwheel.size == requiredSize; }
-    }
+        if (isOccupied) return false;
+        if (equippedItem == null || equippedItem.itemType != ItemType.Cogwheel) return false;
+        if (equippedItem.cogwheelType != requiredType) return false;
 
-
-    public bool TryPlaceCogwheel(Cogwheel cogwheel)
-    {
-        if (isOccupied)
+        if (equippedItem.prefab3D != null)
         {
-            Debug.Log("Spot already has a cogwheel.");
-            return false;
-        }
-
-        if (cogwheel.size != requiredSize)
-        {
-            Debug.Log($"Wrong cogwheel size. Needed: {requiredSize}, but got: {cogwheel.size}");
-            return false;
+            Instantiate(equippedItem.prefab3D, transform.position, transform.rotation, transform);
         }
 
         isOccupied = true;
-        placedCogwheel = cogwheel;
 
-        cogwheel.transform.position = transform.position;
-        cogwheel.transform.rotation = transform.rotation;
-        cogwheel.transform.SetParent(transform);
-        cogwheel.gameObject.SetActive(true);
+        if (equippedItem.amount > 1)
+        {
+            equippedItem.amount--;
+        }
+        else
+        {
+            InventoryManager.Instance.inventory.RemoveItem(equippedItem);
+            FindObjectOfType<InteractionManager>()?.UnequipItem();
+        }
 
-        Collider cogCollider = cogwheel.GetComponent<Collider>();
-        if (cogCollider) cogCollider.enabled = false;
+        InventoryManager.Instance.uiInventory.RefreshInventoryItems();
 
-        CogwheelManager.Instance.ClearHeldCogwheel();
-
-        Debug.Log("Cogwheel placed successfully.");
-
-        PuzzleDoor.Instance.CheckPuzzleCompletion();
+        // ✅ Notify puzzle manager
+        PuzzleDoor.Instance?.CheckPuzzleCompletion();
 
         return true;
     }
 
+    // ✅ This method is what PuzzleDoor.cs expects to call
     public bool HasCorrectCogwheel()
     {
-        return isOccupied && placedCogwheel != null && placedCogwheel.size == requiredSize;
+        return isOccupied;
     }
 }

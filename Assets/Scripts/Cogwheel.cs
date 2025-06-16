@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Cogwheel : MonoBehaviour
 {
-    public CogwheelSize size;
+    public Cogwheel size;
     private bool isPlaced = false;
 
     public void SetPlaced(bool placed)
