@@ -1,0 +1,198 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1505825137693807863
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 12.8
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 5.25
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.0016949982
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_Name
+      value: ScrewDriverMinus
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      propertyPath: m_TagString
+      value: InventoryItem
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6608204920807305948}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8777415243502345773}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3472960267688843774}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 454168560269483572}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6849562040353355786}
+  m_SourcePrefab: {fileID: 100100000, guid: a2fa3b5fb733f664eafdfc2995a05770, type: 3}
+--- !u!1 &1739702470316845478 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a2fa3b5fb733f664eafdfc2995a05770,
+    type: 3}
+  m_PrefabInstance: {fileID: 1505825137693807863}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &6608204920807305948
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739702470316845478}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!65 &8777415243502345773
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739702470316845478}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 0.10406267, y: 1.0593122, z: 0.10406267}
+  m_Center: {x: -0.0000030137599, y: 0.10334982, z: -0.00003390014}
+--- !u!114 &3472960267688843774
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739702470316845478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0965c831733398a4a97e08af4ef972b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemType: 0
+  amount: 1
+  customName: Screwdriver Blue
+  customDescription: Another Screwdriver !
+  custom3DPrefab: {fileID: 0}
+--- !u!114 &454168560269483572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739702470316845478}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b748dceea6d3b14fbe65f61b8ffef35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  screwdriverID: Blue
+  screwType: 0
+--- !u!114 &-6849562040353355786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1739702470316845478}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fea29bb7c508c244a1f805a5fd3fc4d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  outlineMode: 0
+  outlineColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 2
+  precomputeOutline: 0
+  bakeKeys: []
+  bakeValues: []
