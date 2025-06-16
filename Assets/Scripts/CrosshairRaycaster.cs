@@ -8,6 +8,7 @@ public class CrosshairRaycaster : MonoBehaviour
     public InspectUIManager uiManager;
 
     private GameObject lastHighlighted;
+    private GameObject currentTarget;
 
     void Start()
     {
@@ -55,7 +56,7 @@ public class CrosshairRaycaster : MonoBehaviour
                 var equipped = interactionManager.GetEquippedItem();
                 if (equipped != null && equipped.itemType == Item.ItemType.ScrewDriver)
                 {
-                    Highlight(hitObj);
+                    ApplyHighlight(hitObj);
                     uiManager?.ShowPrompt(true, "LMB"); // Show prompt for unscrewing
                 }
                 else
@@ -69,14 +70,14 @@ public class CrosshairRaycaster : MonoBehaviour
             // Inventory items or doors
             if (hitObj.CompareTag("InventoryItem"))
             {
-                Highlight(hitObj);
+                ApplyHighlight(hitObj);
                 uiManager?.ShowPrompt(true, "E");
                 return;
             }
 
             if (hitObj.CompareTag("SceneChanger"))
             {
-                Highlight(hitObj);
+                ApplyHighlight(hitObj);
                 uiManager?.ShowPrompt(true, "E");
                 return;
             }
