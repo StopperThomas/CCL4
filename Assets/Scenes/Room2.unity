@@ -528,6 +528,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayDistance: 5
+  interactionManager: {fileID: 0}
   uiManager: {fileID: 428264451}
 --- !u!114 &351170824
 MonoBehaviour:
@@ -852,7 +853,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e843fcaaffb60e4fbf4bf016a15b9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptText: {fileID: 617901443}
 --- !u!4 &428264452
 Transform:
   m_ObjectHideFlags: 0
@@ -1094,6 +1094,7 @@ MonoBehaviour:
   screwID: screw5
   screwType: 0
   isUnscrewed: 0
+  amount: 1
 --- !u!1 &494228182
 GameObject:
   m_ObjectHideFlags: 0
@@ -1124,7 +1125,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rayDistance: 5
-  uiManager: {fileID: 428264451}
   inspector: {fileID: 241823442}
   playerController: {fileID: 660735382}
 --- !u!4 &494228184
@@ -1426,6 +1426,9 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 4294967295
   jumpHeight: 1.5
+  uiInventory: {fileID: 0}
+  inventoryUI: {fileID: 0}
+  inspectionUI: {fileID: 0}
 --- !u!136 &660735383
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2241,6 +2244,7 @@ MonoBehaviour:
   screwID: screw8
   screwType: 3
   isUnscrewed: 0
+  amount: 1
 --- !u!1 &1269404475
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,6 +2487,7 @@ MonoBehaviour:
   screwID: screw6
   screwType: 1
   isUnscrewed: 0
+  amount: 1
 --- !u!1 &1404242589
 GameObject:
   m_ObjectHideFlags: 0
@@ -3540,6 +3545,7 @@ MonoBehaviour:
   screwID: screw7
   screwType: 2
   isUnscrewed: 0
+  amount: 1
 --- !u!1 &1874877502
 GameObject:
   m_ObjectHideFlags: 0

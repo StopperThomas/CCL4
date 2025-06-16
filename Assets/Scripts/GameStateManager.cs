@@ -6,7 +6,7 @@ public class GameStateManager : MonoBehaviour
     public static GameStateManager Instance;
 
     private HashSet<string> unscrewedScrews = new HashSet<string>();
-    private string equippedScrewdriverID = null;
+    private string equippedItemID = null;  
 
     void Awake()
     {
@@ -21,7 +21,7 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
-    // --- Screws ---
+    
     public void MarkScrewUnscrewed(string screwID)
     {
         if (!unscrewedScrews.Contains(screwID))
@@ -36,15 +36,15 @@ public class GameStateManager : MonoBehaviour
         return unscrewedScrews.Contains(screwID);
     }
 
-    // --- Equipped Screwdriver ---
-    public void SetEquippedScrewdriver(string screwdriverID)
+    
+    public void SetEquippedItem(string itemID)
     {
-        equippedScrewdriverID = screwdriverID;
-        Debug.Log($"Equipped screwdriver set to {screwdriverID}");
+        equippedItemID = itemID;
+        Debug.Log($"Equipped item set to {itemID}");
     }
 
-    public string GetEquippedScrewdriver()
+    public string GetEquippedItem()
     {
-        return equippedScrewdriverID;
+        return equippedItemID;
     }
 }

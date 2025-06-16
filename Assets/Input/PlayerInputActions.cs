@@ -82,6 +82,51 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""AddToInventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""695eeb8d-b085-4050-8cd7-7a2f8b7cb267"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Inventory"",
+                    ""type"": ""Button"",
+                    ""id"": ""d296e16d-5093-4f2f-9ae9-a0e105a5a400"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DropItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""bbd01450-aab2-4b63-80c1-4b192802588d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""EquipItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""26cbcd53-d9dd-4a43-a86f-bdc5ba648a51"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UnequipItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""063a268a-b8c0-40ab-946c-6895f003d6bb"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""Interact"",
                     ""type"": ""Button"",
                     ""id"": ""6d447427-9016-40ad-be43-1e5c6ac26798"",
@@ -204,6 +249,61 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""d3f641e1-b77d-4b10-8525-20a6283b579b"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""AddToInventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dfb96f2f-4450-43ee-8eb5-246ec859e2fd"",
+                    ""path"": ""<Keyboard>/i"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc06bf9a-7a1f-44a4-b12f-e0b727e44137"",
+                    ""path"": ""<Keyboard>/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""DropItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""12914501-729b-47d8-9ca3-5f02a615bb0e"",
+                    ""path"": ""<Keyboard>/c"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""EquipItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8638626-fbfc-4ee2-8006-04320d610f9f"",
+                    ""path"": ""<Keyboard>/u"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UnequipItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""eb457855-bc05-4f1f-8526-8b444016cb4c"",
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
@@ -226,6 +326,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_Inspect = m_Player.FindAction("Inspect", throwIfNotFound: true);
         m_Player_Cancel = m_Player.FindAction("Cancel", throwIfNotFound: true);
         m_Player_Click = m_Player.FindAction("Click", throwIfNotFound: true);
+        m_Player_AddToInventory = m_Player.FindAction("AddToInventory", throwIfNotFound: true);
+        m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
+        m_Player_EquipItem = m_Player.FindAction("EquipItem", throwIfNotFound: true);
+        m_Player_UnequipItem = m_Player.FindAction("UnequipItem", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
     }
 
@@ -294,6 +399,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Inspect;
     private readonly InputAction m_Player_Cancel;
     private readonly InputAction m_Player_Click;
+    private readonly InputAction m_Player_AddToInventory;
+    private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_DropItem;
+    private readonly InputAction m_Player_EquipItem;
+    private readonly InputAction m_Player_UnequipItem;
     private readonly InputAction m_Player_Interact;
     public struct PlayerActions
     {
@@ -305,6 +415,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @Inspect => m_Wrapper.m_Player_Inspect;
         public InputAction @Cancel => m_Wrapper.m_Player_Cancel;
         public InputAction @Click => m_Wrapper.m_Player_Click;
+        public InputAction @AddToInventory => m_Wrapper.m_Player_AddToInventory;
+        public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
+        public InputAction @EquipItem => m_Wrapper.m_Player_EquipItem;
+        public InputAction @UnequipItem => m_Wrapper.m_Player_UnequipItem;
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
@@ -333,6 +448,21 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Click.started += instance.OnClick;
             @Click.performed += instance.OnClick;
             @Click.canceled += instance.OnClick;
+            @AddToInventory.started += instance.OnAddToInventory;
+            @AddToInventory.performed += instance.OnAddToInventory;
+            @AddToInventory.canceled += instance.OnAddToInventory;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
+            @DropItem.started += instance.OnDropItem;
+            @DropItem.performed += instance.OnDropItem;
+            @DropItem.canceled += instance.OnDropItem;
+            @EquipItem.started += instance.OnEquipItem;
+            @EquipItem.performed += instance.OnEquipItem;
+            @EquipItem.canceled += instance.OnEquipItem;
+            @UnequipItem.started += instance.OnUnequipItem;
+            @UnequipItem.performed += instance.OnUnequipItem;
+            @UnequipItem.canceled += instance.OnUnequipItem;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
@@ -358,6 +488,21 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @Click.started -= instance.OnClick;
             @Click.performed -= instance.OnClick;
             @Click.canceled -= instance.OnClick;
+            @AddToInventory.started -= instance.OnAddToInventory;
+            @AddToInventory.performed -= instance.OnAddToInventory;
+            @AddToInventory.canceled -= instance.OnAddToInventory;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
+            @DropItem.started -= instance.OnDropItem;
+            @DropItem.performed -= instance.OnDropItem;
+            @DropItem.canceled -= instance.OnDropItem;
+            @EquipItem.started -= instance.OnEquipItem;
+            @EquipItem.performed -= instance.OnEquipItem;
+            @EquipItem.canceled -= instance.OnEquipItem;
+            @UnequipItem.started -= instance.OnUnequipItem;
+            @UnequipItem.performed -= instance.OnUnequipItem;
+            @UnequipItem.canceled -= instance.OnUnequipItem;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
@@ -386,6 +531,11 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnInspect(InputAction.CallbackContext context);
         void OnCancel(InputAction.CallbackContext context);
         void OnClick(InputAction.CallbackContext context);
+        void OnAddToInventory(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
+        void OnDropItem(InputAction.CallbackContext context);
+        void OnEquipItem(InputAction.CallbackContext context);
+        void OnUnequipItem(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
     }
 }
