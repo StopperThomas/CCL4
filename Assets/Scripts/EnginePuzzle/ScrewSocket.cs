@@ -3,7 +3,6 @@ using UnityEngine;
 public class ScrewSocket : MonoBehaviour
 {
     public ScrewType requiredType;
-    public Transform wireConnectionPoint;
 
     private GameObject placedScrew;
     private bool isFilled = false;
@@ -23,40 +22,44 @@ public class ScrewSocket : MonoBehaviour
             isFilled = true;
             PlacedType = type;
 
-            PuzzleManager.Instance.NotifyScrewPlaced(this); // Optional if puzzle manager is involved
-
+            PuzzleManager.Instance?.NotifyScrewPlaced(this);
             return true;
         }
 
         return false;
     }
 
-    public Transform GetConnectionPoint()
+    public void RemoveScrew()
     {
-        return wireConnectionPoint != null ? wireConnectionPoint : transform;
+        if (placedScrew != null)
+        {
+            // Return the screw to the inventory
+            Item screwItem = new Item
+            {
+                itemType = ItemType.Screw,
+                screwType = PlacedType,
+                amount = 1,
+                prefab3D = ItemAssets.Instance.GetScrewPrefab(PlacedType)
+            };
+
+            InventoryManager.Instance.inventory.AddItem(screwItem);
+
+            Destroy(placedScrew);
+            placedScrew = null;
+            isFilled = false;
+            PlacedType = default;
+        }
     }
 
-    public void RemoveScrew()
-{
-    if (placedScrew != null)
+    public void ResetSocket()
     {
-        // Add the screw back to inventory
-        Item screwItem = new Item
+        if (isFilled && placedScrew != null)
         {
-            itemType = ItemType.Screw,
-            screwType = PlacedType,
-            amount = 1,
-            prefab3D = ItemAssets.Instance.GetScrewPrefab(PlacedType)
-        };
+            Destroy(placedScrew);
+        }
 
-        InventoryManager.Instance.inventory.AddItem(screwItem);
-
-       
-        Destroy(placedScrew);
-        placedScrew = null;
         isFilled = false;
         PlacedType = default;
     }
-}
 
 }

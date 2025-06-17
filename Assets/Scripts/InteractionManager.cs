@@ -44,6 +44,15 @@ public class InteractionManager : MonoBehaviour
             if (isInspecting && currentTarget != null)
                 TryPickupItem(currentTarget);
         };
+
+        controls.Player.ResetPuzzle.performed += ctx =>
+        {
+            if (PuzzleManager.Instance != null && PuzzleManager.Instance.CanReset())
+            {
+                PuzzleManager.Instance.ResetPuzzle();
+            }
+        };
+
     }
 
     void OnEnable() => controls?.Enable();

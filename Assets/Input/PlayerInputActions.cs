@@ -125,6 +125,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ResetPuzzle"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a07a414-d8b3-4df5-b8bd-576ac156e503"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -292,6 +301,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""UnequipItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""c58c52b5-05a6-4939-a611-20555b5a7730"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ResetPuzzle"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -311,6 +331,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_DropItem = m_Player.FindAction("DropItem", throwIfNotFound: true);
         m_Player_EquipItem = m_Player.FindAction("EquipItem", throwIfNotFound: true);
         m_Player_UnequipItem = m_Player.FindAction("UnequipItem", throwIfNotFound: true);
+        m_Player_ResetPuzzle = m_Player.FindAction("ResetPuzzle", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -383,6 +404,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_DropItem;
     private readonly InputAction m_Player_EquipItem;
     private readonly InputAction m_Player_UnequipItem;
+    private readonly InputAction m_Player_ResetPuzzle;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -398,6 +420,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @DropItem => m_Wrapper.m_Player_DropItem;
         public InputAction @EquipItem => m_Wrapper.m_Player_EquipItem;
         public InputAction @UnequipItem => m_Wrapper.m_Player_UnequipItem;
+        public InputAction @ResetPuzzle => m_Wrapper.m_Player_ResetPuzzle;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -440,6 +463,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UnequipItem.started += instance.OnUnequipItem;
             @UnequipItem.performed += instance.OnUnequipItem;
             @UnequipItem.canceled += instance.OnUnequipItem;
+            @ResetPuzzle.started += instance.OnResetPuzzle;
+            @ResetPuzzle.performed += instance.OnResetPuzzle;
+            @ResetPuzzle.canceled += instance.OnResetPuzzle;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -477,6 +503,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @UnequipItem.started -= instance.OnUnequipItem;
             @UnequipItem.performed -= instance.OnUnequipItem;
             @UnequipItem.canceled -= instance.OnUnequipItem;
+            @ResetPuzzle.started -= instance.OnResetPuzzle;
+            @ResetPuzzle.performed -= instance.OnResetPuzzle;
+            @ResetPuzzle.canceled -= instance.OnResetPuzzle;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -507,5 +536,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnDropItem(InputAction.CallbackContext context);
         void OnEquipItem(InputAction.CallbackContext context);
         void OnUnequipItem(InputAction.CallbackContext context);
+        void OnResetPuzzle(InputAction.CallbackContext context);
     }
 }

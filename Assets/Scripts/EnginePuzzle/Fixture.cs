@@ -5,27 +5,36 @@ public class Fixture : MonoBehaviour
     public bool isCorrectSocket; 
     private GameObject placedBulb;
 
-    public bool TryPlaceBulb(GameObject bulbPrefab)
+public bool TryPlaceBulb(GameObject bulbPrefab)
+{
+    if (placedBulb != null || bulbPrefab == null)
+        return false;
+
+    
+    if (!PuzzleManager.Instance.IsPuzzleSolved)
     {
-        if (placedBulb != null || bulbPrefab == null) return false;
-
-        Quaternion prefabRotation = bulbPrefab.transform.rotation;
-        Vector3 placementPosition = transform.position + transform.up * 0.03f;
-
-        placedBulb = Instantiate(bulbPrefab, placementPosition, prefabRotation);
-        placedBulb.transform.localScale = Vector3.one;
-
-        if (isCorrectSocket)
-        {
-            PowerBulb();
-        }
-        else
-        {
-            Debug.Log("Wrong socket. Bulb placed, but no power.");
-        }
-
-        return true;
+        PromptManager.Instance?.ShowPrompt("Nothing happens. The connection isn't complete.");
+        return false;
     }
+
+    Quaternion prefabRotation = bulbPrefab.transform.rotation;
+    Vector3 placementPosition = transform.position + transform.up * 0.03f;
+
+    placedBulb = Instantiate(bulbPrefab, placementPosition, prefabRotation);
+    placedBulb.transform.localScale = Vector3.one;
+
+    if (isCorrectSocket)
+    {
+        PowerBulb();
+    }
+    else
+    {
+        Debug.Log("Wrong socket. Bulb placed, but no power.");
+    }
+
+    return true;
+}
+
 
     private void PowerBulb()
 {

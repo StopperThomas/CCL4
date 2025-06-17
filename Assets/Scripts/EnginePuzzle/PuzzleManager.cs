@@ -6,7 +6,13 @@ public class PuzzleManager : MonoBehaviour
     public static PuzzleManager Instance;
 
     public List<ScrewSocket> allScrewSockets;
-    public WireManager wireManager;
+    public PromptManager promptManager;
+
+    private bool puzzleSolved = false;
+    public bool IsPuzzleSolved => puzzleSolved;
+
+    private bool resetReady = false;
+    public bool CanReset() => resetReady && !puzzleSolved;
 
     private void Awake()
     {
@@ -15,13 +21,9 @@ public class PuzzleManager : MonoBehaviour
 
     public void NotifyScrewPlaced(ScrewSocket socket)
     {
-        // Automatically connect wires if both ends are filled
-        wireManager.TryAutoConnect(socket);
-
         if (AllScrewsPlaced())
         {
-            Debug.Log("All screws placed. Enabling wire connections.");
-            wireManager.EnableWiring();
+            CheckScrewPuzzle();
         }
     }
 
@@ -34,15 +36,41 @@ public class PuzzleManager : MonoBehaviour
         return true;
     }
 
-    public void ResetScrews()
-{
-    foreach (var socket in allScrewSockets)
+    private void CheckScrewPuzzle()
     {
-        socket.RemoveScrew();
+        bool allCorrect = true;
+
+        foreach (var socket in allScrewSockets)
+        {
+            if (socket.PlacedType != socket.requiredType)
+            {
+                allCorrect = false;
+                break;
+            }
+        }
+
+        if (allCorrect)
+        {
+            puzzleSolved = true;
+            promptManager?.ShowPrompt("The connection is correct. Power flows through!");
+            Debug.Log("Screw puzzle solved!");
+        }
+        else
+        {
+            resetReady = true; // ← enable reset
+            promptManager?.ShowPrompt("Something's wrong. Press 'R' to try again.");
+        }
     }
 
-    Debug.Log("Screws reset and returned to inventory.");
-    wireManager.DisableAllWires(); // Optional: reset wires visually
-}
+    public void ResetPuzzle()
+    {
+        foreach (var socket in allScrewSockets)
+        {
+            socket.RemoveScrew();
+        }
 
+        puzzleSolved = false;
+        resetReady = false; // ← disable reset until next try
+        promptManager?.ShowPrompt("Reset complete. Try again.");
+    }
 }
