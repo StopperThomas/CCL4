@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: 8b2f13facd66e348a8e69ab376d67fbe
     GuidInternal: 
-    m_lastTime: -8584520286772366891
+    m_lastTime: -8584515264765965866
     List: []
   AuxBusWwu:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
@@ -38,7 +38,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: 69a3f08acb45f74895322a68dd17f235
     GuidInternal: 
-    m_lastTime: -8584520286771451356
+    m_lastTime: -8584515264766030768
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -66,8 +66,22 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: 9eedd2760d97324bb62005d75d25d982
     GuidInternal: 
-    m_lastTime: -8584520286771657443
-    List: []
+    m_lastTime: -8584515039869288631
+    List:
+    - name: LockTurnSounds
+      guid: 7d60c3751c26ea458a963fcf33a53a9d
+      id: 2559633245
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 9eedd2760d97324bb62005d75d25d982
+      - ElementName: LockTurnSounds
+        ObjectType: 7
+        guid: 7d60c3751c26ea458a963fcf33a53a9d
+      Path: SoundBanks\Default Work Unit\LockTurnSounds
   EventWwu:
   - PhysicalPath: Events\Default Work Unit.wwu
     PathAndIcons:
@@ -80,8 +94,25 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 51eca575d9046642811c87b7e9873eed
     GuidInternal: 
-    m_lastTime: -8584520286771171170
-    List: []
+    m_lastTime: -8584515039869485167
+    List:
+    - name: Play_LockTurnSound
+      guid: e3b974a87bffe143a0482fe044ddde0d
+      id: 2679905823
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 51eca575d9046642811c87b7e9873eed
+      - ElementName: Play_LockTurnSound
+        ObjectType: 3
+        guid: e3b974a87bffe143a0482fe044ddde0d
+      Path: Events\Default Work Unit\Play_LockTurnSound
+      maxAttenuation: 0
+      maxDuration: 51.5
+      minDuration: 51.5
   RtpcWwu:
   - PhysicalPath: Game Parameters\Default Work Unit.wwu
     PathAndIcons:
@@ -94,7 +125,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 6075bc9ce34ce6428f29c1eb6ac70801
     GuidInternal: 
-    m_lastTime: -8584520286773034903
+    m_lastTime: -8584515264766041324
     List: []
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
@@ -108,7 +139,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: 8c056c417233d446aeacba37f631aec7
     GuidInternal: 
-    m_lastTime: -8584520286771547236
+    m_lastTime: -8584515264765975935
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -122,7 +153,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 1de237aa00839f4da36e8e05dfe3993a
     GuidInternal: 
-    m_lastTime: -8584520286772176192
+    m_lastTime: -8584515264765970887
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -136,10 +167,10 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: 3681e3ed96c44c49ae85285ca32f92f6
     GuidInternal: 
-    m_lastTime: -8584520286771838577
+    m_lastTime: -8584515264765965866
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 
+  ExpandedWaapiItemIds: 0400000006000000070000000a0000000b000000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

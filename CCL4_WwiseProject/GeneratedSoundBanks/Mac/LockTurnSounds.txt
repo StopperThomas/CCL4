@@ -1,0 +1,9 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2679905823	Play_LockTurnSound			\Default Work Unit\Play_LockTurnSound	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	219757454	CombinationLock2	C:\Users\michi\Desktop\CCL4\CCL4_WwiseProject\.cache\B2\{B2C4608A-8E6E-66FE-E228-393CA3B61C0A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\LockTurnSound\CombinationLock2		9084696
+	335210621	CombinationLock4	C:\Users\michi\Desktop\CCL4\CCL4_WwiseProject\.cache\89\{893AFCA0-84A7-0740-07BB-DCD994F2F134}.wem		\Actor-Mixer Hierarchy\Default Work Unit\LockTurnSound\CombinationLock4		9084696
+	615255727	CombinationLock3	C:\Users\michi\Desktop\CCL4\CCL4_WwiseProject\.cache\4B\{4B605B2A-3635-5E49-2002-1F38233BA80C}.wem		\Actor-Mixer Hierarchy\Default Work Unit\LockTurnSound\CombinationLock3		9084696
+	840453906	CombinationLock1	C:\Users\michi\Desktop\CCL4\CCL4_WwiseProject\.cache\6D\{6D6C669F-9035-EAF6-0C02-020BB538518D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\LockTurnSound\CombinationLock1		9084696
+

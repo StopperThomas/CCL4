@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{76D2ED9E-970D-4B32-B620-05D75D25D982}" SchemaVersion="123">
 	<SoundBanks>
-		<WorkUnit Name="Default Work Unit" ID="{76D2ED9E-970D-4B32-B620-05D75D25D982}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{76D2ED9E-970D-4B32-B620-05D75D25D982}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="LockTurnSounds" ID="{75C3607D-261C-45EA-8A96-3FCF33A53A9D}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_LockTurnSound" ID="{A874B9E3-FF7B-43E1-A048-2FE044DDDE0D}" WorkUnitID="{75A5EC51-04D9-4266-811C-87B7E9873EED}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
 	</SoundBanks>
 </WwiseDocument>

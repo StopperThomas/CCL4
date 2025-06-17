@@ -1,6 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
 <WwiseDocument Type="WorkUnit" ID="{64A7B1A2-41CC-4637-A017-789B9DA177A5}" SchemaVersion="123">
 	<AudioObjects>
-		<WorkUnit Name="Default Work Unit" ID="{64A7B1A2-41CC-4637-A017-789B9DA177A5}" PersistMode="Standalone"/>
+		<WorkUnit Name="Default Work Unit" ID="{64A7B1A2-41CC-4637-A017-789B9DA177A5}" PersistMode="Standalone">
+			<ChildrenList>
+				<RandomSequenceContainer Name="LockTurnSound" ID="{D6D35227-98A9-4335-B8DD-D48EE6637574}" ShortID="814420207">
+					<PropertyList>
+						<Property Name="NormalOrShuffle" Type="int16" Value="0"/>
+					</PropertyList>
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5049C17E-4E27-4978-9F77-33FB182F8710}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8AF0A369-45CB-48F7-9532-2A68DD17F235}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<Sound Name="CombinationLock1" ID="{2001EBBD-F2FC-4F91-BC2E-91E37093F8B3}" ShortID="884664463">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5049C17E-4E27-4978-9F77-33FB182F8710}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8AF0A369-45CB-48F7-9532-2A68DD17F235}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="CombinationLock1" ID="{88E2F4F2-2170-4D0A-A200-7C7F9E3984E7}">
+									<Language>SFX</Language>
+									<AudioFile>CombinationLock1.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="840453906"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="CombinationLock1" ID="{88E2F4F2-2170-4D0A-A200-7C7F9E3984E7}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="CombinationLock2" ID="{039AA52C-8534-4260-96B3-82F391BA2F2B}" ShortID="568689110">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5049C17E-4E27-4978-9F77-33FB182F8710}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8AF0A369-45CB-48F7-9532-2A68DD17F235}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="CombinationLock2" ID="{17BDC3EA-EE3C-4BA3-948D-F3846F78308E}">
+									<Language>SFX</Language>
+									<AudioFile>CombinationLock2.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="219757454"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="CombinationLock2" ID="{17BDC3EA-EE3C-4BA3-948D-F3846F78308E}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="CombinationLock3" ID="{E10AEDC8-F374-45F1-9ABA-BF2B47194850}" ShortID="1050410916">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5049C17E-4E27-4978-9F77-33FB182F8710}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8AF0A369-45CB-48F7-9532-2A68DD17F235}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="CombinationLock3" ID="{3CEFF38E-2437-43C0-AFEA-0235D9414741}">
+									<Language>SFX</Language>
+									<AudioFile>CombinationLock3.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="615255727"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="CombinationLock3" ID="{3CEFF38E-2437-43C0-AFEA-0235D9414741}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+						<Sound Name="CombinationLock4" ID="{389BD18C-0AEE-4286-A136-CB47379FEB5F}" ShortID="862578412">
+							<ReferenceList>
+								<Reference Name="Conversion">
+									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5049C17E-4E27-4978-9F77-33FB182F8710}"/>
+								</Reference>
+								<Reference Name="OutputBus">
+									<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8AF0A369-45CB-48F7-9532-2A68DD17F235}"/>
+								</Reference>
+							</ReferenceList>
+							<ChildrenList>
+								<AudioFileSource Name="CombinationLock4" ID="{7407CB2D-67D3-4DE5-8A5E-F515965E3D24}">
+									<Language>SFX</Language>
+									<AudioFile>CombinationLock4.wav</AudioFile>
+									<MediaIDList>
+										<MediaID ID="335210621"/>
+									</MediaIDList>
+								</AudioFileSource>
+							</ChildrenList>
+							<ActiveSourceList>
+								<ActiveSource Name="CombinationLock4" ID="{7407CB2D-67D3-4DE5-8A5E-F515965E3D24}" Platform="Linked"/>
+							</ActiveSourceList>
+						</Sound>
+					</ChildrenList>
+				</RandomSequenceContainer>
+			</ChildrenList>
+		</WorkUnit>
 	</AudioObjects>
 </WwiseDocument>

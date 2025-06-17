@@ -1,0 +1,80 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "2559633245",
+    "Type": "User",
+    "GUID": "{75C3607D-261C-45EA-8A96-3FCF33A53A9D}",
+    "Language": "SFX",
+    "Hash": "{73330796-1D2D-25A3-2EEF-220161F21ACB}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\LockTurnSounds",
+    "ShortName": "LockTurnSounds",
+    "Path": "LockTurnSounds.bnk",
+    "Media": [
+     {
+      "Id": "219757454",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CombinationLock2.wav",
+      "CachePath": "B2/{B2C4608A-8E6E-66FE-E228-393CA3B61C0A}.wem"
+     },
+     {
+      "Id": "335210621",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CombinationLock4.wav",
+      "CachePath": "89/{893AFCA0-84A7-0740-07BB-DCD994F2F134}.wem"
+     },
+     {
+      "Id": "615255727",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CombinationLock3.wav",
+      "CachePath": "4B/{4B605B2A-3635-5E49-2002-1F38233BA80C}.wem"
+     },
+     {
+      "Id": "840453906",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CombinationLock1.wav",
+      "CachePath": "6D/{6D6C669F-9035-EAF6-0C02-020BB538518D}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "2679905823",
+      "Name": "Play_LockTurnSound",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_LockTurnSound",
+      "GUID": "{A874B9E3-FF7B-43E1-A048-2FE044DDDE0D}",
+      "DurationType": "OneShot",
+      "DurationMin": "51.5",
+      "DurationMax": "51.5",
+      "MediaRefs": [
+       {
+        "Id": "219757454"
+       },
+       {
+        "Id": "335210621"
+       },
+       {
+        "Id": "615255727"
+       },
+       {
+        "Id": "840453906"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{5868DB47-41FC-D705-B6CF-C87D3164BA43}"
+ }
+}
