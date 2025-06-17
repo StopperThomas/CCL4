@@ -133,10 +133,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26cdb567f2b17a548b5e824f09a34d52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  screwID: Plus
-  screwType: 3
+  screwID: YScrew
   isUnscrewed: 0
-  amount: 1
 --- !u!65 &8166606111265476808
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -190,6 +188,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemType: 2
   amount: 1
+  screwdriverType: 0
+  screwType: 4
+  keyType: 0
+  cogwheelType: 0
+  noteID: 0
   customName: Y Screw
   customDescription: But why?
-  custom3DPrefab: {fileID: 0}
+  renderDistanceOverride: -1
+  renderScaleOverride: 1

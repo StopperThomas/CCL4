@@ -139,17 +139,23 @@ public class ItemAssets : MonoBehaviour
         };
     }
 
-    public GameObject GetScrewPrefab(ScrewType type)
+public GameObject GetScrewPrefab(ScrewType type)
+{
+    GameObject prefab = type switch
     {
-        return type switch
-        {
-            ScrewType.Minus => screwMinusPrefab,
-            ScrewType.Plus => screwPlusPrefab,
-            ScrewType.Torx => screwTorxPrefab,
-            ScrewType.Y => screwYPrefab,
-            _ => null,
-        };
-    }
+        ScrewType.Minus => screwMinusPrefab,
+        ScrewType.Plus => screwPlusPrefab,
+        ScrewType.Torx => screwTorxPrefab,
+        ScrewType.Y => screwYPrefab,
+        _ => null,
+    };
+
+    if (prefab == null)
+        Debug.LogWarning($"Missing prefab for ScrewType: {type}");
+
+    return prefab;
+}
+
 
     public GameObject GetKeyPrefab(KeyType type)
     {

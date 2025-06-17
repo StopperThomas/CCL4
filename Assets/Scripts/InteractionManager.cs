@@ -149,6 +149,15 @@ public class InteractionManager : MonoBehaviour
             return;
         }
 
+        // Valve interaction
+        ValveController valve = hitObject.GetComponent<ValveController>();
+        if (valve != null)
+        {
+            valve.ActivateValve();
+            PromptManager.Instance?.ShowPrompt("You turned the valve.");
+            return;
+        }
+
         // Screw placement
         var screwSocket = hitObject.GetComponent<ScrewSocket>();
         if (screwSocket != null && equippedItem != null && equippedItem.itemType == ItemType.Screw)
@@ -179,10 +188,23 @@ public class InteractionManager : MonoBehaviour
 
             return;
         }
-
-        // Unscrew
+        // Try unscrewing screws FIRST
         var screw = hitObject.GetComponent<Screw>();
-        screw?.TryUnscrew(equippedItem);
+        if (screw != null)
+        {
+            screw.TryUnscrew(equippedItem);
+            return; // Prevent further handling like pickup
+        }
+
+        // Then try picking up if it's not a screw
+        var pickupItem = hitObject.GetComponent<PickupItem>();
+        if (pickupItem != null)
+        {
+            pickupItem.OnPickup();
+            PromptManager.Instance?.ShowPrompt("Item picked up.");
+            return;
+        }
+
 
         // Cogwheel pickup
         var cog = hitObject.GetComponent<Cogwheel>();
@@ -208,16 +230,6 @@ public class InteractionManager : MonoBehaviour
             }
             return;
         }
-
-        // Pickup
-        var pickupItem = hitObject.GetComponent<PickupItem>();
-        if (pickupItem != null)
-        {
-            pickupItem.OnPickup();
-            PromptManager.Instance?.ShowPrompt("Item picked up.");
-            return;
-        }
-
         // Unlock
         var lockComponent = hitObject.GetComponent<BoxLock>();
         lockComponent?.TryUnlock(equippedItem);

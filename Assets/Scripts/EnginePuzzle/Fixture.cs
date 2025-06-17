@@ -11,11 +11,7 @@ public bool TryPlaceBulb(GameObject bulbPrefab)
         return false;
 
     
-    if (!PuzzleManager.Instance.IsPuzzleSolved)
-    {
-        PromptManager.Instance?.ShowPrompt("Nothing happens. The connection isn't complete.");
-        return false;
-    }
+ 
 
     Quaternion prefabRotation = bulbPrefab.transform.rotation;
     Vector3 placementPosition = transform.position + transform.up * 0.03f;
