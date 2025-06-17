@@ -88,6 +88,22 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
+            // Combination lock digits
+            CombinationLockDigit digit = hitObj.GetComponent<CombinationLockDigit>();
+            if (digit != null)
+            {
+                Highlight(hitObj);
+                uiManager?.ShowPrompt(true, "LMB");
+
+                if (Input.GetMouseButtonDown(0))
+                {
+                    digit.Interact();
+                }
+
+                return;
+            }
+
+
             // Default fallback
             RemoveHighlight();
             uiManager?.ShowPrompt(false);

@@ -134,6 +134,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Crouch"",
+                    ""type"": ""Button"",
+                    ""id"": ""b29a7804-2712-48de-9ab8-abe91019425a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -312,6 +321,17 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""ResetPuzzle"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""79bc7aea-f970-43ec-8c60-8b65c49c63dc"",
+                    ""path"": ""<Keyboard>/leftCtrl"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Crouch"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -332,6 +352,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         m_Player_EquipItem = m_Player.FindAction("EquipItem", throwIfNotFound: true);
         m_Player_UnequipItem = m_Player.FindAction("UnequipItem", throwIfNotFound: true);
         m_Player_ResetPuzzle = m_Player.FindAction("ResetPuzzle", throwIfNotFound: true);
+        m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -405,6 +426,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_EquipItem;
     private readonly InputAction m_Player_UnequipItem;
     private readonly InputAction m_Player_ResetPuzzle;
+    private readonly InputAction m_Player_Crouch;
     public struct PlayerActions
     {
         private @PlayerInputActions m_Wrapper;
@@ -421,6 +443,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         public InputAction @EquipItem => m_Wrapper.m_Player_EquipItem;
         public InputAction @UnequipItem => m_Wrapper.m_Player_UnequipItem;
         public InputAction @ResetPuzzle => m_Wrapper.m_Player_ResetPuzzle;
+        public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -466,6 +489,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ResetPuzzle.started += instance.OnResetPuzzle;
             @ResetPuzzle.performed += instance.OnResetPuzzle;
             @ResetPuzzle.canceled += instance.OnResetPuzzle;
+            @Crouch.started += instance.OnCrouch;
+            @Crouch.performed += instance.OnCrouch;
+            @Crouch.canceled += instance.OnCrouch;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -506,6 +532,9 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             @ResetPuzzle.started -= instance.OnResetPuzzle;
             @ResetPuzzle.performed -= instance.OnResetPuzzle;
             @ResetPuzzle.canceled -= instance.OnResetPuzzle;
+            @Crouch.started -= instance.OnCrouch;
+            @Crouch.performed -= instance.OnCrouch;
+            @Crouch.canceled -= instance.OnCrouch;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -537,5 +566,6 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         void OnEquipItem(InputAction.CallbackContext context);
         void OnUnequipItem(InputAction.CallbackContext context);
         void OnResetPuzzle(InputAction.CallbackContext context);
+        void OnCrouch(InputAction.CallbackContext context);
     }
 }

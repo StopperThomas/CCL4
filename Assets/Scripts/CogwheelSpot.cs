@@ -27,6 +27,19 @@ public class CogwheelSpot : MonoBehaviour
 
         GameObject cogwheelObj = Instantiate(item.prefab3D, transform.position, transform.rotation);
         cogwheelObj.transform.SetParent(transform);
+
+        // Disable interaction
+        cogwheelObj.tag = "Untagged";
+        Destroy(cogwheelObj.GetComponent<Collider>());
+
+        // Ensure Cogwheel component is attached and configured
+        Cogwheel cogComponent = cogwheelObj.GetComponent<Cogwheel>();
+        if (cogComponent == null)
+        {
+            cogComponent = cogwheelObj.AddComponent<Cogwheel>();
+        }
+        cogComponent.size = item.cogwheelType;
+
         isOccupied = true;
 
         Debug.Log("Cogwheel placed successfully.");
@@ -35,21 +48,19 @@ public class CogwheelSpot : MonoBehaviour
         return true;
     }
 
-    public bool HasCorrectCogwheel()
-{
-    if (!isOccupied) return false;
 
-    Transform child = transform.GetChild(0); // assuming placed cogwheel is parented
-    if (child == null) return false;
+        public bool HasCorrectCogwheel()
+    {
+        if (!isOccupied) return false;
 
-    Cogwheel cog = child.GetComponent<Cogwheel>();
-    if (cog == null) return false;
+        Transform child = transform.GetChild(0); // assuming placed cogwheel is parented
+        if (child == null) return false;
 
-    return cog.size == requiredType;
-}
+        Cogwheel cog = child.GetComponent<Cogwheel>();
+        if (cog == null) return false;
 
-
-
+        return cog.size == requiredType;
+    }
 
     public bool IsOccupied() => isOccupied;
 }

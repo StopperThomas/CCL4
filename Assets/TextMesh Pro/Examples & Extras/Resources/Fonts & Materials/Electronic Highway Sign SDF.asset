@@ -1423,20 +1423,21 @@ MonoBehaviour:
   m_FreeGlyphRects:
   - m_X: 98
     m_Y: 910
-    m_Width: 925
-    m_Height: 113
+    m_Width: 51
+    m_Height: 98
+  - m_X: 686
+    m_Y: 260
+    m_Width: 98
+    m_Height: 130
+  - m_X: 784
+    m_Y: 260
+    m_Width: 98
+    m_Height: 130
+  m_FreeGlyphRects:
   - m_X: 1016
     m_Y: 0
     m_Width: 7
     m_Height: 1023
-  - m_X: 0
-    m_Y: 998
-    m_Width: 1023
-    m_Height: 25
-  - m_X: 51
-    m_Y: 946
-    m_Width: 972
-    m_Height: 77
   - m_X: 490
     m_Y: 520
     m_Width: 533

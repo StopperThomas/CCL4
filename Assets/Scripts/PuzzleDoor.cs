@@ -4,11 +4,16 @@ using System.Collections.Generic;
 
 public class PuzzleDoor : MonoBehaviour
 {
+    [SerializeField] private GameObject hingeObject;
+    [SerializeField] private GameObject lightObject;
+
+    [SerializeField] private Material redGlowMaterial;
+    [SerializeField] private Material greenGlowMaterial;
+
     public static PuzzleDoor Instance;
 
     [SerializeField] private CogwheelSpot[] cogwheelSpots;
     [SerializeField] private GameObject doorObject;
-    [SerializeField] private Animator doorAnimator;
 
     private void Awake()
     {
@@ -42,25 +47,32 @@ public class PuzzleDoor : MonoBehaviour
         doorOpened = true;
 
         Debug.Log("Opening door...");
-
         StartCoroutine(RotateDoor());
+
+        // Change the material of the "Light" object
+        MeshRenderer renderer = lightObject.GetComponent<MeshRenderer>();
+        if (renderer != null)
+        {
+            renderer.material = greenGlowMaterial;
+        }
     }
+
 
     private IEnumerator RotateDoor()
     {
-        Quaternion startRot = doorObject.transform.rotation;
-        Quaternion targetRot = startRot * Quaternion.Euler(0, 90f, 0);
+        Quaternion startRot = hingeObject.transform.rotation;
+        Quaternion targetRot = startRot * Quaternion.Euler(0, 90f, 0); // Or -90f for opposite swing
 
         float duration = 2f;
         float elapsed = 0f;
 
         while (elapsed < duration)
         {
-            doorObject.transform.rotation = Quaternion.Slerp(startRot, targetRot, elapsed / duration);
+            hingeObject.transform.rotation = Quaternion.Slerp(startRot, targetRot, elapsed / duration);
             elapsed += Time.deltaTime;
             yield return null;
         }
 
-        doorObject.transform.rotation = targetRot;
+        hingeObject.transform.rotation = targetRot;
     }
 }
