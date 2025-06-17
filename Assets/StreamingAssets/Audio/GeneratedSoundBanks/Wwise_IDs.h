@@ -15,11 +15,13 @@ namespace AK
     {
         static const AkUniqueID PLAY_FOOTSTEPS = 3854155799U;
         static const AkUniqueID PLAY_LOCKTURNSOUND = 2679905823U;
+        static const AkUniqueID PLAY_SOUNDTRACKGAMEPLAY = 1075605560U;
     } // namespace EVENTS
 
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
+        static const AkUniqueID BACKGROUNDMUSIC = 626769978U;
         static const AkUniqueID FOOTSTEPS = 2385628198U;
         static const AkUniqueID LOCKTURNSOUNDS = 2559633245U;
     } // namespace BANKS

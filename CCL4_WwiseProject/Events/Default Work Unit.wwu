@@ -14,12 +14,23 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_FootSteps" ID="{76B4EE2B-877D-4734-899E-2A3D899E5BC6}">
+				<Event Name="Play_FootSteps" ID="{EAFA17FC-256B-4301-9345-EA2979E4E79A}">
 					<ChildrenList>
-						<Action Name="" ID="{58577BFD-6D42-4B9B-B6ED-4544F0336F4F}" ShortID="276079605">
+						<Action Name="" ID="{39608552-420F-4E9A-A011-29AFE5DB65C1}" ShortID="595169090">
 							<ReferenceList>
 								<Reference Name="Target">
 									<ObjectRef Name="FootSteps" ID="{7C471574-8584-4109-9F10-BF06DC360742}" WorkUnitID="{64A7B1A2-41CC-4637-A017-789B9DA177A5}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_SoundTrackGamePlay" ID="{89351361-6DCA-4663-950C-ACBBB53996CC}">
+					<ChildrenList>
+						<Action Name="" ID="{027F9D45-96A7-40ED-89F2-0E6F82D6B0E9}" ShortID="259970366">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SoundTrackGamePlay" ID="{02F9429C-3817-4EB1-979A-502035FC2791}" WorkUnitID="{64A7B1A2-41CC-4637-A017-789B9DA177A5}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

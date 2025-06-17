@@ -2,6 +2,8 @@ Event	ID	Name			Wwise Object Path	Notes
 	3854155799	Play_FootSteps			\Default Work Unit\Play_FootSteps	
 
 In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
-	44521336	FootStep1	C:\Users\michi\Desktop\CCL4\CCL4\CCL4_WwiseProject\.cache\AB\{ABB2A081-C724-DC50-052A-1A0F0380B76B}.wem		\Actor-Mixer Hierarchy\Default Work Unit\FootSteps\FootStep1		58772
-	396126346	FootSTep2	C:\Users\michi\Desktop\CCL4\CCL4\CCL4_WwiseProject\.cache\6A\{6A4842FD-D7AF-0FF2-AD2F-4A2F093E3A6F}.wem		\Actor-Mixer Hierarchy\Default Work Unit\FootSteps\FootSTep2		48104
+	244076365	FootStep3	C:\Users\michi\Desktop\CCL4\CCL4_WwiseProject\.cache\47\{475F87D4-42E5-5B61-EB81-CA01864B79EA}.wem		\Actor-Mixer Hierarchy\Default Work Unit\FootSteps\FootStep3		37492
+	311538208	FootStep2	C:\Users\michi\Desktop\CCL4\CCL4_WwiseProject\.cache\00\{0055A660-0D92-8C3C-E8FD-CA602A5F575A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\FootSteps\FootStep2		64660
+	530576471	FootStep1	C:\Users\michi\Desktop\CCL4\CCL4_WwiseProject\.cache\AF\{AF88A6C5-EC78-EE84-E40D-C1389E9FAD93}.wem		\Actor-Mixer Hierarchy\Default Work Unit\FootSteps\FootStep1		43312
+	951907656	FootStep4	C:\Users\michi\Desktop\CCL4\CCL4_WwiseProject\.cache\18\{1895048C-ADFB-0293-3CED-CC42C9F1BE85}.wem		\Actor-Mixer Hierarchy\Default Work Unit\FootSteps\FootStep4		66600
 
