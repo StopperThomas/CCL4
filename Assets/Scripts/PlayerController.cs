@@ -43,14 +43,27 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         interactionManager = FindObjectOfType<InteractionManager>();
 
+        // Start coroutine to wait for InventoryManager to be ready
+        StartCoroutine(WaitForInventoryManager());
+    }
+
+    private System.Collections.IEnumerator WaitForInventoryManager()
+    {
+        while (InventoryManager.Instance == null)
+        {
+            Debug.Log("⏳ Waiting for InventoryManager to be initialized...");
+            yield return null;
+        }
+
         inventory = InventoryManager.Instance.inventory;
+
         if (uiInventory != null)
             uiInventory.SetInventory(inventory);
     }
 
     private void OnEnable()
     {
-        inputActions.Player.Enable();
+        inputActions?.Player.Enable();
 
         inputActions.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Move.canceled += ctx => moveInput = Vector2.zero;
@@ -167,15 +180,14 @@ public class PlayerController : MonoBehaviour
         if (!isInventoryOpen) return;
 
         Item selectedItem = uiInventory.GetSelectedItem();
-        if (selectedItem == null || selectedItem.prefab3D == null) return;
+        if (selectedItem == null) return;
 
-        InventoryManager.Instance.inventory.RemoveItem(selectedItem);
-
-        Vector3 dropPosition = transform.position + transform.forward * 1.5f;
-        Instantiate(selectedItem.prefab3D, dropPosition, Quaternion.identity);
-
-        Debug.Log("Dropped item: " + selectedItem.itemName);
-        FindObjectOfType<ItemInspectorUI>()?.HideItem();
+        var inspector = FindObjectOfType<ItemInspectorUI>();
+        if (inspector != null)
+        {
+            inspector.ShowItem(selectedItem);
+            inspector.TryDropItemInput();
+        }
     }
 
     private void TryEquipInspectedItem()

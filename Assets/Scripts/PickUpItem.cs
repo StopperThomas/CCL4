@@ -2,13 +2,41 @@ using UnityEngine;
 
 public class PickupItem : MonoBehaviour
 {
-    public Item.ItemType itemType;
+    public ItemType itemType;
     public int amount = 1;
+
+    [Header("Variant Type")]
+    public ScrewdriverType screwdriverType;
+    public ScrewType screwType;
+    public KeyType keyType;
+    public CogwheelType cogwheelType;
+    public int noteID;
 
     [Header("Optional Custom Data")]
     public string customName;
     [TextArea] public string customDescription;
-    public GameObject custom3DPrefab;
+
+    [Header("Render Settings ")]
+    public float renderDistanceOverride = -1f;
+    public float renderScaleOverride = 1f;
+
+
+
+
+    public void OnPickup()
+    {
+        Item item = GetItem();
+        InventoryManager.Instance.inventory.AddItem(item);
+
+        UI_Inventory uiInventory = FindObjectOfType<UI_Inventory>();
+        if (uiInventory != null)
+        {
+            uiInventory.SetInventory(InventoryManager.Instance.inventory);
+        }
+
+        Destroy(gameObject); 
+    
+    }
 
     public Item GetItem()
     {
@@ -17,39 +45,45 @@ public class PickupItem : MonoBehaviour
             itemType = itemType,
             amount = amount,
             itemName = string.IsNullOrEmpty(customName) ? itemType.ToString() : customName,
-            description = string.IsNullOrWhiteSpace(customDescription)
-                ? "Description for " + itemType
-                : customDescription,
-            prefab3D = ItemAssets.Instance.GetPrefab(itemType)
+            description = string.IsNullOrWhiteSpace(customDescription) ? $"Description for {itemType}" : customDescription,
+
+            
+            customRenderDistance = renderDistanceOverride,
+            customRenderScale = renderScaleOverride
         };
 
-        // Special handling for screwdrivers
-        if (itemType == Item.ItemType.ScrewDriver)
+        switch (itemType)
         {
-            Screwdriver screwdriverComponent = GetComponent<Screwdriver>();
-            if (screwdriverComponent != null)
-            {
-                item.screwType = screwdriverComponent.screwType;
-            }
-            else
-            {
-                Debug.LogWarning("Screwdriver component missing on PickupItem.");
-            }
+            case ItemType.ScrewDriver:
+                item.screwdriverType = screwdriverType;
+                item.prefab3D = ItemAssets.Instance.GetScrewdriverPrefab(screwdriverType);
+                break;
+            case ItemType.Screw:
+                item.screwType = screwType;
+                item.prefab3D = ItemAssets.Instance.GetScrewPrefab(screwType);
+                break;
+            case ItemType.Key:
+                item.keyType = keyType;
+                item.prefab3D = ItemAssets.Instance.GetKeyPrefab(keyType);
+                break;
+            case ItemType.Cogwheel:
+                item.cogwheelType = cogwheelType;
+                item.prefab3D = ItemAssets.Instance.GetCogwheelPrefab(cogwheelType);
+                break;
+            case ItemType.Note:
+                item.noteID = noteID;
+                item.prefab3D = ItemAssets.Instance.GetNotePrefab(noteID);
+                break;
+            case ItemType.LightBulb:
+                item.prefab3D = ItemAssets.Instance.bulbPrefab;
+                break;
+            default:
+                Debug.LogWarning($"Unhandled item type in PickupItem: {itemType}");
+                break;
         }
 
         return item;
     }
 
-    public void OnPickup()
-    {
-        InventoryManager.Instance.inventory.AddItem(GetItem());
 
-        UI_Inventory uiInventory = FindObjectOfType<UI_Inventory>();
-        if (uiInventory != null)
-        {
-            uiInventory.SetInventory(InventoryManager.Instance.inventory);
-        }
-
-        Destroy(gameObject);
-    }
 }
