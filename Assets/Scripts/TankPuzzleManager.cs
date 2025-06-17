@@ -6,11 +6,11 @@ public class TankPuzzleManager : MonoBehaviour
 
     public PointerController pointer;
 
-    [Header("Acceptable Angle Range")]
-    public float greenStartAngle = 45f;
-    public float greenEndAngle = 60f;
+    
+    public float greenStartAngle = 230f;
+    public float greenEndAngle = 260f;
 
-    private bool puzzleSolved = false;
+    public bool puzzleSolved = false;
 
     private void Awake()
     {
@@ -22,21 +22,17 @@ public class TankPuzzleManager : MonoBehaviour
         if (puzzleSolved) return;
 
         float angle = pointer.currentAngle;
+        Debug.Log($"Pointer angle (adjusted X): {angle}");
 
-        // Wrap around 0° - 360° if needed
         if (greenStartAngle > greenEndAngle)
         {
             if (angle >= greenStartAngle || angle <= greenEndAngle)
-            {
                 PuzzleSolved();
-            }
         }
         else
         {
             if (angle >= greenStartAngle && angle <= greenEndAngle)
-            {
                 PuzzleSolved();
-            }
         }
     }
 

@@ -12,30 +12,30 @@ public class ObjectInspector : MonoBehaviour
     private Quaternion originalRotation;
     private Transform originalParent;
 
-    
+    private bool originalUseGravity;
+    private bool originalIsKinematic;
+    private Rigidbody currentRigidbody;
 
-   void Update()
-{
-    if (!inspecting || currentObject == null) return;
-
-    float rotX = Input.GetAxis("Mouse X") * 5f;
-    float rotY = Input.GetAxis("Mouse Y") * 5f;
-
-    currentObject.transform.Rotate(Vector3.up, -rotX, Space.World);
-    currentObject.transform.Rotate(Vector3.right, rotY, Space.World);
-
-    if (Input.GetKeyDown(KeyCode.Escape))
+    void Update()
     {
-        EndInspection();
-    }
+        if (!inspecting || currentObject == null) return;
 
-    if (Input.GetKeyDown(KeyCode.E) && isInventoryInspection)
-    {
-    
-        inspecting = !inspecting;
-    }
-}
+        float rotX = Input.GetAxis("Mouse X") * 5f;
+        float rotY = Input.GetAxis("Mouse Y") * 5f;
 
+        currentObject.transform.Rotate(Vector3.up, -rotX, Space.World);
+        currentObject.transform.Rotate(Vector3.right, rotY, Space.World);
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            EndInspection();
+        }
+
+        if (Input.GetKeyDown(KeyCode.E) && isInventoryInspection)
+        {
+            inspecting = !inspecting;
+        }
+    }
 
     public void StartInspection(GameObject obj)
     {
@@ -51,6 +51,16 @@ public class ObjectInspector : MonoBehaviour
         currentObject = obj;
         currentObject.GetComponent<Collider>().enabled = false;
 
+        currentRigidbody = currentObject.GetComponent<Rigidbody>();
+        if (currentRigidbody != null)
+        {
+            originalUseGravity = currentRigidbody.useGravity;
+            originalIsKinematic = currentRigidbody.isKinematic;
+
+            currentRigidbody.useGravity = false;
+            currentRigidbody.isKinematic = true;
+        }
+
         currentObject.transform.SetParent(null);
 
         Transform cam = Camera.main.transform;
@@ -58,6 +68,7 @@ public class ObjectInspector : MonoBehaviour
         currentObject.transform.position = cam.position + cam.forward * inspectDistance;
         currentObject.transform.rotation = Quaternion.identity;
     }
+
     public void StartInventoryInspection(GameObject obj)
     {
         if (currentObject != null)
@@ -69,14 +80,18 @@ public class ObjectInspector : MonoBehaviour
         currentObject = obj;
     }
 
-
     public void EndInspection()
     {
         if (!inspecting && !isInventoryInspection) return;
 
         if (!isInventoryInspection)
         {
-            
+            if (currentRigidbody != null)
+            {
+                currentRigidbody.useGravity = originalUseGravity;
+                currentRigidbody.isKinematic = originalIsKinematic;
+            }
+
             currentObject.transform.SetParent(originalParent);
             currentObject.transform.position = originalPosition;
             currentObject.transform.rotation = originalRotation;
@@ -86,7 +101,6 @@ public class ObjectInspector : MonoBehaviour
         }
         else
         {
-            
             if (currentObject != null)
             {
                 Destroy(currentObject);
@@ -97,5 +111,6 @@ public class ObjectInspector : MonoBehaviour
         inspecting = false;
         isInventoryInspection = false;
         currentObject = null;
+        currentRigidbody = null;
     }
 }

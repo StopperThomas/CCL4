@@ -8,15 +8,13 @@ public class PointerController : MonoBehaviour
     public void RotateBy(float angle)
     {
         currentAngle = (currentAngle + angle) % 360f;
-
         if (pointerTransform != null)
-            pointerTransform.localRotation = Quaternion.Euler(-currentAngle, 0, 0);
+            pointerTransform.localRotation = Quaternion.Euler(-currentAngle, 0f, 0f); // X-axis rotation
     }
 
     public void ResetPointer()
     {
         currentAngle = 0f;
-
         if (pointerTransform != null)
             pointerTransform.localRotation = Quaternion.identity;
     }

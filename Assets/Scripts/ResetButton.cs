@@ -2,8 +2,12 @@ using UnityEngine;
 
 public class ResetButton : MonoBehaviour
 {
+    public SwitchButton switchButton;
+
     private void OnMouseDown()
     {
-        TankPuzzleManager.Instance?.ResetPuzzle();
+        switchButton?.PressButton(); // Play the visual animation
+        TankPuzzleManager.Instance?.ResetPuzzle(); // Logic reset
     }
 }
+

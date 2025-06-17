@@ -15,10 +15,19 @@ public class ValveController : MonoBehaviour
 {
     if (isSpinning || pointerController == null) return;
 
+    // Prevent further interaction if already solved
+    if (TankPuzzleManager.Instance != null && TankPuzzleManager.Instance.puzzleSolved)
+
+    {
+        PromptManager.Instance?.ShowPrompt("The tank is already full.");
+        return;
+    }
+
     StartCoroutine(SpinValveVisual());
     pointerController.RotateBy(rotationAmount);
     TankPuzzleManager.Instance.CheckIfInCorrectRange();
 }
+
    private System.Collections.IEnumerator SpinValveVisual()
 {
     isSpinning = true;
@@ -26,7 +35,7 @@ public class ValveController : MonoBehaviour
     float elapsed = 0f;
     float endAngle = 90f;
 
-    // Cache the initial local rotation
+    
     Quaternion initialRotation = transform.localRotation;
     Quaternion targetRotation = initialRotation * Quaternion.Euler(endAngle, 0f, 0f);
 
@@ -39,7 +48,7 @@ public class ValveController : MonoBehaviour
         yield return null;
     }
 
-    // Snap to final rotation
+    
     transform.localRotation = targetRotation;
     isSpinning = false;
 }
