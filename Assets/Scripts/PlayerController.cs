@@ -1,8 +1,11 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+
+
 public class PlayerController : MonoBehaviour
 {
+    
     [Header("Movement Settings")]
     [SerializeField] private float moveSpeed = 5f;
 
@@ -37,6 +40,11 @@ public class PlayerController : MonoBehaviour
     private bool jumpPressed = false;
     private bool isInventoryOpen = false;
 
+    private bool isMoving = false;
+    private bool footstepPlaying = false;
+
+
+
     private void Awake()
     {
         inputActions = new PlayerInputActions();
@@ -46,6 +54,14 @@ public class PlayerController : MonoBehaviour
         // Start coroutine to wait for InventoryManager to be ready
         StartCoroutine(WaitForInventoryManager());
     }
+
+    private void Start()
+{
+    AkUnitySoundEngine.LoadBank("Main", (AkCallbackManager.BankCallback)null, null);
+    AkUnitySoundEngine.PostEvent("Play_FootSteps", gameObject);
+}
+
+
 
     private System.Collections.IEnumerator WaitForInventoryManager()
     {
@@ -111,11 +127,31 @@ public class PlayerController : MonoBehaviour
         HandleLook();
     }
 
+
     private void HandleMovement()
+{
+    Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
+
+    controller.Move(move * moveSpeed * Time.deltaTime);
+
+    isMoving = move.magnitude > 0.1f;
+
+    uint id = AkUnitySoundEngine.GetIDFromString("Play_FootSteps");
+    Debug.Log("Footstep Event ID: " + id);
+
+    if (isMoving && !footstepPlaying)
     {
-        Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
-        controller.Move(move * moveSpeed * Time.deltaTime);
+        AkUnitySoundEngine.PostEvent("Play_FootSteps", gameObject);
+        footstepPlaying = true;
     }
+    else if (!isMoving && footstepPlaying)
+    {
+        AkUnitySoundEngine.PostEvent("Stop_FootSteps", gameObject);
+        footstepPlaying = false;
+    }
+}
+
+
 
     private void HandleLook()
     {
