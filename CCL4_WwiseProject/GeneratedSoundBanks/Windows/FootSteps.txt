@@ -1,0 +1,7 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3854155799	Play_FootSteps			\Default Work Unit\Play_FootSteps	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	44521336	FootStep1	C:\Users\michi\Desktop\CCL4\CCL4\CCL4_WwiseProject\.cache\AB\{ABB2A081-C724-DC50-052A-1A0F0380B76B}.wem		\Actor-Mixer Hierarchy\Default Work Unit\FootSteps\FootStep1		58772
+	396126346	FootSTep2	C:\Users\michi\Desktop\CCL4\CCL4\CCL4_WwiseProject\.cache\6A\{6A4842FD-D7AF-0FF2-AD2F-4A2F093E3A6F}.wem		\Actor-Mixer Hierarchy\Default Work Unit\FootSteps\FootSTep2		48104
+

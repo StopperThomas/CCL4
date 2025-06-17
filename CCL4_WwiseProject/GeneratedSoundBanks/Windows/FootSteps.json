@@ -1,0 +1,58 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "2385628198",
+    "Type": "User",
+    "GUID": "{B62A6E88-A7A6-4C76-8A8D-F8B029EC5870}",
+    "Language": "SFX",
+    "Hash": "{8CA6F33A-0FA0-A639-7C27-E7CAD32C48E9}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\FootSteps",
+    "ShortName": "FootSteps",
+    "Path": "FootSteps.bnk",
+    "Media": [
+     {
+      "Id": "44521336",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "metal-footsteps-14727.wav",
+      "CachePath": "AB/{ABB2A081-C724-DC50-052A-1A0F0380B76B}.wem"
+     },
+     {
+      "Id": "396126346",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "metal-footsteps-14727.wav",
+      "CachePath": "6A/{6A4842FD-D7AF-0FF2-AD2F-4A2F093E3A6F}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3854155799",
+      "Name": "Play_FootSteps",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_FootSteps",
+      "GUID": "{76B4EE2B-877D-4734-899E-2A3D899E5BC6}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.54430723",
+      "DurationMax": "0.66526437",
+      "MediaRefs": [
+       {
+        "Id": "44521336"
+       },
+       {
+        "Id": "396126346"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{5F38BCCD-C960-2017-278E-98EB8940952D}"
+ }
+}

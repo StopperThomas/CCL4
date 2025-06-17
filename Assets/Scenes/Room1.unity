@@ -1330,6 +1330,12 @@ MonoBehaviour:
   uiInventory: {fileID: 1563501179}
   inventoryUI: {fileID: 1563501177}
   inspectionUI: {fileID: 1312513594}
+  footstepEventName:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: e75a5b760b41273498b026d335405ec8,
+      type: 2}
+  footstepInterval: 0.5
 --- !u!143 &310420002
 CharacterController:
   m_ObjectHideFlags: 0
@@ -5297,7 +5303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ed957486ceea2a47be3be8ae28c2053, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 310420001}
 --- !u!4 &1158073740
 Transform:
   m_ObjectHideFlags: 0
@@ -5325,6 +5330,64 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1060258246}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1184520320
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1184520322}
+  - component: {fileID: 1184520321}
+  m_Layer: 0
+  m_Name: FootSteps
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1184520321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184520320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c44dd927cd283c74eb3a08b43163d073, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  triggerList: f7e1664c
+  useOtherObject: 0
+  data:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 51962b91d59beb34992dea06051cfe19,
+      type: 2}
+  decodeBank: 0
+  overrideLoadSetting: 0
+  loadAsynchronous: 0
+  saveDecodedBank: 0
+  unloadTriggerList: 958ca0ea
+  bankNameInternal: 
+  valueGuidInternal: 
+--- !u!4 &1184520322
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184520320}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1204187760
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6845,10 +6908,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c92d1bc4facc4f244bff2b70a9ad12f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemSlotContainer: {fileID: 1653851048}
-  itemSlotTemplate: {fileID: 1858850399}
-  equippedSlotObject: {fileID: 317448228}
-  equippedSlotIcon: {fileID: 1642819615}
 --- !u!1 &1566422176 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3758261113301964850, guid: 60f71d58280852744ba4c2306565f808,
@@ -10194,9 +10253,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdb41134855b81c4f8c4f90f8f614527, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rayDistance: 5
-  interactionManager: {fileID: 853638737}
-  uiManager: {fileID: 0}
 --- !u!1001 &622285200875507776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -11058,3 +11114,4 @@ SceneRoots:
   - {fileID: 3678998398444737186}
   - {fileID: 1014236754}
   - {fileID: 1151433905}
+  - {fileID: 1184520322}
