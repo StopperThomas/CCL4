@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Cogwheel : MonoBehaviour
 {
-    public CogwheelType size;  // ✅ Corrected to the enum type
+    public CogwheelType size;  
     private bool isPlaced = false;
 
     public void SetPlaced(bool placed)

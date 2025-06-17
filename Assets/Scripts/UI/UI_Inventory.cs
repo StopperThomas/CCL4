@@ -110,15 +110,17 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
-    private bool IsEquipable(Item item)
-    {
-        return item != null && (
-            item.itemType == ItemType.ScrewDriver ||
-            item.itemType == ItemType.Key ||
-            item.itemType == ItemType.Screw ||
-            item.itemType == ItemType.Cogwheel
-        );
-    }
+ private bool IsEquipable(Item item)
+{
+    return item != null && (
+        item.itemType == ItemType.ScrewDriver ||
+        item.itemType == ItemType.Key ||
+        item.itemType == ItemType.Screw ||
+        item.itemType == ItemType.Cogwheel ||
+        item.itemType == ItemType.LightBulb
+    );
+}
+
 
     public Item GetSelectedItem()
     {

@@ -35,21 +35,23 @@ public class Inventory
 
     public void RemoveItem(Item item)
     {
-        if (item == null) return;
-
-        if (item.amount > 1 &&
-            (item.itemType == ItemType.Cogwheel ||
-             item.itemType == ItemType.Screw ||
-             item.itemType == ItemType.ScrewDriver))
+        Item inventoryItem = itemList.Find(i => CanStack(i, item));
+        if (inventoryItem == null)
         {
-            item.amount--;
+            Debug.LogWarning("Item not found in inventory.");
+            return;
+        }
+
+        if (inventoryItem.amount > 1)
+        {
+            inventoryItem.amount--;
         }
         else
         {
-            itemList.Remove(item);
+            itemList.Remove(inventoryItem);
         }
 
-        Debug.Log("Removed item: " + item.itemName);
+        Debug.Log("Removed item: " + inventoryItem.itemName);
         InventoryManager.Instance?.uiInventory?.RefreshInventoryItems();
     }
 
@@ -60,11 +62,25 @@ public class Inventory
 
     private bool CanStack(Item a, Item b)
     {
-        return a.itemType == b.itemType &&
-               a.screwType == b.screwType &&
-               a.screwdriverType == b.screwdriverType &&
-               a.keyType == b.keyType &&
-               a.cogwheelType == b.cogwheelType &&
-               a.noteID == b.noteID;
+        if (a.itemType != b.itemType)
+            return false;
+
+        switch (a.itemType)
+        {
+            case ItemType.Screw:
+                return a.screwType == b.screwType;
+            case ItemType.ScrewDriver:
+                return a.screwdriverType == b.screwdriverType;
+            case ItemType.Cogwheel:
+                return a.cogwheelType == b.cogwheelType;
+            case ItemType.LightBulb:
+                return true;
+            case ItemType.Note:
+            case ItemType.Key:
+                return false;
+            default:
+                return false;
+        }
     }
+
 }

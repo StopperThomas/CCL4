@@ -16,6 +16,13 @@ public class PickupItem : MonoBehaviour
     public string customName;
     [TextArea] public string customDescription;
 
+    [Header("Render Settings ")]
+    public float renderDistanceOverride = -1f;
+    public float renderScaleOverride = 1f;
+
+
+
+
     public void OnPickup()
     {
         Item item = GetItem();
@@ -27,7 +34,8 @@ public class PickupItem : MonoBehaviour
             uiInventory.SetInventory(InventoryManager.Instance.inventory);
         }
 
-        Destroy(gameObject); // Remove item from scene
+        Destroy(gameObject); 
+    
     }
 
     public Item GetItem()
@@ -37,7 +45,11 @@ public class PickupItem : MonoBehaviour
             itemType = itemType,
             amount = amount,
             itemName = string.IsNullOrEmpty(customName) ? itemType.ToString() : customName,
-            description = string.IsNullOrWhiteSpace(customDescription) ? $"Description for {itemType}" : customDescription
+            description = string.IsNullOrWhiteSpace(customDescription) ? $"Description for {itemType}" : customDescription,
+
+            
+            customRenderDistance = renderDistanceOverride,
+            customRenderScale = renderScaleOverride
         };
 
         switch (itemType)
@@ -62,11 +74,16 @@ public class PickupItem : MonoBehaviour
                 item.noteID = noteID;
                 item.prefab3D = ItemAssets.Instance.GetNotePrefab(noteID);
                 break;
+            case ItemType.LightBulb:
+                item.prefab3D = ItemAssets.Instance.bulbPrefab;
+                break;
             default:
-                item.prefab3D = ItemAssets.Instance.GetPrefab(itemType);
+                Debug.LogWarning($"Unhandled item type in PickupItem: {itemType}");
                 break;
         }
 
         return item;
     }
+
+
 }

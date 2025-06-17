@@ -11,13 +11,13 @@ public class BoxLock : MonoBehaviour
 
         if (equippedItem == null || equippedItem.itemType != ItemType.Key)
         {
-            FindObjectOfType<InspectUIManager>()?.ShowPrompt(true, "You need to equip a key to use it.", true);
+            PromptManager.Instance?.ShowPrompt("You need to equip a key to use it.");
             return;
         }
 
         if (equippedItem.keyType != requiredKeyType)
         {
-            FindObjectOfType<InspectUIManager>()?.ShowPrompt(true, "This key doesn't fit.", true);
+            PromptManager.Instance?.ShowPrompt("This key doesn't fit.");
             Debug.Log("Wrong key type.");
             return;
         }
@@ -46,7 +46,7 @@ public class BoxLock : MonoBehaviour
             inspectorUI.HideItem();
         }
 
-        FindObjectOfType<InspectUIManager>()?.ShowPrompt(true, "The key clicks and the lock opens.", true);
+        PromptManager.Instance?.ShowPrompt("The key clicks and the lock opens.");
     }
 
     public bool IsUnlocked() => isUnlocked;

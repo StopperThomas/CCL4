@@ -63,6 +63,10 @@ public class ItemAssets : MonoBehaviour
     public GameObject note1Prefab;
     public GameObject note2Prefab;
 
+    // LightBulb
+    public Sprite bulbSprite;
+    public GameObject bulbPrefab;
+
 
     public Sprite GetScrewdriverSprite(ScrewdriverType type)
     {
@@ -187,6 +191,7 @@ public class ItemAssets : MonoBehaviour
             ItemType.Cogwheel => gearPrefab,
             ItemType.Screw => screwMinusPrefab,
             ItemType.Note => note0Prefab,
+            
             _ => null,
         };
     }

@@ -20,7 +20,7 @@ public class Box : MonoBehaviour
         else
         {
             Debug.Log("Box is still locked.");
-            FindObjectOfType<InspectUIManager>()?.ShowPrompt(true, "The box is locked.", true);
+            PromptManager.Instance?.ShowPrompt("The box is locked.");
         }
     }
 

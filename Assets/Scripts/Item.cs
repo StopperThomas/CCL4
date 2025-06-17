@@ -9,6 +9,9 @@ public class Item
     public string description;
     public GameObject prefab3D;
 
+    public float customRenderDistance = -1f; 
+    public float customRenderScale = 1f;
+
     public ScrewdriverType screwdriverType;
     public ScrewType screwType;
     public KeyType keyType;
@@ -24,22 +27,31 @@ public class Item
         ItemType.Key => ItemAssets.Instance.GetKeySprite(keyType),
         ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelSprite(cogwheelType),
         ItemType.Note => ItemAssets.Instance.GetNoteSprite(noteID),
-        _ => null,
+        ItemType.LightBulb => ItemAssets.Instance.bulbSprite,
+        _ => null // ✅ catch-all to satisfy compiler
     };
 }
 
 
+
     public GameObject GetPrefab()
+{
+    if (prefab3D != null)
+        return prefab3D;
+
+    prefab3D = itemType switch
     {
-        switch (itemType)
-        {
-            case ItemType.ScrewDriver: return ItemAssets.Instance.GetScrewdriverPrefab(screwdriverType);
-            case ItemType.Screw: return ItemAssets.Instance.GetScrewPrefab(screwType);
-            case ItemType.Key: return ItemAssets.Instance.GetKeyPrefab(keyType);
-            case ItemType.Cogwheel: return ItemAssets.Instance.GetCogwheelPrefab(cogwheelType);
-            case ItemType.Note: return ItemAssets.Instance.GetNotePrefab(noteID);
-            default: return null;
-        }
-    }
+        ItemType.ScrewDriver => ItemAssets.Instance.GetScrewdriverPrefab(screwdriverType),
+        ItemType.Screw => ItemAssets.Instance.GetScrewPrefab(screwType),
+        ItemType.Key => ItemAssets.Instance.GetKeyPrefab(keyType),
+        ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelPrefab(cogwheelType),
+        ItemType.Note => ItemAssets.Instance.GetNotePrefab(noteID),
+        ItemType.LightBulb => ItemAssets.Instance.bulbPrefab,
+        _ => null,
+    };
+
+    return prefab3D;
+}
+
 }
 
