@@ -149,6 +149,15 @@ public class InteractionManager : MonoBehaviour
             return;
         }
 
+        // Valve interaction
+        ValveController valve = hitObject.GetComponent<ValveController>();
+        if (valve != null)
+        {
+            valve.ActivateValve();
+            PromptManager.Instance?.ShowPrompt("You turned the valve.");
+            return;
+        }
+
         // Screw placement
         var screwSocket = hitObject.GetComponent<ScrewSocket>();
         if (screwSocket != null && equippedItem != null && equippedItem.itemType == ItemType.Screw)
