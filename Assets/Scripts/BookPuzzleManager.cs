@@ -28,9 +28,9 @@ public class BookPuzzleManager : MonoBehaviour
             return false;
         }*/
 
-        return selectedBooks.Count < 4 || book.IsSelected(); 
+        return selectedBooks.Count < 4 || book.IsSelected();
     }
-    
+
 
     public void HandleBookToggle(BookSelectable book, bool isSelected)
     {
@@ -43,25 +43,56 @@ public class BookPuzzleManager : MonoBehaviour
             selectedBooks.Remove(book);
         }
 
+        // 🟡 Log currently selected books
+        Debug.Log("Currently selected books:");
+        foreach (var b in selectedBooks)
+        {
+            Debug.Log($"🟢 Book ID: {b.bookID}");
+        }
+
         if (selectedBooks.Count == 4)
             CheckSolution();
     }
 
-    private void CheckSolution()
-    {
-        foreach (var book in selectedBooks)
-        {
-            if (!book.isCorrectBook)
-            {
-                PromptManager.Instance?.ShowPrompt("That doesn’t look quite right...");
-                return;
-            }
-        }
 
-        puzzleSolved = true;
-        PromptManager.Instance?.ShowPrompt("You hear something move behind the shelf...");
-        SlideBookshelf();
+private void CheckSolution()
+{
+    Debug.Log("Checking selected books:");
+    foreach (var book in selectedBooks)
+    {
+        Debug.Log($"Selected Book ID: {book.bookID}, Correct: {book.isCorrectBook}");
     }
+
+    // Make sure exactly 4 are selected
+    if (selectedBooks.Count != 4)
+    {
+        Debug.Log("Not enough books selected yet.");
+        return;
+    }
+
+    // Check if all 4 are correct
+    foreach (var book in selectedBooks)
+    {
+        if (!book.isCorrectBook)
+        {
+            PromptManager.Instance?.ShowPrompt("I know this combination... let's try again.");
+
+            foreach (var b in selectedBooks)
+            {
+                b.Deselect();
+            }
+
+            selectedBooks.Clear();
+            return;
+        }
+    }
+
+    // All 4 correct
+    puzzleSolved = true;
+    PromptManager.Instance?.ShowPrompt("You hear something move behind the shelf...");
+    SlideBookshelf();
+}
+
 
     private void SlideBookshelf()
     {
