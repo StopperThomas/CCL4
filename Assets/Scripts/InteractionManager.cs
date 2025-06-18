@@ -45,14 +45,6 @@ public class InteractionManager : MonoBehaviour
                 TryPickupItem(currentTarget);
         };
 
-        controls.Player.ResetPuzzle.performed += ctx =>
-        {
-            if (PuzzleManager.Instance != null && PuzzleManager.Instance.CanReset())
-            {
-                PuzzleManager.Instance.ResetPuzzle();
-            }
-        };
-
     }
 
     void OnEnable() => controls?.Enable();
@@ -93,6 +85,7 @@ public class InteractionManager : MonoBehaviour
     {
         if (currentTarget == null || isInspecting) return;
 
+        // Scene change
         if (currentTarget.CompareTag("SceneChanger"))
         {
             var transition = currentTarget.GetComponent<SceneTransitionObject>();
@@ -100,16 +93,23 @@ public class InteractionManager : MonoBehaviour
             return;
         }
 
+        // Handle Screw-specific logic
+        var screw = currentTarget.GetComponent<Screw>();
+        if (screw != null && !screw.isUnscrewed)
+        {
+            PromptManager.Instance?.ShowPrompt("You need to unscrew it first.");
+            return; // Block inspection
+        }
+
+        // Regular interactable or inventory item
         if (currentTarget.CompareTag("Interactable") || currentTarget.CompareTag("InventoryItem"))
         {
             isInspecting = true;
             inspector.StartInspection(currentTarget);
             if (playerController != null) playerController.enabled = false;
         }
-
-        var screw = currentTarget.GetComponent<Screw>();
-        screw?.TryUnscrew(equippedItem);
     }
+
 
     void TryClick()
     {
@@ -118,18 +118,17 @@ public class InteractionManager : MonoBehaviour
 
         GameObject hitObject = hit.collider.gameObject;
 
-        // Bulb: prevent powered pickup
-        var bulb = hitObject.GetComponent<LightBulb>();
-        if (bulb != null && bulb.isPowered)
-        {
-            PromptManager.Instance?.ShowPrompt("This bulb is powered and cannot be picked up.");
-            return;
-        }
 
-        // Lightbulb placement
+        // Lightbulb placement (only if engine puzzle is solved)
         var fixture = hitObject.GetComponent<Fixture>();
         if (fixture != null && equippedItem != null && equippedItem.itemType == ItemType.LightBulb)
         {
+            if (!PuzzleManager.Instance.IsEnginePuzzleSolved)
+            {
+                PromptManager.Instance?.ShowPrompt("There's no power yet. Check the sides if the screws are placed.");
+                return;
+            }
+
             if (!InventoryManager.Instance.inventory.GetItemList().Contains(equippedItem))
             {
                 PromptManager.Instance?.ShowPrompt("This bulb is no longer in your inventory.");
@@ -137,14 +136,19 @@ public class InteractionManager : MonoBehaviour
                 return;
             }
 
-            fixture.TryPlaceBulb(equippedItem.GetPrefab());
-            InventoryManager.Instance.inventory.RemoveItem(equippedItem);
-            PromptManager.Instance?.ShowPrompt("You placed the bulb.");
+            bool placed = fixture.TryPlaceBulb(equippedItem.GetPrefab());
+            if (placed)
+            {
+                InventoryManager.Instance.inventory.RemoveItem(equippedItem);
+                equippedItem.amount--;
 
-            if (equippedItem.amount <= 0)
-                UnequipItem();
-            else
-                InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+                PromptManager.Instance?.ShowPrompt("You placed the bulb.");
+
+                if (equippedItem.amount <= 0)
+                    UnequipItem();
+                else
+                    InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+            }
 
             return;
         }
@@ -158,6 +162,7 @@ public class InteractionManager : MonoBehaviour
             return;
         }
 
+
         // Screw placement
         var screwSocket = hitObject.GetComponent<ScrewSocket>();
         if (screwSocket != null && equippedItem != null && equippedItem.itemType == ItemType.Screw)
@@ -170,16 +175,19 @@ public class InteractionManager : MonoBehaviour
             }
 
             bool placed = screwSocket.TryPlaceScrew(equippedItem.GetPrefab(), equippedItem.screwType);
+
             if (placed)
             {
-                InventoryManager.Instance.inventory.RemoveItem(equippedItem);
                 equippedItem.amount--;
-                PromptManager.Instance?.ShowPrompt("Screw placed.");
 
                 if (equippedItem.amount <= 0)
+                {
+                    InventoryManager.Instance.inventory.RemoveItem(equippedItem);
                     UnequipItem();
+                }
 
                 InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+                PromptManager.Instance?.ShowPrompt("Screw placed.");
             }
             else
             {
@@ -188,15 +196,45 @@ public class InteractionManager : MonoBehaviour
 
             return;
         }
-        // Try unscrewing screws FIRST
+
+
+
+
         var screw = hitObject.GetComponent<Screw>();
         if (screw != null)
         {
-            screw.TryUnscrew(equippedItem);
-            return; // Prevent further handling like pickup
+            if (PuzzleManager.Instance != null && PuzzleManager.Instance.IsEnginePuzzleSolved)
+            {
+                PromptManager.Instance?.ShowPrompt("The circuit is already completed.");
+                return;
+            }
+
+            if (!screw.isUnscrewed)
+            {
+
+                if (equippedItem != null &&
+                    equippedItem.itemType == ItemType.ScrewDriver &&
+                    screw.TryUnscrew(equippedItem))
+                {
+                    PromptManager.Instance?.ShowPrompt("You unscrewed it.");
+                }
+                else
+                {
+                    PromptManager.Instance?.ShowPrompt("That won't work here.");
+                }
+            }
+            else
+            {
+                // Screw already unscrewed – allow pickup
+                var pickup = hitObject.GetComponent<PickupItem>();
+                pickup?.OnPickup();
+                PromptManager.Instance?.ShowPrompt("Item picked up.");
+            }
+
+            return;
         }
 
-        // Then try picking up if it's not a screw
+
         var pickupItem = hitObject.GetComponent<PickupItem>();
         if (pickupItem != null)
         {
@@ -230,6 +268,14 @@ public class InteractionManager : MonoBehaviour
             }
             return;
         }
+        // Book selection
+
+        var book = hitObject.GetComponent<BookSelectable>();
+        if (book != null)
+        {
+            book.ToggleSelection();
+            return;
+        }
         // Unlock
         var lockComponent = hitObject.GetComponent<BoxLock>();
         lockComponent?.TryUnlock(equippedItem);
@@ -255,6 +301,13 @@ public class InteractionManager : MonoBehaviour
         if (playerController != null)
             playerController.enabled = true;
     }
+
+    public void ForceExitInspectMode()
+    {
+        if (isInspecting)
+            ExitInspectMode();
+    }
+
 
     void ClearHighlight()
     {

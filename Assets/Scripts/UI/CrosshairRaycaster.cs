@@ -63,7 +63,7 @@ public class CrosshairRaycaster : MonoBehaviour
                 if (equipped != null && equipped.itemType == ItemType.ScrewDriver)
                 {
                     Highlight(hitObj);
-                    uiManager?.ShowPrompt(true, "LMB"); 
+                    uiManager?.ShowPrompt(true, "LMB");
                 }
                 else
                 {
@@ -75,13 +75,6 @@ public class CrosshairRaycaster : MonoBehaviour
 
             // Inventory items or doors
             if (hitObj.CompareTag("InventoryItem"))
-            {
-                Highlight(hitObj);
-                uiManager?.ShowPrompt(true, "E");
-                return;
-            }
-
-            if (hitObj.CompareTag("SceneChanger"))
             {
                 Highlight(hitObj);
                 uiManager?.ShowPrompt(true, "E");
@@ -100,6 +93,14 @@ public class CrosshairRaycaster : MonoBehaviour
                     digit.Interact();
                 }
 
+                return;
+            }
+
+            // Highlight for books
+            if (hitObj.CompareTag("Book"))
+            {
+                Highlight(hitObj);
+                uiManager?.ShowPrompt(true, "LMB");
                 return;
             }
 

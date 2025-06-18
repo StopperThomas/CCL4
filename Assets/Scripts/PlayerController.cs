@@ -104,7 +104,7 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Disable();
     }
 
-    private void Update()
+    private void Update() 
     {
         if (isInventoryOpen) return;
 

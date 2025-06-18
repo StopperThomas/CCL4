@@ -21,7 +21,7 @@ public class KeyManager : MonoBehaviour
     public void OnKeyCollected()
     {
         hasKey = true;
-        Debug.Log("✅ Key collected via KeyManager");
+        Debug.Log("Key collected via KeyManager");
     }
 
     public bool HasKey() => hasKey;

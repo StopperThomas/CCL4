@@ -7,59 +7,46 @@ public class ScrewSocket : MonoBehaviour
     private GameObject placedScrew;
     private bool isFilled = false;
 
+    [SerializeField] private Vector3 screwOffset = new Vector3(-0.02f, -0.05f, 0f);
+
+
     public bool IsFilled => isFilled;
     public ScrewType PlacedType { get; private set; }
 
     public bool TryPlaceScrew(GameObject screwPrefab, ScrewType type)
+{
+
+
+    if (isFilled || screwPrefab == null)
+        return false;
+
+    if (type != requiredType)
     {
-        if (isFilled || screwPrefab == null) return false;
-
-        if (type == requiredType)
-        {
-            placedScrew = Instantiate(screwPrefab, transform.position, transform.rotation);
-            placedScrew.transform.localScale = Vector3.one;
-            placedScrew.tag = "Untagged";
-            isFilled = true;
-            PlacedType = type;
-
-            PuzzleManager.Instance?.NotifyScrewPlaced(this);
-            return true;
-        }
-
+        PromptManager.Instance?.ShowPrompt("That screw doesn't fit here.");
         return false;
     }
 
-    public void RemoveScrew()
-    {
-        if (placedScrew != null)
-        {
-            // Return the screw to the inventory
-            Item screwItem = new Item
-            {
-                itemType = ItemType.Screw,
-                screwType = PlacedType,
-                amount = 1,
-                prefab3D = ItemAssets.Instance.GetScrewPrefab(PlacedType)
-            };
+    // Instantiate and parent the screw to this socket
+    placedScrew = Instantiate(screwPrefab, transform.position, Quaternion.identity);
+    placedScrew.transform.SetParent(transform);
 
-            InventoryManager.Instance.inventory.AddItem(screwItem);
+    // Apply local offset and rotation
+    placedScrew.transform.localPosition = screwOffset;
+    placedScrew.transform.localRotation = Quaternion.Euler(180f, 0f, 0f); // Flip for visual alignment
+    placedScrew.transform.localScale = Vector3.one;
 
-            Destroy(placedScrew);
-            placedScrew = null;
-            isFilled = false;
-            PlacedType = default;
-        }
-    }
+    // Disable further interaction
+    placedScrew.tag = "Untagged";
 
-    public void ResetSocket()
-    {
-        if (isFilled && placedScrew != null)
-        {
-            Destroy(placedScrew);
-        }
+    isFilled = true;
+    PlacedType = type;
 
-        isFilled = false;
-        PlacedType = default;
-    }
+    // Notify the puzzle manager
+    PuzzleManager.Instance?.NotifyScrewPlaced(this);
+
+    return true;
+}
+
+
 
 }

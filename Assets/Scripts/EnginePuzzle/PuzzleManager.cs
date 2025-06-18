@@ -6,13 +6,11 @@ public class PuzzleManager : MonoBehaviour
     public static PuzzleManager Instance;
 
     public List<ScrewSocket> allScrewSockets;
-    public PromptManager promptManager;
 
-    private bool puzzleSolved = false;
-    public bool IsPuzzleSolved => puzzleSolved;
 
-    private bool resetReady = false;
-    public bool CanReset() => resetReady && !puzzleSolved;
+    private bool enginePuzzleSolved = false;
+    public bool IsEnginePuzzleSolved => enginePuzzleSolved;
+
 
     private void Awake()
     {
@@ -38,6 +36,8 @@ public class PuzzleManager : MonoBehaviour
 
     private void CheckScrewPuzzle()
     {
+        Debug.Log("Checking screw puzzle...");
+
         bool allCorrect = true;
 
         foreach (var socket in allScrewSockets)
@@ -51,26 +51,13 @@ public class PuzzleManager : MonoBehaviour
 
         if (allCorrect)
         {
-            puzzleSolved = true;
-            promptManager?.ShowPrompt("The connection is correct. Power flows through!");
+            enginePuzzleSolved = true;
             Debug.Log("Screw puzzle solved!");
-        }
-        else
-        {
-            resetReady = true; // ← enable reset
-            promptManager?.ShowPrompt("Something's wrong. Press 'R' to try again.");
-        }
-    }
-
-    public void ResetPuzzle()
-    {
-        foreach (var socket in allScrewSockets)
-        {
-            socket.RemoveScrew();
+            PromptManager.Instance?.ShowPrompt("The connection is correct. Power flows through!");
+            var interactionManager = FindObjectOfType<InteractionManager>();
+            if (interactionManager != null)
+                interactionManager.ForceExitInspectMode();
         }
 
-        puzzleSolved = false;
-        resetReady = false; // ← disable reset until next try
-        promptManager?.ShowPrompt("Reset complete. Try again.");
     }
 }

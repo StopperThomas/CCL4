@@ -14,35 +14,25 @@ public class Screw : MonoBehaviour
         }
     }
 
-   public void TryUnscrew(Item equippedItem)
+   public bool TryUnscrew(Item equippedItem)
 {
-    if (isUnscrewed || equippedItem == null) return;
+    if (isUnscrewed || equippedItem == null) return false;
 
     var pickup = GetComponent<PickupItem>();
-    if (pickup == null)
+    if (pickup == null) return false;
+
+    if (equippedItem.itemType == ItemType.ScrewDriver &&
+        (ScrewType)equippedItem.screwdriverType == pickup.screwType)
     {
-        Debug.LogWarning("No PickupItem attached to screw.");
-        return;
-    }
-
-    // Validate the equipped screwdriver
-    if (equippedItem.itemType == ItemType.ScrewDriver && (ScrewType)equippedItem.screwdriverType == pickup.screwType)
-
-    {
-        Debug.Log("Correct screwdriver! Unscrewing...");
-
         isUnscrewed = true;
         GameStateManager.Instance?.MarkScrewUnscrewed(screwID);
-
         InventoryManager.Instance.inventory.AddItem(pickup.GetItem());
         InventoryManager.Instance.uiInventory.RefreshInventoryItems();
-
         gameObject.SetActive(false);
+        return true;
     }
-    else
-    {
-        Debug.Log("Wrong tool.");
-    }
+
+    return false;
 }
 
 }

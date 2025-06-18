@@ -10,9 +10,6 @@ public bool TryPlaceBulb(GameObject bulbPrefab)
     if (placedBulb != null || bulbPrefab == null)
         return false;
 
-    
- 
-
     Quaternion prefabRotation = bulbPrefab.transform.rotation;
     Vector3 placementPosition = transform.position + transform.up * 0.03f;
 
@@ -28,8 +25,10 @@ public bool TryPlaceBulb(GameObject bulbPrefab)
         Debug.Log("Wrong socket. Bulb placed, but no power.");
     }
 
+    // ✅ Always return true if bulb was placed
     return true;
 }
+
 
 
     private void PowerBulb()
