@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class BookSelectable : MonoBehaviour
 {
@@ -7,17 +8,26 @@ public class BookSelectable : MonoBehaviour
     public bool isCorrectBook;
 
     private bool isSelected = false;
-    private Renderer bookRenderer;
-    private Material bookMaterial;
+    private List<Renderer> renderers = new();
+    private List<Material> instanceMaterials = new();
+    private List<Color> originalColors = new();
     private Coroutine pulseRoutine;
 
     private void Start()
     {
-        bookRenderer = GetComponent<Renderer>();
-        if (bookRenderer != null)
+        renderers.AddRange(GetComponentsInChildren<Renderer>());
+
+        foreach (var rend in renderers)
         {
-            bookMaterial = Instantiate(bookRenderer.material); // make unique instance
-            bookRenderer.material = bookMaterial;
+            if (rend.material != null)
+            {
+                Material instanced = new Material(rend.material);
+                Color original = instanced.HasProperty("_Color") ? instanced.color : Color.white;
+
+                instanceMaterials.Add(instanced);
+                originalColors.Add(original);
+                rend.material = instanced;
+            }
         }
     }
 
@@ -27,6 +37,7 @@ public class BookSelectable : MonoBehaviour
 
         isSelected = !isSelected;
         UpdateVisual();
+
         BookPuzzleManager.Instance.HandleBookToggle(this, isSelected);
     }
 
@@ -36,10 +47,10 @@ public class BookSelectable : MonoBehaviour
         UpdateVisual();
     }
 
+    public bool IsSelected() => isSelected;
+
     private void UpdateVisual()
     {
-        if (bookMaterial == null) return;
-
         if (isSelected)
         {
             StartPulsing();
@@ -47,18 +58,14 @@ public class BookSelectable : MonoBehaviour
         else
         {
             StopPulsing();
-            bookMaterial.color = Color.white;
+            RestoreOriginalColors();
         }
     }
 
-    public bool IsSelected() => isSelected;
-
     private void StartPulsing()
     {
-        if (pulseRoutine != null)
-            StopCoroutine(pulseRoutine);
-
-        pulseRoutine = StartCoroutine(PulseMaterialColor());
+        if (pulseRoutine != null) StopCoroutine(pulseRoutine);
+        pulseRoutine = StartCoroutine(PulseColor());
     }
 
     private void StopPulsing()
@@ -70,20 +77,38 @@ public class BookSelectable : MonoBehaviour
         }
     }
 
-    private IEnumerator PulseMaterialColor()
+    private IEnumerator PulseColor()
     {
         float time = 0f;
-        Color baseColor = Color.white;
         Color pulseColor = Color.yellow;
 
         while (isSelected)
         {
             float t = Mathf.PingPong(time * 2f, 1f);
-            bookMaterial.color = Color.Lerp(baseColor, pulseColor, t);
+            for (int i = 0; i < instanceMaterials.Count; i++)
+            {
+                if (instanceMaterials[i].HasProperty("_Color"))
+                {
+                    Color baseColor = originalColors[i];
+                    instanceMaterials[i].color = Color.Lerp(baseColor, pulseColor, t);
+                }
+            }
+
             time += Time.deltaTime;
             yield return null;
         }
 
-        bookMaterial.color = baseColor;
+        RestoreOriginalColors();
+    }
+
+    private void RestoreOriginalColors()
+    {
+        for (int i = 0; i < instanceMaterials.Count; i++)
+        {
+            if (instanceMaterials[i].HasProperty("_Color"))
+            {
+                instanceMaterials[i].color = originalColors[i];
+            }
+        }
     }
 }

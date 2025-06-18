@@ -8,6 +8,7 @@ TagManager:
   - SceneChanger
   - InventoryItem
   - Box
+  - Book
   layers:
   - Default
   - TransparentFX

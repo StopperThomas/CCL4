@@ -22,77 +22,56 @@ public class BookPuzzleManager : MonoBehaviour
     {
         if (puzzleSolved) return false;
 
-        /*if (!PuzzleManager.Instance.IsEnginePuzzleSolved) // ← check from previous puzzle
-        {
-            PromptManager.Instance?.ShowPrompt("Hmm… have you seen symbols somewhere else?");
-            return false;
-        }*/
-
         return selectedBooks.Count < 4 || book.IsSelected();
     }
-
 
     public void HandleBookToggle(BookSelectable book, bool isSelected)
     {
         if (isSelected)
         {
             selectedBooks.Add(book);
+            Debug.Log($" Book ID: {book.bookID}");
         }
         else
         {
             selectedBooks.Remove(book);
-        }
-
-        // 🟡 Log currently selected books
-        Debug.Log("Currently selected books:");
-        foreach (var b in selectedBooks)
-        {
-            Debug.Log($"🟢 Book ID: {b.bookID}");
+            Debug.Log($" Book deselected: {book.bookID}");
         }
 
         if (selectedBooks.Count == 4)
             CheckSolution();
     }
 
-
-private void CheckSolution()
-{
-    Debug.Log("Checking selected books:");
-    foreach (var book in selectedBooks)
+    private void CheckSolution()
     {
-        Debug.Log($"Selected Book ID: {book.bookID}, Correct: {book.isCorrectBook}");
-    }
-
-    // Make sure exactly 4 are selected
-    if (selectedBooks.Count != 4)
-    {
-        Debug.Log("Not enough books selected yet.");
-        return;
-    }
-
-    // Check if all 4 are correct
-    foreach (var book in selectedBooks)
-    {
-        if (!book.isCorrectBook)
+        Debug.Log("📘 Checking selected books:");
+        foreach (var book in selectedBooks)
         {
-            PromptManager.Instance?.ShowPrompt("I know this combination... let's try again.");
-
-            foreach (var b in selectedBooks)
-            {
-                b.Deselect();
-            }
-
-            selectedBooks.Clear();
-            return;
+            Debug.Log($"Selected Book ID: {book.bookID}, Correct: {book.isCorrectBook}");
         }
+
+        foreach (var book in selectedBooks)
+        {
+            if (!book.isCorrectBook)
+            {
+                PromptManager.Instance?.ShowPrompt("I know this combination... let's try again.");
+
+                foreach (var b in selectedBooks)
+                {
+                    b.Deselect();
+                }
+
+                selectedBooks.Clear();
+                Debug.Log(" Incorrect combination. Resetting selections.");
+                return;
+            }
+        }
+
+        puzzleSolved = true;
+        PromptManager.Instance?.ShowPrompt("You hear something move behind the shelf...");
+        Debug.Log(" Puzzle solved. Sliding bookshelf.");
+        SlideBookshelf();
     }
-
-    // All 4 correct
-    puzzleSolved = true;
-    PromptManager.Instance?.ShowPrompt("You hear something move behind the shelf...");
-    SlideBookshelf();
-}
-
 
     private void SlideBookshelf()
     {
