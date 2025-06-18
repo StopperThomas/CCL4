@@ -12,9 +12,18 @@ public class Potion : MonoBehaviour
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody>();
+        CacheComponents();
         originalPosition = transform.position;
         originalRotation = transform.rotation;
+    }
+
+    // In case Awake never ran (e.g. due to inactive GameObject)
+    private void CacheComponents()
+    {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
     }
 
     public void FlyToCauldron()
@@ -24,6 +33,8 @@ public class Potion : MonoBehaviour
 
     private IEnumerator FlyRoutine()
     {
+        CacheComponents();
+
         rb.useGravity = false;
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
@@ -46,6 +57,8 @@ public class Potion : MonoBehaviour
 
     public void ResetPotion()
     {
+        CacheComponents();
+
         transform.position = originalPosition;
         transform.rotation = originalRotation;
         rb.useGravity = false;
@@ -54,9 +67,10 @@ public class Potion : MonoBehaviour
         gameObject.SetActive(true);
     }
 
-
     public void HidePotion()
     {
+        CacheComponents();
+
         rb.velocity = Vector3.zero;
         rb.angularVelocity = Vector3.zero;
         rb.useGravity = false;
