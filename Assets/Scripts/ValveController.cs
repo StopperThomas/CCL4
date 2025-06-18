@@ -16,7 +16,7 @@ public class ValveController : MonoBehaviour
     if (isSpinning || pointerController == null) return;
 
     // Prevent further interaction if already solved
-    if (TankPuzzleManager.Instance != null && TankPuzzleManager.Instance.puzzleSolved)
+    if (TankPuzzleManager.Instance != null && TankPuzzleManager.Instance.tankPuzzleSolved)
 
     {
         PromptManager.Instance?.ShowPrompt("The tank is already full.");

@@ -10,7 +10,7 @@ public class TankPuzzleManager : MonoBehaviour
     public float greenStartAngle = 230f;
     public float greenEndAngle = 260f;
 
-    public bool puzzleSolved = false;
+    public bool tankPuzzleSolved = false;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public class TankPuzzleManager : MonoBehaviour
 
     public void CheckIfInCorrectRange()
     {
-        if (puzzleSolved) return;
+        if (tankPuzzleSolved) return;
 
         float angle = pointer.currentAngle;
         Debug.Log($"Pointer angle (adjusted X): {angle}");
@@ -38,14 +38,15 @@ public class TankPuzzleManager : MonoBehaviour
 
     public void PuzzleSolved()
     {
-        puzzleSolved = true;
+        tankPuzzleSolved = true;
         Debug.Log("Puzzle solved! Tank is full.");
-        PromptManager.Instance?.ShowPrompt("The gauge points to green! The tank is filled.");
+        PromptManager.Instance?.ShowPrompt("The gauge points to green! The tank is filled. A Drawer somewhere opened.");
+
     }
 
     public void ResetPuzzle()
     {
-        puzzleSolved = false;
+        tankPuzzleSolved = false;
         pointer.ResetPointer();
         PromptManager.Instance?.ShowPrompt("Puzzle reset.");
     }

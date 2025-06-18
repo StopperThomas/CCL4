@@ -162,6 +162,14 @@ public class InteractionManager : MonoBehaviour
             return;
         }
 
+        var drawer = hitObject.GetComponent<DeskDrawer>();
+        if (drawer != null)
+        {
+            drawer.TryOpen(equippedItem);
+            return;
+        }
+
+
 
         // Screw placement
         var screwSocket = hitObject.GetComponent<ScrewSocket>();
