@@ -103,6 +103,21 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
+            // Potion interaction
+            Potion potion = hitObj.GetComponent<Potion>();
+            if (potion != null)
+            {
+                Highlight(hitObj);
+                uiManager?.ShowPrompt(true, "LMB");
+
+                if (Input.GetMouseButtonDown(0)) // or whatever input system you're using
+                {
+                    potion.FlyToCauldron();
+                }
+                return;
+            }
+
+
 
             // Default fallback
             RemoveHighlight();
