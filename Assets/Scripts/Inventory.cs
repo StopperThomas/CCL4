@@ -1,47 +1,86 @@
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Inventory
 {
-
     private List<Item> itemList;
 
-    
     public Inventory()
     {
         itemList = new List<Item>();
-
         Debug.Log("Inventory created");
     }
-    public void AddItem(Item item)
+
+    public void AddItem(Item newItem)
     {
-        itemList.Add(item);
-        Debug.Log("Item added: " + item.itemType + " Amount: " + item.amount);
-        InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+        bool itemStacked = false;
+
+        foreach (Item existingItem in itemList)
+        {
+            if (CanStack(existingItem, newItem))
+            {
+                existingItem.amount += newItem.amount;
+                itemStacked = true;
+                break;
+            }
+        }
+
+        if (!itemStacked)
+        {
+            itemList.Add(newItem);
+        }
+
+        InventoryManager.Instance?.uiInventory?.RefreshInventoryItems();
     }
 
     public void RemoveItem(Item item)
     {
-        if (item.itemType == Item.ItemType.Gear)
+        Item inventoryItem = itemList.Find(i => CanStack(i, item));
+        if (inventoryItem == null)
         {
-            item.amount--;
-            if (item.amount <= 0)
-                itemList.Remove(item);
+            Debug.LogWarning("Item not found in inventory.");
+            return;
+        }
+
+        if (inventoryItem.amount > 1)
+        {
+            inventoryItem.amount--;
         }
         else
         {
-            itemList.Remove(item);
+            itemList.Remove(inventoryItem);
         }
 
-        Debug.Log("Removed item: " + item.itemName);
-        InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+        Debug.Log("Removed item: " + inventoryItem.itemName);
+        InventoryManager.Instance?.uiInventory?.RefreshInventoryItems();
     }
 
     public List<Item> GetItemList()
     {
         return itemList;
     }
-    
+
+    private bool CanStack(Item a, Item b)
+    {
+        if (a.itemType != b.itemType)
+            return false;
+
+        switch (a.itemType)
+        {
+            case ItemType.Screw:
+                return a.screwType == b.screwType;
+            case ItemType.ScrewDriver:
+                return a.screwdriverType == b.screwdriverType;
+            case ItemType.Cogwheel:
+                return a.cogwheelType == b.cogwheelType;
+            case ItemType.LightBulb:
+                return true;
+            case ItemType.Note:
+            case ItemType.Key:
+                return false;
+            default:
+                return false;
+        }
+    }
+
 }

@@ -15,8 +15,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float groundCheckDistance = 0.1f;
     [SerializeField] private LayerMask groundMask;
 
-    [Header("Jump Settings")]
-    [SerializeField] private float jumpHeight = 1.5f;
+    [Header("Crouch Settings")]
+    [SerializeField] private float crouchHeight = 1f;
+    [SerializeField] private float standHeight = 2f;
+    [SerializeField] private float crouchSpeed = 5f;
+    [SerializeField] private float cameraCrouchOffset = -0.5f;
 
     [Header("Inventory Settings")]
     [SerializeField] private UI_Inventory uiInventory;
@@ -34,8 +37,11 @@ public class PlayerController : MonoBehaviour
     private Vector3 velocity;
     private float xRotation = 0f;
     private bool isGrounded;
-    private bool jumpPressed = false;
     private bool isInventoryOpen = false;
+
+    private bool isCrouching = false;
+    private float targetHeight;
+    private Vector3 cameraInitialLocalPos;
 
     private void Awake()
     {
@@ -43,7 +49,9 @@ public class PlayerController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         interactionManager = FindObjectOfType<InteractionManager>();
 
-        // Start coroutine to wait for InventoryManager to be ready
+        cameraInitialLocalPos = cameraTransform.localPosition;
+        targetHeight = standHeight;
+
         StartCoroutine(WaitForInventoryManager());
     }
 
@@ -71,15 +79,12 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Look.performed += ctx => lookInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Look.canceled += ctx => lookInput = Vector2.zero;
 
-        inputActions.Player.Jump.performed += ctx => jumpPressed = true;
-        inputActions.Player.Jump.canceled += ctx => jumpPressed = false;
+        inputActions.Player.Crouch.performed += ctx => ToggleCrouch();
 
         inputActions.Player.Inventory.performed += ctx => ToggleInventory();
         inputActions.Player.DropItem.performed += ctx => TryDropSelectedItem();
         inputActions.Player.EquipItem.performed += ctx => TryEquipInspectedItem();
         inputActions.Player.UnequipItem.performed += ctx => interactionManager?.UnequipItem();
-
-
     }
 
     private void OnDisable()
@@ -90,8 +95,7 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Look.performed -= ctx => lookInput = ctx.ReadValue<Vector2>();
         inputActions.Player.Look.canceled -= ctx => lookInput = Vector2.zero;
 
-        inputActions.Player.Jump.performed -= ctx => jumpPressed = true;
-        inputActions.Player.Jump.canceled -= ctx => jumpPressed = false;
+        inputActions.Player.Crouch.performed -= ctx => ToggleCrouch();
 
         inputActions.Player.Inventory.performed -= ctx => ToggleInventory();
         inputActions.Player.DropItem.performed -= ctx => TryDropSelectedItem();
@@ -100,15 +104,15 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.Disable();
     }
 
-    private void Update()
+    private void Update() 
     {
         if (isInventoryOpen) return;
 
         HandleGroundCheck();
-        HandleJump();
         HandleGravity();
         HandleMovement();
         HandleLook();
+        HandleCrouch();
     }
 
     private void HandleMovement()
@@ -140,19 +144,28 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void HandleJump()
-    {
-        if (jumpPressed && isGrounded)
-        {
-            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-            jumpPressed = false;
-        }
-    }
-
     private void HandleGravity()
     {
         velocity.y += gravity * Time.deltaTime;
         controller.Move(velocity * Time.deltaTime);
+    }
+
+    private void ToggleCrouch()
+    {
+        isCrouching = !isCrouching;
+        targetHeight = isCrouching ? crouchHeight : standHeight;
+    }
+
+    private void HandleCrouch()
+    {
+        // Smoothly transition character controller height
+        controller.height = Mathf.Lerp(controller.height, targetHeight, Time.deltaTime * crouchSpeed);
+
+        // Adjust camera to simulate crouching
+        float targetY = cameraInitialLocalPos.y + (isCrouching ? cameraCrouchOffset : 0f);
+        Vector3 camPos = cameraTransform.localPosition;
+        camPos.y = Mathf.Lerp(camPos.y, targetY, Time.deltaTime * crouchSpeed);
+        cameraTransform.localPosition = camPos;
     }
 
     private void ToggleInventory()
@@ -180,15 +193,14 @@ public class PlayerController : MonoBehaviour
         if (!isInventoryOpen) return;
 
         Item selectedItem = uiInventory.GetSelectedItem();
-        if (selectedItem == null || selectedItem.prefab3D == null) return;
+        if (selectedItem == null) return;
 
-        InventoryManager.Instance.inventory.RemoveItem(selectedItem);
-
-        Vector3 dropPosition = transform.position + transform.forward * 1.5f;
-        Instantiate(selectedItem.prefab3D, dropPosition, Quaternion.identity);
-
-        Debug.Log("Dropped item: " + selectedItem.itemName);
-        FindObjectOfType<ItemInspectorUI>()?.HideItem();
+        var inspector = FindObjectOfType<ItemInspectorUI>();
+        if (inspector != null)
+        {
+            inspector.ShowItem(selectedItem);
+            inspector.TryDropItemInput();
+        }
     }
 
     private void TryEquipInspectedItem()

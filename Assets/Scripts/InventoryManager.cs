@@ -16,8 +16,8 @@ private void Awake()
 
         if (inventory == null)
         {
-            Debug.LogWarning("⚠️ Inventory was null. Creating new one.");
-            inventory = new Inventory(); // or ScriptableObject.CreateInstance<Inventory>();
+            Debug.LogWarning("Inventory was null. Creating new one.");
+            inventory = new Inventory(); 
         }
     }
     else

@@ -27,6 +27,11 @@ public class ItemInspectorUI : MonoBehaviour
         {
             TryDropItemInput();
         }
+
+        if (Keyboard.current.eKey.wasPressedThisFrame)
+        {
+            TryEquipInspectedItem();
+        }
     }
 
     public void ShowItem(Item item)
@@ -37,8 +42,8 @@ public class ItemInspectorUI : MonoBehaviour
 
         if (dropHintText != null)
         {
-            dropHintText.gameObject.SetActive(true);
             dropHintText.text = "Press Y to drop item";
+            dropHintText.gameObject.SetActive(true);
         }
 
         if (currentRender != null)
@@ -58,8 +63,7 @@ public class ItemInspectorUI : MonoBehaviour
             FitItemInView(currentRender);
 
             ObjectInspector inspector = FindObjectOfType<ObjectInspector>();
-            if (inspector != null)
-                inspector.StartInventoryInspection(currentRender);
+            inspector?.StartInventoryInspection(currentRender);
 
             Debug.Log("Item shown: " + item.itemName);
         }
@@ -79,23 +83,25 @@ public class ItemInspectorUI : MonoBehaviour
 
     private void DropItem(Item item)
     {
-        if (item.prefab3D == null)
+        if (item == null || item.prefab3D == null)
+            return;
+
+
+        Item actualInventoryItem = InventoryManager.Instance.inventory.GetItemList().Find(i => i == item);
+        if (actualInventoryItem == null)
         {
-            Debug.LogWarning("No prefab assigned to this item.");
+            Debug.LogWarning("Item not found in inventory.");
             return;
         }
 
         Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
-        GameObject dropped = GameObject.Instantiate(item.prefab3D, dropPosition, Quaternion.identity);
+        GameObject dropped = Instantiate(item.prefab3D, dropPosition, Quaternion.identity);
+        dropped.tag = "InventoryItem";
 
-        // If you want, tag it as interactable again:
-        dropped.tag = "InvenontoryItem";
-
-        InventoryManager.Instance.inventory.RemoveItem(item);
+        InventoryManager.Instance.inventory.RemoveItem(actualInventoryItem);
         InventoryManager.Instance.uiInventory.RefreshInventoryItems();
 
         HideItem();
-        Debug.Log("🔁 Dropped item: " + item.itemName);
     }
 
     public void HideItem()
@@ -106,38 +112,92 @@ public class ItemInspectorUI : MonoBehaviour
             currentRender = null;
         }
 
+        if (renderAnchor != null)
+        {
+            foreach (Transform child in renderAnchor)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
         if (dropHintText != null)
         {
             dropHintText.text = "";
             dropHintText.gameObject.SetActive(false);
         }
 
-        nameText.text = "";
-        descriptionText.text = "";
+        if (nameText != null)
+        {
+            nameText.text = "";
+        }
+
+        if (descriptionText != null)
+        {
+            descriptionText.text = "";
+        }
+
         currentItem = null;
+
+        Debug.Log("ItemInspectorUI: Cleared all item data.");
     }
 
-    private void FitItemInView(GameObject obj)
+
+
+    public void TryEquipInspectedItem()
     {
-        if (renderCamera == null || obj == null) return;
+        if (currentItem != null && IsEquipable(currentItem))
+        {
+            var ui = FindObjectOfType<UI_Inventory>();
+            ui?.UpdateEquippedSlot(currentItem);
 
-        Renderer renderer = obj.GetComponentInChildren<Renderer>();
-        if (renderer == null) return;
+            var interaction = FindObjectOfType<InteractionManager>();
+            interaction?.EquipFromUI(currentItem);
 
-        Bounds bounds = renderer.bounds;
-        float maxSize = Mathf.Max(bounds.size.x, bounds.size.y, bounds.size.z);
-        float padding = 0.8f;
-        float distance = (maxSize * padding) / (2f * Mathf.Tan(Mathf.Deg2Rad * renderCamera.fieldOfView * 0.5f));
-
-        obj.transform.rotation = Quaternion.LookRotation(-renderCamera.transform.forward);
-        obj.transform.position = renderCamera.transform.position + renderCamera.transform.forward * distance;
-
-        Vector3 centerOffset = renderer.bounds.center - obj.transform.position;
-        obj.transform.position -= centerOffset;
-
-        float scaleFactor = padding / maxSize;
-        obj.transform.localScale = Vector3.one * scaleFactor;
+            Debug.Log("Equipped from inspector: " + currentItem.itemName);
+        }
     }
+
+    private bool IsEquipable(Item item)
+    {
+        return item.itemType == ItemType.ScrewDriver ||
+               item.itemType == ItemType.Key ||
+               item.itemType == ItemType.Screw ||
+               item.itemType == ItemType.Cogwheel ||
+               item.itemType == ItemType.LightBulb;
+    }
+    private void FitItemInView(GameObject obj)
+{
+    if (renderCamera == null || obj == null) return;
+
+    Renderer renderer = obj.GetComponentInChildren<Renderer>();
+    if (renderer == null) return;
+
+    Bounds bounds = renderer.bounds;
+    float maxSize = Mathf.Max(bounds.size.x, bounds.size.y, bounds.size.z);
+    float padding = 0.8f;
+
+    float distance;
+
+    if (currentItem != null && currentItem.customRenderDistance > 0f)
+    {
+        distance = currentItem.customRenderDistance;
+    }
+    else
+    {
+        distance = (maxSize * padding) / (2f * Mathf.Tan(Mathf.Deg2Rad * renderCamera.fieldOfView * 0.5f));
+    }
+
+    obj.transform.rotation = Quaternion.LookRotation(-renderCamera.transform.forward);
+    obj.transform.position = renderCamera.transform.position + renderCamera.transform.forward * distance;
+
+    // Centering the object
+    Vector3 centerOffset = renderer.bounds.center - obj.transform.position;
+    obj.transform.position -= centerOffset;
+
+    float scale = currentItem != null ? currentItem.customRenderScale : 1f;
+    obj.transform.localScale = Vector3.one * scale;
+}
+
 
     private void SetLayerRecursively(GameObject obj, int newLayer)
     {
@@ -151,24 +211,9 @@ public class ItemInspectorUI : MonoBehaviour
         }
     }
 
-    public void TryEquipInspectedItem()
-{
-    if (currentItem != null && currentItem.itemType == Item.ItemType.ScrewDriver)
+    public Item GetCurrentItem()
     {
-        var ui = FindObjectOfType<UI_Inventory>();
-        if (ui != null)
-        {
-            ui.UpdateEquippedSlot(currentItem);
-        }
-
-        var interaction = FindObjectOfType<InteractionManager>();
-        if (interaction != null)
-        {
-            interaction.EquipFromUI(currentItem);
-        }
-
-        Debug.Log("Equipped from inspector: " + currentItem.itemName);
+        return currentItem;
     }
-}
 
 }

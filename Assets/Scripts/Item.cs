@@ -1,16 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Item
 {
-    public enum ItemType
-    {
-        ScrewDriver,
-        Gear,
-        Screw,
-        Paper
-    }
     public ItemType itemType;
     public int amount;
 
@@ -18,38 +9,49 @@ public class Item
     public string description;
     public GameObject prefab3D;
 
+    public float customRenderDistance = -1f; 
+    public float customRenderScale = 1f;
+
+    public ScrewdriverType screwdriverType;
     public ScrewType screwType;
+    public KeyType keyType;
+    public CogwheelType cogwheelType;
+    public int noteID;
 
-
-    public Sprite GetSprite()
+   public Sprite GetSprite()
+{
+    return itemType switch
     {
-        switch (itemType)
-        {
-            case ItemType.ScrewDriver:
-                return ItemAssets.Instance.screwDriverSprite;
-            case ItemType.Gear:
-                return ItemAssets.Instance.gearSprite;
-            case ItemType.Screw:
-                return ItemAssets.Instance.screwSprite;
-            case ItemType.Paper:
-                return ItemAssets.Instance.paperSprite;
-            default:
-                return null;
-        }
-    }
+        ItemType.ScrewDriver => ItemAssets.Instance.GetScrewdriverSprite(screwdriverType),
+        ItemType.Screw => ItemAssets.Instance.GetScrewSprite(screwType),
+        ItemType.Key => ItemAssets.Instance.GetKeySprite(keyType),
+        ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelSprite(cogwheelType),
+        ItemType.Note => ItemAssets.Instance.GetNoteSprite(noteID),
+        ItemType.LightBulb => ItemAssets.Instance.bulbSprite,
+        _ => null // ✅ catch-all to satisfy compiler
+    };
+}
+
+
 
     public GameObject GetPrefab()
+{
+    if (prefab3D != null)
+        return prefab3D;
+
+    prefab3D = itemType switch
     {
-        switch (itemType)
-        {
-            case ItemType.ScrewDriver: return ItemAssets.Instance.screwDriverPrefab;
-            case ItemType.Gear: return ItemAssets.Instance.gearPrefab;
-            case ItemType.Screw: return ItemAssets.Instance.screwPrefab;
-            case ItemType.Paper: return ItemAssets.Instance.paperPrefab;
-            default: return null;
-        }
-    }
+        ItemType.ScrewDriver => ItemAssets.Instance.GetScrewdriverPrefab(screwdriverType),
+        ItemType.Screw => ItemAssets.Instance.GetScrewPrefab(screwType),
+        ItemType.Key => ItemAssets.Instance.GetKeyPrefab(keyType),
+        ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelPrefab(cogwheelType),
+        ItemType.Note => ItemAssets.Instance.GetNotePrefab(noteID),
+        ItemType.LightBulb => ItemAssets.Instance.bulbPrefab,
+        _ => null,
+    };
 
-
+    return prefab3D;
+}
 
 }
+

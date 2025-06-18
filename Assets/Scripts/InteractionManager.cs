@@ -44,25 +44,24 @@ public class InteractionManager : MonoBehaviour
             if (isInspecting && currentTarget != null)
                 TryPickupItem(currentTarget);
         };
+
     }
 
-    void OnEnable() => controls.Enable();
-    void OnDisable() => controls.Disable();
+    void OnEnable() => controls?.Enable();
+    void OnDisable() => controls?.Disable();
 
     void Update()
     {
         if (isInspecting) return;
 
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance))
         {
             GameObject hitObject = hit.collider.gameObject;
 
             if (hitObject.CompareTag("Interactable") ||
-    hitObject.CompareTag("InventoryItem") ||
-    hitObject.CompareTag("SceneChanger"))
+                hitObject.CompareTag("InventoryItem") ||
+                hitObject.CompareTag("SceneChanger"))
             {
                 if (hitObject != currentTarget)
                 {
@@ -86,71 +85,237 @@ public class InteractionManager : MonoBehaviour
     {
         if (currentTarget == null || isInspecting) return;
 
+        // Scene change
         if (currentTarget.CompareTag("SceneChanger"))
         {
-            SceneTransitionObject transition = currentTarget.GetComponent<SceneTransitionObject>();
-            if (transition != null)
-            {
-                transition.LoadScene();
-                return;
-            }
+            var transition = currentTarget.GetComponent<SceneTransitionObject>();
+            transition?.LoadScene();
+            return;
         }
 
+        // Handle Screw-specific logic
+        var screw = currentTarget.GetComponent<Screw>();
+        if (screw != null && !screw.isUnscrewed)
+        {
+            PromptManager.Instance?.ShowPrompt("You need to unscrew it first.");
+            return; // Block inspection
+        }
+
+        // Regular interactable or inventory item
         if (currentTarget.CompareTag("Interactable") || currentTarget.CompareTag("InventoryItem"))
         {
             isInspecting = true;
             inspector.StartInspection(currentTarget);
             if (playerController != null) playerController.enabled = false;
         }
-
-        Screw screw = currentTarget.GetComponent<Screw>();
-        if (screw != null)
-        {
-            screw.TryUnscrew(equippedItem);
-            return;
-        }
     }
+
 
     void TryClick()
     {
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
+        if (!Physics.Raycast(ray, out RaycastHit hit, rayDistance)) return;
 
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        GameObject hitObject = hit.collider.gameObject;
+
+
+        // Lightbulb placement (only if engine puzzle is solved)
+        var fixture = hitObject.GetComponent<Fixture>();
+        if (fixture != null && equippedItem != null && equippedItem.itemType == ItemType.LightBulb)
         {
-            GameObject hitObject = hit.collider.gameObject;
-
-            Screw screw = hitObject.GetComponent<Screw>();
-            if (screw != null)
+            if (!PuzzleManager.Instance.IsEnginePuzzleSolved)
             {
-                screw.TryUnscrew(equippedItem);
+                PromptManager.Instance?.ShowPrompt("There's no power yet. Check the sides if the screws are placed.");
                 return;
             }
 
+            if (!InventoryManager.Instance.inventory.GetItemList().Contains(equippedItem))
+            {
+                PromptManager.Instance?.ShowPrompt("This bulb is no longer in your inventory.");
+                UnequipItem();
+                return;
+            }
 
+            bool placed = fixture.TryPlaceBulb(equippedItem.GetPrefab());
+            if (placed)
+            {
+                InventoryManager.Instance.inventory.RemoveItem(equippedItem);
+                equippedItem.amount--;
+
+                PromptManager.Instance?.ShowPrompt("You placed the bulb.");
+
+                if (equippedItem.amount <= 0)
+                    UnequipItem();
+                else
+                    InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+            }
+
+            return;
         }
+
+        // Valve interaction
+        ValveController valve = hitObject.GetComponent<ValveController>();
+        if (valve != null)
+        {
+            valve.ActivateValve();
+            PromptManager.Instance?.ShowPrompt("You turned the valve.");
+            return;
+        }
+
+        var drawer = hitObject.GetComponent<DeskDrawer>();
+        if (drawer != null)
+        {
+            drawer.TryOpen(equippedItem);
+            return;
+        }
+
+
+
+        // Screw placement
+        var screwSocket = hitObject.GetComponent<ScrewSocket>();
+        if (screwSocket != null && equippedItem != null && equippedItem.itemType == ItemType.Screw)
+        {
+            if (equippedItem.amount <= 0)
+            {
+                PromptManager.Instance?.ShowPrompt("No screws left.");
+                UnequipItem();
+                return;
+            }
+
+            bool placed = screwSocket.TryPlaceScrew(equippedItem.GetPrefab(), equippedItem.screwType);
+
+            if (placed)
+            {
+                equippedItem.amount--;
+
+                if (equippedItem.amount <= 0)
+                {
+                    InventoryManager.Instance.inventory.RemoveItem(equippedItem);
+                    UnequipItem();
+                }
+
+                InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+                PromptManager.Instance?.ShowPrompt("Screw placed.");
+            }
+            else
+            {
+                PromptManager.Instance?.ShowPrompt("That screw doesn't fit here.");
+            }
+
+            return;
+        }
+
+
+
+
+        var screw = hitObject.GetComponent<Screw>();
+        if (screw != null)
+        {
+            if (PuzzleManager.Instance != null && PuzzleManager.Instance.IsEnginePuzzleSolved)
+            {
+                PromptManager.Instance?.ShowPrompt("The circuit is already completed.");
+                return;
+            }
+
+            if (!screw.isUnscrewed)
+            {
+
+                if (equippedItem != null &&
+                    equippedItem.itemType == ItemType.ScrewDriver &&
+                    screw.TryUnscrew(equippedItem))
+                {
+                    PromptManager.Instance?.ShowPrompt("You unscrewed it.");
+                }
+                else
+                {
+                    PromptManager.Instance?.ShowPrompt("That won't work here.");
+                }
+            }
+            else
+            {
+                // Screw already unscrewed – allow pickup
+                var pickup = hitObject.GetComponent<PickupItem>();
+                pickup?.OnPickup();
+                PromptManager.Instance?.ShowPrompt("Item picked up.");
+            }
+
+            return;
+        }
+
+
+        var pickupItem = hitObject.GetComponent<PickupItem>();
+        if (pickupItem != null)
+        {
+            pickupItem.OnPickup();
+            PromptManager.Instance?.ShowPrompt("Item picked up.");
+            return;
+        }
+
+
+        // Cogwheel pickup
+        var cog = hitObject.GetComponent<Cogwheel>();
+        if (cog != null && !CogwheelManager.Instance.IsHoldingCogwheel())
+        {
+            CogwheelManager.Instance.PickUpCogwheel(cog);
+            cog.gameObject.SetActive(false);
+            PromptManager.Instance?.ShowPrompt("Picked up a cogwheel.");
+            return;
+        }
+
+        // Cogwheel placement
+        var spot = hitObject.GetComponent<CogwheelSpot>();
+        if (spot != null && equippedItem != null && equippedItem.itemType == ItemType.Cogwheel)
+        {
+            bool placed = spot.TryPlaceEquippedCogwheel(equippedItem);
+            if (placed)
+            {
+                InventoryManager.Instance.inventory.RemoveItem(equippedItem);
+                InventoryManager.Instance.uiInventory.UpdateEquippedSlot(null);
+                equippedItem = null;
+                PromptManager.Instance?.ShowPrompt("Cogwheel placed.");
+            }
+            return;
+        }
+        // Book selection
+
+        var book = hitObject.GetComponent<BookSelectable>();
+        if (book != null)
+        {
+            book.ToggleSelection();
+            return;
+        }
+        // Unlock
+        var lockComponent = hitObject.GetComponent<BoxLock>();
+        lockComponent?.TryUnlock(equippedItem);
+
+        // Open box
+        var box = hitObject.GetComponent<Box>();
+        box?.TryOpen();
     }
 
     void TryPickupItem(GameObject target)
     {
         if (!target.CompareTag("InventoryItem")) return;
 
-        PickupItem pickup = target.GetComponent<PickupItem>();
-        if (pickup != null)
-        {
-            pickup.OnPickup();
-            ExitInspectMode();
-        }
+        var pickup = target.GetComponent<PickupItem>();
+        pickup?.OnPickup();
+        ExitInspectMode();
     }
 
     void ExitInspectMode()
     {
         isInspecting = false;
         inspector.EndInspection();
-
         if (playerController != null)
             playerController.enabled = true;
     }
+
+    public void ForceExitInspectMode()
+    {
+        if (isInspecting)
+            ExitInspectMode();
+    }
+
 
     void ClearHighlight()
     {
@@ -163,29 +328,36 @@ public class InteractionManager : MonoBehaviour
 
     void EnableOutline(GameObject obj, bool enable)
     {
-        Outline outline = obj.GetComponent<Outline>();
+        var outline = obj.GetComponent<Outline>();
         if (outline != null)
-        {
             outline.enabled = enable;
-        }
     }
 
     public void EquipFromUI(Item item)
     {
-        if (item.itemType != Item.ItemType.ScrewDriver)
+        if (item == null ||
+            (item.itemType != ItemType.ScrewDriver &&
+             item.itemType != ItemType.Key &&
+             item.itemType != ItemType.Screw &&
+             item.itemType != ItemType.Cogwheel &&
+             item.itemType != ItemType.LightBulb))
         {
-            Debug.LogWarning("Tried to equip non-screwdriver item.");
+            Debug.LogWarning("Tried to equip invalid item.");
+            return;
+        }
+
+        if (!InventoryManager.Instance.inventory.GetItemList().Contains(item))
+        {
+            Debug.LogWarning("Item not in inventory anymore.");
             return;
         }
 
         equippedItem = item;
-        Debug.Log("Equipped screwdriver: " + item.itemName + " Type: " + item.screwType);
+        Debug.Log("Equipped item in interaction manager: " + item.itemName);
     }
 
-    public Item GetEquippedItem()
-    {
-        return equippedItem;
-    }
+    public Item GetEquippedItem() => equippedItem;
+
     public void UnequipItem()
     {
         if (equippedItem == null)
@@ -194,22 +366,16 @@ public class InteractionManager : MonoBehaviour
             return;
         }
 
+        var inventory = InventoryManager.Instance?.inventory;
 
-        Inventory inventory = InventoryManager.Instance?.inventory;
-        if (inventory != null && !inventory.GetItemList().Contains(equippedItem))
+        if (inventory != null && !inventory.GetItemList().Contains(equippedItem) && equippedItem.amount > 0)
         {
             inventory.AddItem(equippedItem);
         }
 
         Debug.Log("Unequipped item: " + equippedItem.itemName);
-
         equippedItem = null;
 
-
-        if (InventoryManager.Instance != null && InventoryManager.Instance.uiInventory != null)
-        {
-            InventoryManager.Instance.uiInventory.UpdateEquippedSlot(null);
-        }
+        InventoryManager.Instance?.uiInventory?.UpdateEquippedSlot(null);
     }
-
 }
