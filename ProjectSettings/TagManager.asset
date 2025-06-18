@@ -6,12 +6,12 @@ TagManager:
   tags:
   - Interactable
   - SceneChanger
-  - Screwdriver
+  - InventoryItem
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - ItemRenderLayer
   - Water
   - UI
   - 

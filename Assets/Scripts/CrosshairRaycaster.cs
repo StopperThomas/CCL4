@@ -3,12 +3,32 @@ using UnityEngine;
 public class CrosshairRaycaster : MonoBehaviour
 {
     public float rayDistance = 5f;
+    public InteractionManager interactionManager;
     public InspectUIManager uiManager;
 
-    private GameObject currentTarget;
+    private GameObject lastHighlighted;
+
+    void Start()
+    {
+        if (interactionManager == null)
+        {
+            interactionManager = FindObjectOfType<InteractionManager>();
+            if (interactionManager == null)
+                Debug.LogError("⚠️ InteractionManager not found!");
+        }
+
+        if (uiManager == null)
+        {
+            uiManager = FindObjectOfType<InspectUIManager>();
+            if (uiManager == null)
+                Debug.LogWarning("⚠️ InspectUIManager not assigned!");
+        }
+    }
 
     void Update()
     {
+        if (interactionManager == null) return;
+
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
@@ -16,58 +36,73 @@ public class CrosshairRaycaster : MonoBehaviour
         {
             GameObject hitObj = hit.collider.gameObject;
 
-            bool isInteractable = hitObj.CompareTag("Interactable");
-            bool isScrew = hitObj.GetComponent<Screw>() != null;
-            bool isScrewdriver = hitObj.CompareTag("Screwdriver");
-            bool isDoor = hitObj.CompareTag("SceneChanger");
-
-            if (isInteractable || isScrew || isScrewdriver || isDoor)
+            // Highlight logic
+            Screw screw = hitObj.GetComponent<Screw>();
+            if (screw != null)
             {
-                if (hitObj != currentTarget)
+                var equipped = interactionManager.GetEquippedItem();
+                if (equipped != null && equipped.itemType == Item.ItemType.ScrewDriver)
                 {
-                    ClearHighlight();
-                    currentTarget = hitObj;
-                    ApplyHighlight(currentTarget);
+                    Highlight(hitObj);
+                    uiManager?.ShowPrompt(true, "LMB"); // Show prompt for unscrewing
                 }
+                else
+                {
+                    RemoveHighlight();
+                    uiManager?.ShowPrompt(false);
+                }
+                return;
+            }
 
-                // Show prompt based on type
-                if (isInteractable || isDoor)
-                    uiManager.ShowPrompt(true, "E");
-                else if (isScrew || isScrewdriver)
-                    uiManager.ShowPrompt(true, "LMB");
-            }
-            else
+            // Inventory items or doors
+            if (hitObj.CompareTag("InventoryItem"))
             {
-                ClearHighlight();
-                uiManager.ShowPrompt(false);
+                Highlight(hitObj);
+                uiManager?.ShowPrompt(true, "E");
+                return;
             }
+
+            if (hitObj.CompareTag("SceneChanger"))
+            {
+                Highlight(hitObj);
+                uiManager?.ShowPrompt(true, "E");
+                return;
+            }
+
+            // Default fallback
+            RemoveHighlight();
+            uiManager?.ShowPrompt(false);
         }
         else
         {
-            ClearHighlight();
-            uiManager.ShowPrompt(false);
+            RemoveHighlight();
+            uiManager?.ShowPrompt(false);
         }
     }
 
-    void ApplyHighlight(GameObject obj)
+    void Highlight(GameObject obj)
     {
+        if (lastHighlighted != null && lastHighlighted != obj)
+        {
+            Outline old = lastHighlighted.GetComponent<Outline>();
+            if (old != null) old.enabled = false;
+        }
+
         Outline outline = obj.GetComponent<Outline>();
         if (outline != null)
         {
             outline.enabled = true;
+            lastHighlighted = obj;
         }
     }
 
-    void ClearHighlight()
+    void RemoveHighlight()
     {
-        if (currentTarget != null)
+        if (lastHighlighted != null)
         {
-            Outline outline = currentTarget.GetComponent<Outline>();
-            if (outline != null)
-            {
-                outline.enabled = false;
-            }
-            currentTarget = null;
+            Outline outline = lastHighlighted.GetComponent<Outline>();
+            if (outline != null) outline.enabled = false;
+            lastHighlighted = null;
         }
     }
 }
