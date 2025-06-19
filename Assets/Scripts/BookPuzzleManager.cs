@@ -44,7 +44,7 @@ public class BookPuzzleManager : MonoBehaviour
 
     private void CheckSolution()
     {
-        Debug.Log("📘 Checking selected books:");
+        Debug.Log(" Checking selected books:");
         foreach (var book in selectedBooks)
         {
             Debug.Log($"Selected Book ID: {book.bookID}, Correct: {book.isCorrectBook}");

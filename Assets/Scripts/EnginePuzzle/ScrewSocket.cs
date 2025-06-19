@@ -15,8 +15,6 @@ public class ScrewSocket : MonoBehaviour
 
     public bool TryPlaceScrew(GameObject screwPrefab, ScrewType type)
 {
-
-
     if (isFilled || screwPrefab == null)
         return false;
 
@@ -38,6 +36,14 @@ public class ScrewSocket : MonoBehaviour
     // Disable further interaction
     placedScrew.tag = "Untagged";
 
+    // Disable gravity and physics
+    Rigidbody rb = placedScrew.GetComponent<Rigidbody>();
+    if (rb != null)
+    {
+        rb.useGravity = false;
+        rb.isKinematic = true;
+    }
+
     isFilled = true;
     PlacedType = type;
 
@@ -46,6 +52,7 @@ public class ScrewSocket : MonoBehaviour
 
     return true;
 }
+
 
 
 

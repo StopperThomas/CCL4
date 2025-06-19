@@ -15,17 +15,24 @@ public bool TryPlaceBulb(GameObject bulbPrefab)
 
     placedBulb = Instantiate(bulbPrefab, placementPosition, prefabRotation);
     placedBulb.transform.localScale = Vector3.one;
+    
+    Rigidbody rb = placedBulb.GetComponent<Rigidbody>();
+    if (rb != null)
+    {
+        rb.useGravity = false;
+        rb.isKinematic = true;
+    }
 
     if (isCorrectSocket)
-    {
-        PowerBulb();
-    }
-    else
-    {
-        Debug.Log("Wrong socket. Bulb placed, but no power.");
-    }
+        {
+            PowerBulb();
+        }
+        else
+        {
+            Debug.Log("Wrong socket. Bulb placed, but no power.");
+        }
 
-    // ✅ Always return true if bulb was placed
+    // Always return true if bulb was placed
     return true;
 }
 

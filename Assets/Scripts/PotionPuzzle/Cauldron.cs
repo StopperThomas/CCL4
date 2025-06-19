@@ -74,26 +74,29 @@ public class Cauldron : MonoBehaviour
         Debug.Log("New liquid position: " + liquidLayer.localPosition);
     }
 
-    void CheckCombination()
+void CheckCombination()
+{
+    var sortedCorrect = correctPotions.OrderBy(x => x).ToList();
+    var sortedInput = insertedPotions.OrderBy(x => x).ToList();
+
+    Debug.Log("Checking combination...");
+    Debug.Log("Correct: " + string.Join(", ", sortedCorrect));
+    Debug.Log("Input: " + string.Join(", ", sortedInput));
+
+    if (sortedInput.SequenceEqual(sortedCorrect))
     {
-        var sortedCorrect = correctPotions.OrderBy(x => x).ToList();
-        var sortedInput = insertedPotions.OrderBy(x => x).ToList();
+        Debug.Log("Correct combination! Spawning reward.");
 
-        Debug.Log("Checking combination...");
-        Debug.Log("Correct: " + string.Join(", ", sortedCorrect));
-        Debug.Log("Input: " + string.Join(", ", sortedInput));
-
-        if (sortedInput.SequenceEqual(sortedCorrect))
-        {
-            Debug.Log("Correct combination! Spawning reward.");
-            Instantiate(rewardCubePrefab, rewardSpawnPoint.position, Quaternion.identity);
-        }
-        else
-        {
-            Debug.Log("Incorrect combination. Resetting puzzle.");
-            ResetPuzzle();
-        }
+        GameObject reward = Instantiate(rewardCubePrefab, rewardSpawnPoint.position, Quaternion.identity);
+        reward.transform.localScale = 0.5f * Vector3.one;
+        reward.SetActive(true);
     }
+    else
+    {
+        Debug.Log("Incorrect combination. Resetting puzzle.");
+        ResetPuzzle();
+    }
+}
 
     void ResetPuzzle()
     {

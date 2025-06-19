@@ -13,8 +13,13 @@ public class Inventory
 
     public void AddItem(Item newItem)
     {
-        bool itemStacked = false;
+        if (itemList.Count >= 20)
+        {
+            Debug.LogWarning("Inventory full: Max 20 items.");
+            return;
+        }
 
+        bool itemStacked = false;
         foreach (Item existingItem in itemList)
         {
             if (CanStack(existingItem, newItem))
@@ -33,9 +38,21 @@ public class Inventory
         InventoryManager.Instance?.uiInventory?.RefreshInventoryItems();
     }
 
+
     public void RemoveItem(Item item)
     {
-        Item inventoryItem = itemList.Find(i => CanStack(i, item));
+        Item inventoryItem = null;
+
+        if (CanStackable(item.itemType))
+        {
+            inventoryItem = itemList.Find(i => CanStack(i, item));
+        }
+        else
+        {
+            // For unstackables like keys, find exact match
+            inventoryItem = itemList.Find(i => i == item);
+        }
+
         if (inventoryItem == null)
         {
             Debug.LogWarning("Item not found in inventory.");
@@ -53,6 +70,14 @@ public class Inventory
 
         Debug.Log("Removed item: " + inventoryItem.itemName);
         InventoryManager.Instance?.uiInventory?.RefreshInventoryItems();
+    }
+
+    private bool CanStackable(ItemType type)
+    {
+        return type == ItemType.Screw ||
+               type == ItemType.ScrewDriver ||
+               type == ItemType.Cogwheel ||
+               type == ItemType.LightBulb;
     }
 
     public List<Item> GetItemList()

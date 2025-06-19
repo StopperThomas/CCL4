@@ -31,8 +31,16 @@ public class BookSelectable : MonoBehaviour
         }
     }
 
+
     public void ToggleSelection()
     {
+        // Block interaction until engine puzzle is solved
+        /*if (!PuzzleManager.Instance.IsEnginePuzzleSolved)
+        {
+            PromptManager.Instance?.ShowPrompt("These symbols look familiar... I've seen them elsewhere.");
+            return;
+        } */
+
         if (!BookPuzzleManager.Instance.CanToggle(this)) return;
 
         isSelected = !isSelected;

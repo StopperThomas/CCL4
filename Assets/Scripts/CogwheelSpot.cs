@@ -25,8 +25,17 @@ public class CogwheelSpot : MonoBehaviour
             return false;
         }
 
+        
+
         GameObject cogwheelObj = Instantiate(item.prefab3D, transform.position, transform.rotation);
         cogwheelObj.transform.SetParent(transform);
+
+          Rigidbody rb = cogwheelObj.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true;
+        }
 
         // Disable interaction
         cogwheelObj.tag = "Untagged";
