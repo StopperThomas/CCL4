@@ -1,0 +1,80 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "2751881562",
+    "Type": "User",
+    "GUID": "{46D73B31-6155-400B-9FDF-D642FB19912E}",
+    "Language": "SFX",
+    "Hash": "{A2F5178C-AD75-D0DA-39CE-00E603FBD480}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\CombiLock",
+    "ShortName": "CombiLock",
+    "Path": "CombiLock.bnk",
+    "Media": [
+     {
+      "Id": "88930550",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CombinationLock4.wav",
+      "CachePath": "3B/{3BAEB636-A34E-9A51-A555-59EEBBD286A9}.wem"
+     },
+     {
+      "Id": "468083241",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CombinationLock3.wav",
+      "CachePath": "10/{100F7770-1D0A-42FD-4675-58DE45F68A20}.wem"
+     },
+     {
+      "Id": "724752976",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CombinationLock1.wav",
+      "CachePath": "2F/{2FE000DE-1503-58F3-AB45-DC1CE908B97D}.wem"
+     },
+     {
+      "Id": "864688254",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "CombinationLock2.wav",
+      "CachePath": "D2/{D2A795B6-E72D-2E3D-CFFB-82932988CE9E}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3385592911",
+      "Name": "Play_CombiLock",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_CombiLock",
+      "GUID": "{AF40CFF6-BB13-45DB-986A-20C13E789FE0}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.24465558",
+      "DurationMax": "0.30581948",
+      "MediaRefs": [
+       {
+        "Id": "88930550"
+       },
+       {
+        "Id": "468083241"
+       },
+       {
+        "Id": "724752976"
+       },
+       {
+        "Id": "864688254"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{0D02CE37-0141-8075-5248-B2838B5589C1}"
+ }
+}

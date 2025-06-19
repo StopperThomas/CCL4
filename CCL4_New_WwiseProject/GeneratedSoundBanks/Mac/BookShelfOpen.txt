@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2037734507	Play_BookShelfOpen			\Default Work Unit\Play_BookShelfOpen	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	465491363	BookShelfOpen	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\97\{9726980E-9535-DB05-1295-638811349843}.wem		\Actor-Mixer Hierarchy\Default Work Unit\BookShelfOpen		519556
+

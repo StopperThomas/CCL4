@@ -5,59 +5,59 @@ public class Fixture : MonoBehaviour
     public bool isCorrectSocket; 
     private GameObject placedBulb;
 
-public bool TryPlaceBulb(GameObject bulbPrefab)
-{
-    if (placedBulb != null || bulbPrefab == null)
-        return false;
+    [SerializeField] private AK.Wwise.Event bulbPlaceSound; // Assign in Inspector
 
-    Quaternion prefabRotation = bulbPrefab.transform.rotation;
-    Vector3 placementPosition = transform.position + transform.up * 0.03f;
-
-    placedBulb = Instantiate(bulbPrefab, placementPosition, prefabRotation);
-    placedBulb.transform.localScale = Vector3.one;
-
-    if (isCorrectSocket)
+    public bool TryPlaceBulb(GameObject bulbPrefab)
     {
-        PowerBulb();
+        if (placedBulb != null || bulbPrefab == null)
+            return false;
+
+        Quaternion prefabRotation = bulbPrefab.transform.rotation;
+        Vector3 placementPosition = transform.position + transform.up * 0.03f;
+
+        placedBulb = Instantiate(bulbPrefab, placementPosition, prefabRotation);
+        placedBulb.transform.localScale = Vector3.one;
+
+        if (bulbPlaceSound != null)
+        {
+            bulbPlaceSound.Post(gameObject);
+        }
+
+        if (isCorrectSocket)
+        {
+            PowerBulb();
+        }
+        else
+        {
+            Debug.Log("Wrong socket. Bulb placed, but no power.");
+        }
+
+        return true;
     }
-    else
-    {
-        Debug.Log("Wrong socket. Bulb placed, but no power.");
-    }
-
-    // ✅ Always return true if bulb was placed
-    return true;
-}
-
-
 
     private void PowerBulb()
-{
-    LightBulb bulbScript = placedBulb.GetComponent<LightBulb>();
-    if (bulbScript != null)
     {
-        bulbScript.SetPowered(true);
-        Debug.Log("Bulb powered via LightBulb script.");
+        LightBulb bulbScript = placedBulb.GetComponent<LightBulb>();
+        if (bulbScript != null)
+        {
+            bulbScript.SetPowered(true);
+            Debug.Log("Bulb powered via LightBulb script.");
+        }
+        else
+        {
+            Debug.LogWarning("No LightBulb script found on placed bulb!");
+        }
+
+        Renderer rend = placedBulb.GetComponentInChildren<Renderer>();
+        if (rend != null)
+        {
+            Material matInstance = new Material(rend.material);
+            matInstance.color = Color.yellow;
+            rend.material = matInstance;
+        }
+
+        placedBulb.tag = "Untagged";
     }
-    else
-    {
-        Debug.LogWarning("No LightBulb script found on placed bulb!");
-    }
-
-    // Change color to yellow
-    Renderer rend = placedBulb.GetComponentInChildren<Renderer>();
-    if (rend != null)
-    {
-        Material matInstance = new Material(rend.material);
-        matInstance.color = Color.yellow;
-        rend.material = matInstance;
-    }
-
-    // Lock interaction
-    placedBulb.tag = "Untagged";
-
-
-}
 
     public void RemoveBulb()
     {

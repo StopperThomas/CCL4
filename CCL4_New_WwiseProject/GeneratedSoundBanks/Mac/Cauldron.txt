@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3212638512	Play_Cauldron			\Default Work Unit\Play_Cauldron	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	247924138	Cauldron	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\2F\{2F6D268E-E0FB-F2D8-068A-EB304F130617}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Cauldron		5027496
+

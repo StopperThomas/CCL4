@@ -1,0 +1,7 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1516012301	Play_TurnScrew			\Default Work Unit\Play_TurnScrew	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	139724522	ScrewSound_01	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\E4\{E48802E5-2183-4DF2-0367-067306C7372B}.wem		\Actor-Mixer Hierarchy\Default Work Unit\TurnScrew\ScrewSound_01		135580
+	316705040	ScrewSound_02	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\14\{145BB6CF-173D-518D-F49A-02BD5AD36E51}.wem		\Actor-Mixer Hierarchy\Default Work Unit\TurnScrew\ScrewSound_02		82424
+

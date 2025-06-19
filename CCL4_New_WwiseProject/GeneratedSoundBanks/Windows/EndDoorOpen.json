@@ -1,0 +1,47 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "1259417468",
+    "Type": "User",
+    "GUID": "{9E20A773-D549-405D-B2CA-3F3733127B9F}",
+    "Language": "SFX",
+    "Hash": "{1842DCDB-7CF7-4D82-553A-4B9934870EB1}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\EndDoorOpen",
+    "ShortName": "EndDoorOpen",
+    "Path": "EndDoorOpen.bnk",
+    "Media": [
+     {
+      "Id": "422479768",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "EndDoorOpen.wav",
+      "CachePath": "C9/{C9027DE9-1F50-E66F-476E-9915F882BB42}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3738987653",
+      "Name": "Play_EndDoorOpen",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_EndDoorOpen",
+      "GUID": "{50FA260B-854D-42F2-82D7-091148FA3345}",
+      "DurationType": "OneShot",
+      "DurationMin": "5.6370068",
+      "DurationMax": "5.6370068",
+      "MediaRefs": [
+       {
+        "Id": "422479768"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{1F51A694-947F-C4C7-78A8-0E5B8952FD29}"
+ }
+}

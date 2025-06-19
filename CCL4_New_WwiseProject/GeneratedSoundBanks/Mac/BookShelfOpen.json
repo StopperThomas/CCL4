@@ -1,0 +1,55 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "3857466246",
+    "Type": "User",
+    "GUID": "{815CF4C8-83E8-4FA8-8166-838C2B707699}",
+    "Language": "SFX",
+    "Hash": "{96B5EF7F-B62C-F905-594F-2AA1AF4188F2}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\BookShelfOpen",
+    "ShortName": "BookShelfOpen",
+    "Path": "BookShelfOpen.bnk",
+    "Media": [
+     {
+      "Id": "465491363",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "BookShelfOpen.wav",
+      "CachePath": "97/{9726980E-9535-DB05-1295-638811349843}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "2037734507",
+      "Name": "Play_BookShelfOpen",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_BookShelfOpen",
+      "GUID": "{AD122D38-F770-4FF5-9220-DD847B6ED16F}",
+      "DurationType": "OneShot",
+      "DurationMin": "2.9447744",
+      "DurationMax": "2.9447744",
+      "MediaRefs": [
+       {
+        "Id": "465491363"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "1583579231",
+        "Name": "ReverbObjects",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\ReverbObjects",
+        "GUID": "{FD5FFE96-A0E6-4D3D-BF95-2BA173BE32D5}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{8C47F91E-81F8-D369-F9B8-FDBA1A96F711}"
+ }
+}

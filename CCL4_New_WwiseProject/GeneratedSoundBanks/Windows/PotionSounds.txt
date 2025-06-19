@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	239692163	Play_PotionSounds			\Default Work Unit\Play_PotionSounds	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	77732484	PotionSound_02	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\94\{94D0214E-7DD5-22F3-0152-F412933B18F0}.wem		\Actor-Mixer Hierarchy\Default Work Unit\PotionSounds\PotionSound_02		88296
+

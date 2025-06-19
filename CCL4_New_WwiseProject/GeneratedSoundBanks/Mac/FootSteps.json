@@ -1,0 +1,88 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "2385628198",
+    "Type": "User",
+    "GUID": "{E7CE77E6-B504-44EC-A225-670A84E0B48D}",
+    "Language": "SFX",
+    "Hash": "{29484A6E-BFEC-0B73-787A-FA9C833483DF}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\FootSteps",
+    "ShortName": "FootSteps",
+    "Path": "FootSteps.bnk",
+    "Media": [
+     {
+      "Id": "208812673",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FootStep3.wav",
+      "CachePath": "47/{475F87D4-42E5-5B61-EB81-CA01864B79EA}.wem"
+     },
+     {
+      "Id": "303639342",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FootStep1.wav",
+      "CachePath": "AF/{AF88A6C5-EC78-EE84-E40D-C1389E9FAD93}.wem"
+     },
+     {
+      "Id": "783086028",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FootStep2.wav",
+      "CachePath": "00/{0055A660-0D92-8C3C-E8FD-CA602A5F575A}.wem"
+     },
+     {
+      "Id": "984670310",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "FootStep4.wav",
+      "CachePath": "18/{1895048C-ADFB-0293-3CED-CC42C9F1BE85}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3854155799",
+      "Name": "Play_FootSteps",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_FootSteps",
+      "GUID": "{083DC178-02E3-4A5B-B362-1DBC8A1BF4ED}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.21199547",
+      "DurationMax": "0.4355758",
+      "MediaRefs": [
+       {
+        "Id": "208812673"
+       },
+       {
+        "Id": "303639342"
+       },
+       {
+        "Id": "783086028"
+       },
+       {
+        "Id": "984670310"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Reverb",
+        "GUID": "{5E48E46A-B668-4F44-985B-28CA77965728}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{1F6C0FC9-6EDB-D133-CFB3-A3A2E6B5D992}"
+ }
+}

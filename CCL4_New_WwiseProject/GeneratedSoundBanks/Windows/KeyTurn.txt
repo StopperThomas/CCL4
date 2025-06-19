@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	522170566	Play_KeyTurn			\Default Work Unit\Play_KeyTurn	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	468054892	KeyTurn	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\39\{39F050D0-832B-684B-6666-B0B358482E2A}.wem		\Actor-Mixer Hierarchy\Default Work Unit\KeyTurn		88296
+

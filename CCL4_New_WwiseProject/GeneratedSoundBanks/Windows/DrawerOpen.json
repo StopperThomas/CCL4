@@ -1,0 +1,47 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "2432269754",
+    "Type": "User",
+    "GUID": "{821ACA29-540C-4001-B078-C586A8E2636A}",
+    "Language": "SFX",
+    "Hash": "{AB6F243F-9765-FA98-19F8-6DDA404C6127}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\DrawerOpen",
+    "ShortName": "DrawerOpen",
+    "Path": "DrawerOpen.bnk",
+    "Media": [
+     {
+      "Id": "599859357",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "DrawerOpen.wav",
+      "CachePath": "DA/{DAD576EE-AEE4-18DB-35F1-8287D5962F9E}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "3070904089",
+      "Name": "Play_DrawerOpen",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_DrawerOpen",
+      "GUID": "{573DB6BB-C810-4BE2-9292-DFFBB7397979}",
+      "DurationType": "OneShot",
+      "DurationMin": "1.2",
+      "DurationMax": "1.2",
+      "MediaRefs": [
+       {
+        "Id": "599859357"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{3144FC98-B5D1-B292-AFFA-22BDEA4BC070}"
+ }
+}

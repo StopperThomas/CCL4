@@ -1,0 +1,47 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "584054836",
+    "Type": "User",
+    "GUID": "{851B26B6-AFFA-4288-9303-5C6275714146}",
+    "Language": "SFX",
+    "Hash": "{E293A7A8-752C-8880-B775-5772E6E77B08}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\PotionSounds",
+    "ShortName": "PotionSounds",
+    "Path": "PotionSounds.bnk",
+    "Media": [
+     {
+      "Id": "77732484",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "PotionSound.wav",
+      "CachePath": "94/{94D0214E-7DD5-22F3-0152-F412933B18F0}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "239692163",
+      "Name": "Play_PotionSounds",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_PotionSounds",
+      "GUID": "{6451A5E1-3D89-4A00-81D5-73A89330E83A}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.4084789",
+      "DurationMax": "0.6120268",
+      "MediaRefs": [
+       {
+        "Id": "77732484"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{9B642D59-A301-7724-D180-FCEF9AB9A536}"
+ }
+}

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{504CF2A7-C3C1-4E39-BF81-04E0DB0CA7CA}" SchemaVersion="123">
+	<SoundBanks>
+		<WorkUnit Name="Default Work Unit" ID="{504CF2A7-C3C1-4E39-BF81-04E0DB0CA7CA}" PersistMode="Standalone">
+			<ChildrenList>
+				<SoundBank Name="FootSteps" ID="{E7CE77E6-B504-44EC-A225-670A84E0B48D}">
+					<ObjectInclusionList>
+						<ObjectRef Name="FootSteps" ID="{B030DBEE-2C6C-4115-A87C-EB72B7E746E1}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="BackGroundMusic" ID="{59A5B7AC-31D6-421E-B327-9040F021425F}">
+					<ObjectInclusionList/>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="CombiLock" ID="{46D73B31-6155-400B-9FDF-D642FB19912E}">
+					<ObjectInclusionList>
+						<ObjectRef Name="CombiLock" ID="{2D48B1AF-F8E0-4A7D-A964-A9273C1DA777}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="ChestOpen" ID="{CD40C42F-FF44-470D-9CFC-D92D158AA871}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Chestopen" ID="{4AA40D92-94BF-42F7-8B0E-FEE24DE89617}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="BookShelfOpen" ID="{815CF4C8-83E8-4FA8-8166-838C2B707699}">
+					<ObjectInclusionList>
+						<ObjectRef Name="BookShelfOpen" ID="{D4917F4E-1FCD-445D-B4E9-7992BE1BD0CA}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="EndDoorOpen" ID="{9E20A773-D549-405D-B2CA-3F3733127B9F}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_EndDoorOpen" ID="{50FA260B-854D-42F2-82D7-091148FA3345}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="DrawerOpen" ID="{821ACA29-540C-4001-B078-C586A8E2636A}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_DrawerOpen" ID="{573DB6BB-C810-4BE2-9292-DFFBB7397979}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="ValveSound" ID="{B9EB78B5-DED0-4A46-B805-1162B1E37DF6}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_ValveTurn" ID="{95485B67-2A92-49E3-A9BD-90E3720DE96C}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="KeyTurn" ID="{597D837B-9954-4F9B-81B1-DB6285413A9C}">
+					<ObjectInclusionList>
+						<ObjectRef Name="KeyTurn" ID="{615C6700-45B4-4F64-8462-20FA03C7DD59}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="TunrScrew" ID="{C2438286-996D-4445-B077-8C82135E2FED}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_TurnScrew" ID="{4CD767D9-068C-4BF9-8478-B9FBA9963906}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="PotionSounds" ID="{851B26B6-AFFA-4288-9303-5C6275714146}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_PotionSounds" ID="{6451A5E1-3D89-4A00-81D5-73A89330E83A}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="Cauldron" ID="{1760FF60-18BB-4B66-8774-B0159F01C1D2}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_Cauldron" ID="{DC12F4C4-29C9-454D-B81A-9A24D60981C1}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+			</ChildrenList>
+		</WorkUnit>
+	</SoundBanks>
+</WwiseDocument>

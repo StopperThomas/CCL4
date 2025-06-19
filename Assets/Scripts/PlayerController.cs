@@ -26,6 +26,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject inventoryUI;
     [SerializeField] private GameObject inspectionUI;
 
+    [Header("Footstep Settings")]
+    [SerializeField] private AK.Wwise.Event footstepEventName;
+    [SerializeField] private float footstepInterval = 0.5f;
+
     private CharacterController controller;
     private PlayerInputActions inputActions;
     private InteractionManager interactionManager;
@@ -42,6 +46,8 @@ public class PlayerController : MonoBehaviour
     private bool isCrouching = false;
     private float targetHeight;
     private Vector3 cameraInitialLocalPos;
+
+    private float footstepTimer = 0f;
 
     private void Awake()
     {
@@ -119,6 +125,25 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 move = transform.right * moveInput.x + transform.forward * moveInput.y;
         controller.Move(move * moveSpeed * Time.deltaTime);
+
+        bool isMoving = move.magnitude > 0.1f;
+
+        if (isMoving && isGrounded)
+        {
+            footstepTimer -= Time.deltaTime;
+
+            if (footstepTimer <= 0f)
+            {
+                if (footstepEventName != null)
+                    footstepEventName.Post(gameObject);
+
+                footstepTimer = footstepInterval;
+            }
+        }
+        else
+        {
+            footstepTimer = 0f; // Reset timer when not moving
+        }
     }
 
     private void HandleLook()

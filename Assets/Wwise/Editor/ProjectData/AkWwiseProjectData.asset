@@ -1,0 +1,535 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a59f3e38a25b8db4e93b720fe7b6efcd, type: 3}
+  m_Name: AkWwiseProjectData
+  m_EditorClassIdentifier: 
+  AcousticTextureWwu:
+  - PhysicalPath: Virtual Acoustics\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Virtual Acoustics
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: 3f58793a70415a4ca9e2bdf9d89f561b
+    ParentPath: Virtual Acoustics\Default Work Unit
+    guid: 3f58793a70415a4ca9e2bdf9d89f561b
+    GuidInternal: 
+    m_lastTime: -8584512727880053219
+    List: []
+  AuxBusWwu:
+  - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Master-Mixer Hierarchy
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: bd28d66c19ffbe40a70641feb1561a57
+    ParentPath: Master-Mixer Hierarchy\Default Work Unit
+    guid: bd28d66c19ffbe40a70641feb1561a57
+    GuidInternal: 
+    m_lastTime: -8584512354772090044
+    List:
+    - name: Master Audio Bus
+      guid: d8a41415a61d2a41a17e75ca0c2149f3
+      id: 3803692087
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: bd28d66c19ffbe40a70641feb1561a57
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus
+    - name: Reverb
+      guid: 6ae4485e68b6444f985b28ca77965728
+      id: 348963605
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: bd28d66c19ffbe40a70641feb1561a57
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: Reverb
+        ObjectType: 1
+        guid: 6ae4485e68b6444f985b28ca77965728
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\Reverb
+    - name: ReverbObjects
+      guid: 96fe5ffde6a03d4dbf952ba173be32d5
+      id: 1583579231
+      PathAndIcons:
+      - ElementName: Master-Mixer Hierarchy
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: bd28d66c19ffbe40a70641feb1561a57
+      - ElementName: Master Audio Bus
+        ObjectType: 2
+        guid: d8a41415a61d2a41a17e75ca0c2149f3
+      - ElementName: ReverbObjects
+        ObjectType: 1
+        guid: 96fe5ffde6a03d4dbf952ba173be32d5
+      Path: Master-Mixer Hierarchy\Default Work Unit\Master Audio Bus\ReverbObjects
+  BankWwu:
+  - PhysicalPath: SoundBanks\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: SoundBanks
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+    ParentPath: SoundBanks\Default Work Unit
+    guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+    GuidInternal: 
+    m_lastTime: -8584512334181859504
+    List:
+    - name: BackGroundMusic
+      guid: acb7a559d6311e42b3279040f021425f
+      id: 626769978
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: BackGroundMusic
+        ObjectType: 7
+        guid: acb7a559d6311e42b3279040f021425f
+      Path: SoundBanks\Default Work Unit\BackGroundMusic
+    - name: BookShelfOpen
+      guid: c8f45c81e883a84f8166838c2b707699
+      id: 3857466246
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: BookShelfOpen
+        ObjectType: 7
+        guid: c8f45c81e883a84f8166838c2b707699
+      Path: SoundBanks\Default Work Unit\BookShelfOpen
+    - name: Cauldron
+      guid: 60ff6017bb18664b8774b0159f01c1d2
+      id: 1482754215
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: Cauldron
+        ObjectType: 7
+        guid: 60ff6017bb18664b8774b0159f01c1d2
+      Path: SoundBanks\Default Work Unit\Cauldron
+    - name: ChestOpen
+      guid: 2fc440cd44ff0d479cfcd92d158aa871
+      id: 2892697348
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: ChestOpen
+        ObjectType: 7
+        guid: 2fc440cd44ff0d479cfcd92d158aa871
+      Path: SoundBanks\Default Work Unit\ChestOpen
+    - name: CombiLock
+      guid: 313bd74655610b409fdfd642fb19912e
+      id: 2751881562
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: CombiLock
+        ObjectType: 7
+        guid: 313bd74655610b409fdfd642fb19912e
+      Path: SoundBanks\Default Work Unit\CombiLock
+    - name: DrawerOpen
+      guid: 29ca1a820c540140b078c586a8e2636a
+      id: 2432269754
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: DrawerOpen
+        ObjectType: 7
+        guid: 29ca1a820c540140b078c586a8e2636a
+      Path: SoundBanks\Default Work Unit\DrawerOpen
+    - name: EndDoorOpen
+      guid: 73a7209e49d55d40b2ca3f3733127b9f
+      id: 1259417468
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: EndDoorOpen
+        ObjectType: 7
+        guid: 73a7209e49d55d40b2ca3f3733127b9f
+      Path: SoundBanks\Default Work Unit\EndDoorOpen
+    - name: FootSteps
+      guid: e677cee704b5ec44a225670a84e0b48d
+      id: 2385628198
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: FootSteps
+        ObjectType: 7
+        guid: e677cee704b5ec44a225670a84e0b48d
+      Path: SoundBanks\Default Work Unit\FootSteps
+    - name: KeyTurn
+      guid: 7b837d5954999b4f81b1db6285413a9c
+      id: 3841355487
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: KeyTurn
+        ObjectType: 7
+        guid: 7b837d5954999b4f81b1db6285413a9c
+      Path: SoundBanks\Default Work Unit\KeyTurn
+    - name: PotionSounds
+      guid: b6261b85faaf884293035c6275714146
+      id: 584054836
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: PotionSounds
+        ObjectType: 7
+        guid: b6261b85faaf884293035c6275714146
+      Path: SoundBanks\Default Work Unit\PotionSounds
+    - name: TunrScrew
+      guid: 868243c26d994544b0778c82135e2fed
+      id: 3241605936
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: TunrScrew
+        ObjectType: 7
+        guid: 868243c26d994544b0778c82135e2fed
+      Path: SoundBanks\Default Work Unit\TunrScrew
+    - name: ValveSound
+      guid: b578ebb9d0de464ab8051162b1e37df6
+      id: 396599554
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: ValveSound
+        ObjectType: 7
+        guid: b578ebb9d0de464ab8051162b1e37df6
+      Path: SoundBanks\Default Work Unit\ValveSound
+  EventWwu:
+  - PhysicalPath: Events\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Events
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: 185cdb2573b74f40889eea3e6b66329b
+    ParentPath: Events\Default Work Unit
+    guid: 185cdb2573b74f40889eea3e6b66329b
+    GuidInternal: 
+    m_lastTime: -8584512334181756277
+    List:
+    - name: Play_BookShelfOpen
+      guid: 382d12ad70f7f54f9220dd847b6ed16f
+      id: 2037734507
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_BookShelfOpen
+        ObjectType: 3
+        guid: 382d12ad70f7f54f9220dd847b6ed16f
+      Path: Events\Default Work Unit\Play_BookShelfOpen
+      maxAttenuation: 0
+      maxDuration: 2.9447744
+      minDuration: 2.9447744
+    - name: Play_Cauldron
+      guid: c4f412dcc9294d45b81a9a24d60981c1
+      id: 3212638512
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_Cauldron
+        ObjectType: 3
+        guid: c4f412dcc9294d45b81a9a24d60981c1
+      Path: Events\Default Work Unit\Play_Cauldron
+      maxAttenuation: 100
+      maxDuration: 0
+      minDuration: 0
+    - name: Play_Chestopen
+      guid: 7b5b38a1dca218428f0889b13f920a82
+      id: 364247913
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_Chestopen
+        ObjectType: 3
+        guid: 7b5b38a1dca218428f0889b13f920a82
+      Path: Events\Default Work Unit\Play_Chestopen
+      maxAttenuation: 0
+      maxDuration: 1
+      minDuration: 1
+    - name: Play_CombiLock
+      guid: f6cf40af13bbdb45986a20c13e789fe0
+      id: 3385592911
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_CombiLock
+        ObjectType: 3
+        guid: f6cf40af13bbdb45986a20c13e789fe0
+      Path: Events\Default Work Unit\Play_CombiLock
+      maxAttenuation: 0
+      maxDuration: 0.30581948
+      minDuration: 0.24465558
+    - name: Play_DrawerOpen
+      guid: bbb63d5710c8e24b9292dffbb7397979
+      id: 3070904089
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_DrawerOpen
+        ObjectType: 3
+        guid: bbb63d5710c8e24b9292dffbb7397979
+      Path: Events\Default Work Unit\Play_DrawerOpen
+      maxAttenuation: 0
+      maxDuration: 1.2
+      minDuration: 1.2
+    - name: Play_EndDoorOpen
+      guid: 0b26fa504d85f24282d7091148fa3345
+      id: 3738987653
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_EndDoorOpen
+        ObjectType: 3
+        guid: 0b26fa504d85f24282d7091148fa3345
+      Path: Events\Default Work Unit\Play_EndDoorOpen
+      maxAttenuation: 0
+      maxDuration: 5.6370068
+      minDuration: 5.6370068
+    - name: Play_FootSteps
+      guid: 78c13d08e3025b4ab3621dbc8a1bf4ed
+      id: 3854155799
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_FootSteps
+        ObjectType: 3
+        guid: 78c13d08e3025b4ab3621dbc8a1bf4ed
+      Path: Events\Default Work Unit\Play_FootSteps
+      maxAttenuation: 0
+      maxDuration: 0.4355758
+      minDuration: 0.21199547
+    - name: Play_KeyTurn
+      guid: fd65da712bd6a6408f263f181bbeb25a
+      id: 522170566
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_KeyTurn
+        ObjectType: 3
+        guid: fd65da712bd6a6408f263f181bbeb25a
+      Path: Events\Default Work Unit\Play_KeyTurn
+      maxAttenuation: 0
+      maxDuration: 0.5
+      minDuration: 0.5
+    - name: Play_PotionSounds
+      guid: e1a55164893d004a81d573a89330e83a
+      id: 239692163
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_PotionSounds
+        ObjectType: 3
+        guid: e1a55164893d004a81d573a89330e83a
+      Path: Events\Default Work Unit\Play_PotionSounds
+      maxAttenuation: 0
+      maxDuration: 0.6120268
+      minDuration: 0.4084789
+    - name: Play_TurnScrew
+      guid: d967d74c8c06f94b8478b9fba9963906
+      id: 1516012301
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_TurnScrew
+        ObjectType: 3
+        guid: d967d74c8c06f94b8478b9fba9963906
+      Path: Events\Default Work Unit\Play_TurnScrew
+      maxAttenuation: 0
+      maxDuration: 0.7680587
+      minDuration: 0.4838467
+    - name: Play_ValveTurn
+      guid: 675b4895922ae349a9bd90e3720de96c
+      id: 704027681
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_ValveTurn
+        ObjectType: 3
+        guid: 675b4895922ae349a9bd90e3720de96c
+      Path: Events\Default Work Unit\Play_ValveTurn
+      maxAttenuation: 0
+      maxDuration: 0.91600907
+      minDuration: 0.17455664
+  RtpcWwu:
+  - PhysicalPath: Game Parameters\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Game Parameters
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: 96f2e650e2f2184bbdedfe7c23906050
+    ParentPath: Game Parameters\Default Work Unit
+    guid: 96f2e650e2f2184bbdedfe7c23906050
+    GuidInternal: 
+    m_lastTime: -8584512727879644504
+    List: []
+  StateWwu:
+  - PhysicalPath: States\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: States
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: c873c12584f6f7498ef2f13b9e7644b7
+    ParentPath: States\Default Work Unit
+    guid: c873c12584f6f7498ef2f13b9e7644b7
+    GuidInternal: 
+    m_lastTime: -8584512727879731547
+    List: []
+  SwitchWwu:
+  - PhysicalPath: Switches\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Switches
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: 391af487446b1c4bbbd1be0c0b37266b
+    ParentPath: Switches\Default Work Unit
+    guid: 391af487446b1c4bbbd1be0c0b37266b
+    GuidInternal: 
+    m_lastTime: -8584512727879349591
+    List: []
+  TriggerWwu:
+  - PhysicalPath: Triggers\Default Work Unit.wwu
+    PathAndIcons:
+    - ElementName: Triggers
+      ObjectType: 5
+      guid: 00000000000000000000000000000000
+    - ElementName: Default Work Unit
+      ObjectType: 12
+      guid: 71bd5613dca44946ac6c42d8cc7bf211
+    ParentPath: Triggers\Default Work Unit
+    guid: 71bd5613dca44946ac6c42d8cc7bf211
+    GuidInternal: 
+    m_lastTime: -8584512727878831312
+    List: []
+  ExpandedFileSystemItemIds: 
+  ExpandedWaapiItemIds: 0500000006000000070000000b0000000c0000000d0000000e0000000f0000001000000011000000120000001300000014000000150000001b0000001c000000220000002300000028000000290000006600000067000000c5000000c6000000d1000000d2000000d3000000d4000000020100000301000013010000140100001b0100001c0100008701000088010000cc010000cd010000d9010000da010000c7020000
+  AutoSyncSelection: 0
+  autoPopulateEnabled: 1
+  currentDataSource: 0
+  CurrentPluginConfig: 

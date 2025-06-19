@@ -1,0 +1,55 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "3841355487",
+    "Type": "User",
+    "GUID": "{597D837B-9954-4F9B-81B1-DB6285413A9C}",
+    "Language": "SFX",
+    "Hash": "{D188CD7B-4629-8419-C77D-6117F2585C8A}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\KeyTurn",
+    "ShortName": "KeyTurn",
+    "Path": "KeyTurn.bnk",
+    "Media": [
+     {
+      "Id": "468054892",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "KeyTurn.wav",
+      "CachePath": "39/{39F050D0-832B-684B-6666-B0B358482E2A}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "522170566",
+      "Name": "Play_KeyTurn",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_KeyTurn",
+      "GUID": "{71DA65FD-D62B-40A6-8F26-3F181BBEB25A}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.5",
+      "DurationMax": "0.5",
+      "MediaRefs": [
+       {
+        "Id": "468054892"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Reverb",
+        "GUID": "{5E48E46A-B668-4F44-985B-28CA77965728}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{54B8FA62-92BB-9D98-267C-BD7C531474F2}"
+ }
+}

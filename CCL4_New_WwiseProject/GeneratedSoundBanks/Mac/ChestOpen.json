@@ -1,0 +1,55 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Mac",
+  "BasePlatform": "Mac",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "2892697348",
+    "Type": "User",
+    "GUID": "{CD40C42F-FF44-470D-9CFC-D92D158AA871}",
+    "Language": "SFX",
+    "Hash": "{73C19A46-85DC-DF22-6CA8-F9D2C42FEFD9}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\ChestOpen",
+    "ShortName": "ChestOpen",
+    "Path": "ChestOpen.bnk",
+    "Media": [
+     {
+      "Id": "362102182",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "Chestopen.wav",
+      "CachePath": "4B/{4B11F0AC-E12E-2137-3C5D-8605A77665E5}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "364247913",
+      "Name": "Play_Chestopen",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_Chestopen",
+      "GUID": "{A1385B7B-A2DC-4218-8F08-89B13F920A82}",
+      "DurationType": "OneShot",
+      "DurationMin": "1",
+      "DurationMax": "1",
+      "MediaRefs": [
+       {
+        "Id": "362102182"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Reverb",
+        "GUID": "{5E48E46A-B668-4F44-985B-28CA77965728}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{DEAD526C-0958-E984-0D4F-6860A6B594A1}"
+ }
+}

@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3738987653	Play_EndDoorOpen			\Default Work Unit\Play_EndDoorOpen	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	422479768	EndDoorOpen	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\C9\{C9027DE9-1F50-E66F-476E-9915F882BB42}.wem		\Actor-Mixer Hierarchy\Default Work Unit\EndDoorOpen		994464
+

@@ -6,6 +6,8 @@ public class Potion : MonoBehaviour
     public string potionID;
     public Transform cauldronTarget;
 
+    [SerializeField] private AK.Wwise.Event potionFlySound; // Assign in Inspector
+
     private Vector3 originalPosition;
     private Quaternion originalRotation;
     private Rigidbody rb;
@@ -17,7 +19,6 @@ public class Potion : MonoBehaviour
         originalRotation = transform.rotation;
     }
 
-    // In case Awake never ran (e.g. due to inactive GameObject)
     private void CacheComponents()
     {
         if (rb == null)
@@ -28,6 +29,11 @@ public class Potion : MonoBehaviour
 
     public void FlyToCauldron()
     {
+        if (potionFlySound != null)
+        {
+            potionFlySound.Post(gameObject);
+        }
+
         StartCoroutine(FlyRoutine());
     }
 

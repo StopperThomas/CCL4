@@ -10,6 +10,8 @@ public class BookPuzzleManager : MonoBehaviour
     public Vector3 slideOffset;
     public float slideDuration = 1f;
 
+    [SerializeField] private AK.Wwise.Event puzzleSolvedSound; // Add Wwise event in Inspector
+
     private List<BookSelectable> selectedBooks = new();
     private bool puzzleSolved = false;
 
@@ -68,6 +70,12 @@ public class BookPuzzleManager : MonoBehaviour
         }
 
         puzzleSolved = true;
+
+        if (puzzleSolvedSound != null)
+        {
+            puzzleSolvedSound.Post(gameObject);
+        }
+
         PromptManager.Instance?.ShowPrompt("You hear something move behind the shelf...");
         Debug.Log(" Puzzle solved. Sliding bookshelf.");
         SlideBookshelf();

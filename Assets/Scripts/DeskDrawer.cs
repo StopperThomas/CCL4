@@ -14,6 +14,8 @@ public class DeskDrawer : MonoBehaviour
     [Header("Puzzle Auto-Open")]
     public bool openOnTankPuzzleSolved = false;
 
+    [SerializeField] private AK.Wwise.Event drawerInteractSound; // Assign in Inspector
+
     private Vector3 closedPosition;
     private Vector3 openPosition;
     private bool isSliding = false;
@@ -64,6 +66,11 @@ public class DeskDrawer : MonoBehaviour
 
     private void SlideDrawer(bool open)
     {
+        if (drawerInteractSound != null)
+        {
+            drawerInteractSound.Post(gameObject);
+        }
+
         isOpen = open;
         StartCoroutine(SlideCoroutine(open ? openPosition : closedPosition));
     }

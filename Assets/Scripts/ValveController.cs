@@ -9,49 +9,50 @@ public class ValveController : MonoBehaviour
     [Header("References")]
     public PointerController pointerController;
 
+    [SerializeField] private AK.Wwise.Event valveTurnSound; // Assign in Inspector
+
     private bool isSpinning = false;
 
-  public void ActivateValve()
-{
-    if (isSpinning || pointerController == null) return;
-
-    // Prevent further interaction if already solved
-    if (TankPuzzleManager.Instance != null && TankPuzzleManager.Instance.tankPuzzleSolved)
-
+    public void ActivateValve()
     {
-        PromptManager.Instance?.ShowPrompt("The tank is already full.");
-        return;
+        if (isSpinning || pointerController == null) return;
+
+        if (TankPuzzleManager.Instance != null && TankPuzzleManager.Instance.tankPuzzleSolved)
+        {
+            PromptManager.Instance?.ShowPrompt("The tank is already full.");
+            return;
+        }
+
+        if (valveTurnSound != null)
+        {
+            valveTurnSound.Post(gameObject);
+        }
+
+        StartCoroutine(SpinValveVisual());
+        pointerController.RotateBy(rotationAmount);
+        TankPuzzleManager.Instance.CheckIfInCorrectRange();
     }
 
-    StartCoroutine(SpinValveVisual());
-    pointerController.RotateBy(rotationAmount);
-    TankPuzzleManager.Instance.CheckIfInCorrectRange();
-}
-
-   private System.Collections.IEnumerator SpinValveVisual()
-{
-    isSpinning = true;
-
-    float elapsed = 0f;
-    float endAngle = 90f;
-
-    
-    Quaternion initialRotation = transform.localRotation;
-    Quaternion targetRotation = initialRotation * Quaternion.Euler(endAngle, 0f, 0f);
-
-    while (elapsed < valveSpinDuration)
+    private System.Collections.IEnumerator SpinValveVisual()
     {
-        float t = elapsed / valveSpinDuration;
-        transform.localRotation = Quaternion.Slerp(initialRotation, targetRotation, t);
+        isSpinning = true;
 
-        elapsed += Time.deltaTime;
-        yield return null;
+        float elapsed = 0f;
+        float endAngle = 90f;
+
+        Quaternion initialRotation = transform.localRotation;
+        Quaternion targetRotation = initialRotation * Quaternion.Euler(endAngle, 0f, 0f);
+
+        while (elapsed < valveSpinDuration)
+        {
+            float t = elapsed / valveSpinDuration;
+            transform.localRotation = Quaternion.Slerp(initialRotation, targetRotation, t);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localRotation = targetRotation;
+        isSpinning = false;
     }
-
-    
-    transform.localRotation = targetRotation;
-    isSpinning = false;
-}
-
-
 }

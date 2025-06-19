@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	704027681	Play_ValveTurn			\Default Work Unit\Play_ValveTurn	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	604017797	ValveTurn_03	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\21\{218AA030-E26C-DDC6-CBAB-37430D9F571F}.wem		\Actor-Mixer Hierarchy\Default Work Unit\ValveTurn\ValveTurn_03		40492
+

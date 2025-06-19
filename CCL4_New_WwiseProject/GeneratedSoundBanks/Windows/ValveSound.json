@@ -1,0 +1,55 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "396599554",
+    "Type": "User",
+    "GUID": "{B9EB78B5-DED0-4A46-B805-1162B1E37DF6}",
+    "Language": "SFX",
+    "Hash": "{E9A68978-355A-C4C7-3907-2B940AE80300}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\ValveSound",
+    "ShortName": "ValveSound",
+    "Path": "ValveSound.bnk",
+    "Media": [
+     {
+      "Id": "604017797",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ValveTurn.wav",
+      "CachePath": "21/{218AA030-E26C-DDC6-CBAB-37430D9F571F}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "704027681",
+      "Name": "Play_ValveTurn",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_ValveTurn",
+      "GUID": "{95485B67-2A92-49E3-A9BD-90E3720DE96C}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.17455664",
+      "DurationMax": "0.91600907",
+      "MediaRefs": [
+       {
+        "Id": "604017797"
+       }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Reverb",
+        "GUID": "{5E48E46A-B668-4F44-985B-28CA77965728}"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{8E4EAD52-68E3-868C-07F8-A11BD74F4398}"
+ }
+}

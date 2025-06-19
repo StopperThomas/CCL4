@@ -10,6 +10,8 @@ public class Cauldron : MonoBehaviour
     public GameObject rewardCubePrefab;
     public Transform rewardSpawnPoint;
 
+    [SerializeField] private AK.Wwise.Event potionEnterSound; // Assign in Inspector
+
     private List<string> insertedPotions = new List<string>();
     private bool isChecking = false;
     private Vector3 originalLiquidPosition;
@@ -40,6 +42,11 @@ public class Cauldron : MonoBehaviour
             {
                 Debug.LogWarning("Already have 3 potions. Ignoring additional potion: " + potion.potionID);
                 return;
+            }
+
+            if (potionEnterSound != null)
+            {
+                potionEnterSound.Post(gameObject);
             }
 
             insertedPotions.Add(potion.potionID);

@@ -1,0 +1,58 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "3241605936",
+    "Type": "User",
+    "GUID": "{C2438286-996D-4445-B077-8C82135E2FED}",
+    "Language": "SFX",
+    "Hash": "{6B60083A-55AE-68E3-4CBE-CBC379CBFAD2}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\TunrScrew",
+    "ShortName": "TunrScrew",
+    "Path": "TunrScrew.bnk",
+    "Media": [
+     {
+      "Id": "139724522",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ScrewSound.wav",
+      "CachePath": "E4/{E48802E5-2183-4DF2-0367-067306C7372B}.wem"
+     },
+     {
+      "Id": "316705040",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "ScrewSound.wav",
+      "CachePath": "14/{145BB6CF-173D-518D-F49A-02BD5AD36E51}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "1516012301",
+      "Name": "Play_TurnScrew",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_TurnScrew",
+      "GUID": "{4CD767D9-068C-4BF9-8478-B9FBA9963906}",
+      "DurationType": "OneShot",
+      "DurationMin": "0.4838467",
+      "DurationMax": "0.7680587",
+      "MediaRefs": [
+       {
+        "Id": "139724522"
+       },
+       {
+        "Id": "316705040"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{0AAFB2E9-0677-CC15-C5F7-9700CA490DE9}"
+ }
+}

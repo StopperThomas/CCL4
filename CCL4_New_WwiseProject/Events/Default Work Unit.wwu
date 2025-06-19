@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" SchemaVersion="123">
+	<Events>
+		<WorkUnit Name="Default Work Unit" ID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" PersistMode="Standalone">
+			<ChildrenList>
+				<Event Name="Play_FootSteps" ID="{083DC178-02E3-4A5B-B362-1DBC8A1BF4ED}">
+					<ChildrenList>
+						<Action Name="" ID="{8E5A3F0D-8316-484A-B2E6-C963F84DB03C}" ShortID="129512256">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="FootSteps" ID="{B030DBEE-2C6C-4115-A87C-EB72B7E746E1}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_CombiLock" ID="{AF40CFF6-BB13-45DB-986A-20C13E789FE0}">
+					<ChildrenList>
+						<Action Name="" ID="{0EC9FBA0-FDA2-4AAA-8F5F-8C96390CF6ED}" ShortID="630856570">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="CombiLock" ID="{2D48B1AF-F8E0-4A7D-A964-A9273C1DA777}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Chestopen" ID="{A1385B7B-A2DC-4218-8F08-89B13F920A82}">
+					<ChildrenList>
+						<Action Name="" ID="{F71A932B-BB07-462E-A83A-A6CBD4A603AB}" ShortID="722563308">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Chestopen" ID="{4AA40D92-94BF-42F7-8B0E-FEE24DE89617}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_BookShelfOpen" ID="{AD122D38-F770-4FF5-9220-DD847B6ED16F}">
+					<ChildrenList>
+						<Action Name="" ID="{A1405E12-8DEB-47AE-9268-9739ECCB799F}" ShortID="10693123">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="BookShelfOpen" ID="{D4917F4E-1FCD-445D-B4E9-7992BE1BD0CA}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_EndDoorOpen" ID="{50FA260B-854D-42F2-82D7-091148FA3345}">
+					<ChildrenList>
+						<Action Name="" ID="{1C330F8B-A45E-41B4-A5CA-C5A05050A19A}" ShortID="880622556">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="EndDoorOpen" ID="{5DC207F7-6F62-4811-8FFE-A80A626090A5}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_DrawerOpen" ID="{573DB6BB-C810-4BE2-9292-DFFBB7397979}">
+					<ChildrenList>
+						<Action Name="" ID="{24AC03CF-B568-46EC-9FBA-3C6F45B752B4}" ShortID="762705161">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="DrawerOpen" ID="{12330C25-898F-4036-B09D-258140093DFE}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_ValveTurn" ID="{95485B67-2A92-49E3-A9BD-90E3720DE96C}">
+					<ChildrenList>
+						<Action Name="" ID="{0029FA4E-AE5E-4DCD-A89B-D0CB84894C81}" ShortID="197438399">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="ValveTurn" ID="{2DEA2722-1B54-4857-B338-35CC6BC11B6D}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_KeyTurn" ID="{71DA65FD-D62B-40A6-8F26-3F181BBEB25A}">
+					<ChildrenList>
+						<Action Name="" ID="{0CB97CFD-32B1-4972-8EA4-72D0082493CA}" ShortID="296677873">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="KeyTurn" ID="{615C6700-45B4-4F64-8462-20FA03C7DD59}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_TurnScrew" ID="{4CD767D9-068C-4BF9-8478-B9FBA9963906}">
+					<ChildrenList>
+						<Action Name="" ID="{418E77CD-7AEF-4047-BA16-3E0BA3C0C902}" ShortID="868584049">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="TurnScrew" ID="{5321F3E8-3E66-4EEE-BCE1-DADEDD3B155A}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_PotionSounds" ID="{6451A5E1-3D89-4A00-81D5-73A89330E83A}">
+					<ChildrenList>
+						<Action Name="" ID="{EA4BF5F0-DC4B-4C93-9035-CE2CE5E3827A}" ShortID="423178929">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="PotionSounds" ID="{0DDB0C5F-4419-4E12-B10E-D8FA346D0AFE}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_Cauldron" ID="{DC12F4C4-29C9-454D-B81A-9A24D60981C1}">
+					<ChildrenList>
+						<Action Name="" ID="{6240F5BF-1C44-496E-925A-861E0C7DD413}" ShortID="219648271">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="Cauldron" ID="{624C9EA3-8CE3-4925-B260-6CE1915E16EF}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+			</ChildrenList>
+		</WorkUnit>
+	</Events>
+</WwiseDocument>

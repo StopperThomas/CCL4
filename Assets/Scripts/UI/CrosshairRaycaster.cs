@@ -6,6 +6,8 @@ public class CrosshairRaycaster : MonoBehaviour
     public InteractionManager interactionManager;
     public InspectUIManager uiManager;
 
+    [SerializeField] private AK.Wwise.Event clickSoundEvent; // Assign in Inspector via Wwise picker
+
     private GameObject lastHighlighted;
 
     void Start()
@@ -40,13 +42,11 @@ public class CrosshairRaycaster : MonoBehaviour
             if (boxLock != null)
             {
                 var equipped = interactionManager.GetEquippedItem();
-                // Highlight logic for locked boxes
                 if (equipped != null && equipped.itemType == ItemType.Key)
                 {
-
                     Highlight(hitObj);
                     uiManager?.ShowPrompt(true, "LMB");
-                }// Show prompt for unlocking
+                }
                 else
                 {
                     RemoveHighlight();
@@ -55,7 +55,6 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
-            // Highlight logic
             Screw screw = hitObj.GetComponent<Screw>();
             if (screw != null)
             {
@@ -73,7 +72,6 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
-            // Inventory items or doors
             if (hitObj.CompareTag("InventoryItem"))
             {
                 Highlight(hitObj);
@@ -81,7 +79,6 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
-            // Combination lock digits
             CombinationLockDigit digit = hitObj.GetComponent<CombinationLockDigit>();
             if (digit != null)
             {
@@ -90,13 +87,13 @@ public class CrosshairRaycaster : MonoBehaviour
 
                 if (Input.GetMouseButtonDown(0))
                 {
+                    PlayClickSound(hitObj);
                     digit.Interact();
                 }
 
                 return;
             }
 
-            // Highlight for books
             if (hitObj.CompareTag("Book"))
             {
                 Highlight(hitObj);
@@ -104,36 +101,34 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
-            // Potion interaction
             Potion potion = hitObj.GetComponent<Potion>();
             if (potion != null)
             {
                 Highlight(hitObj);
                 uiManager?.ShowPrompt(true, "LMB");
 
-                if (Input.GetMouseButtonDown(0)) // or whatever input system you're using
+                if (Input.GetMouseButtonDown(0))
                 {
+                    PlayClickSound(hitObj);
                     potion.FlyToCauldron();
                 }
                 return;
             }
 
-            // Sugar interaction
             Sugar sugar = hitObj.GetComponent<Sugar>();
             if (sugar != null)
             {
                 Highlight(hitObj);
                 uiManager?.ShowPrompt(true, "LMB");
+
                 if (Input.GetMouseButtonDown(0))
                 {
+                    PlayClickSound(hitObj);
                     sugar.OnInteract();
                 }
                 return;
             }
 
-
-
-            // Default fallback
             RemoveHighlight();
             uiManager?.ShowPrompt(false);
         }
@@ -167,6 +162,18 @@ public class CrosshairRaycaster : MonoBehaviour
             Outline outline = lastHighlighted.GetComponent<Outline>();
             if (outline != null) outline.enabled = false;
             lastHighlighted = null;
+        }
+    }
+
+    void PlayClickSound(GameObject sourceObj)
+    {
+        if (clickSoundEvent != null)
+        {
+            clickSoundEvent.Post(sourceObj);
+        }
+        else
+        {
+            Debug.LogWarning("Wwise click event not assigned.");
         }
     }
 }

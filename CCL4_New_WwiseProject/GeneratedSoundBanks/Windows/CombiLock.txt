@@ -1,0 +1,9 @@
+Event	ID	Name			Wwise Object Path	Notes
+	3385592911	Play_CombiLock			\Default Work Unit\Play_CombiLock	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	88930550	CombinationLock4	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\3B\{3BAEB636-A34E-9A51-A555-59EEBBD286A9}.wem		\Actor-Mixer Hierarchy\Default Work Unit\CombiLock\CombinationLock4		54044
+	468083241	CombinationLock3	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\10\{100F7770-1D0A-42FD-4675-58DE45F68A20}.wem		\Actor-Mixer Hierarchy\Default Work Unit\CombiLock\CombinationLock3		43252
+	724752976	CombinationLock1	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\2F\{2FE000DE-1503-58F3-AB45-DC1CE908B97D}.wem		\Actor-Mixer Hierarchy\Default Work Unit\CombiLock\CombinationLock1		43252
+	864688254	CombinationLock2	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\D2\{D2A795B6-E72D-2E3D-CFFB-82932988CE9E}.wem		\Actor-Mixer Hierarchy\Default Work Unit\CombiLock\CombinationLock2		54040
+

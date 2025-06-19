@@ -3,6 +3,8 @@ using UnityEngine;
 public class BoxLock : MonoBehaviour
 {
     [SerializeField] private KeyType requiredKeyType = KeyType.Box;
+    [SerializeField] private AK.Wwise.Event unlockSound; // Assign in Inspector
+
     private bool isUnlocked = false;
 
     public void TryUnlock(Item equippedItem)
@@ -25,21 +27,19 @@ public class BoxLock : MonoBehaviour
         Debug.Log("Lock opened with key: " + equippedItem.itemName);
         isUnlocked = true;
 
-        // Despawn lock
-        gameObject.SetActive(false);
+        if (unlockSound != null)
+        {
+            unlockSound.Post(gameObject);
+        }
 
-        // Remove key from inventory
+        gameObject.SetActive(false);
         InventoryManager.Instance.inventory.RemoveItem(equippedItem);
         InventoryManager.Instance.uiInventory.RefreshInventoryItems();
-
-        // Clear equipped item slot
         InventoryManager.Instance.uiInventory.UpdateEquippedSlot(null);
 
-        // Unequip from interaction system
         var interaction = FindObjectOfType<InteractionManager>();
         interaction?.EquipFromUI(null);
 
-        // If key is being inspected, hide it
         var inspectorUI = FindObjectOfType<ItemInspectorUI>();
         if (inspectorUI != null && inspectorUI.GetCurrentItem() == equippedItem)
         {

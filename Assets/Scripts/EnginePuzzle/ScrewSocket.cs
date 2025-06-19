@@ -8,45 +8,41 @@ public class ScrewSocket : MonoBehaviour
     private bool isFilled = false;
 
     [SerializeField] private Vector3 screwOffset = new Vector3(-0.02f, -0.05f, 0f);
-
+    [SerializeField] private AK.Wwise.Event screwPlaceSound; // Assign in Inspector
 
     public bool IsFilled => isFilled;
     public ScrewType PlacedType { get; private set; }
 
     public bool TryPlaceScrew(GameObject screwPrefab, ScrewType type)
-{
-
-
-    if (isFilled || screwPrefab == null)
-        return false;
-
-    if (type != requiredType)
     {
-        PromptManager.Instance?.ShowPrompt("That screw doesn't fit here.");
-        return false;
+        if (isFilled || screwPrefab == null)
+            return false;
+
+        if (type != requiredType)
+        {
+            PromptManager.Instance?.ShowPrompt("That screw doesn't fit here.");
+            return false;
+        }
+
+        placedScrew = Instantiate(screwPrefab, transform.position, Quaternion.identity);
+        placedScrew.transform.SetParent(transform);
+
+        placedScrew.transform.localPosition = screwOffset;
+        placedScrew.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
+        placedScrew.transform.localScale = Vector3.one;
+
+        placedScrew.tag = "Untagged";
+
+        isFilled = true;
+        PlacedType = type;
+
+        if (screwPlaceSound != null)
+        {
+            screwPlaceSound.Post(gameObject);
+        }
+
+        PuzzleManager.Instance?.NotifyScrewPlaced(this);
+
+        return true;
     }
-
-    // Instantiate and parent the screw to this socket
-    placedScrew = Instantiate(screwPrefab, transform.position, Quaternion.identity);
-    placedScrew.transform.SetParent(transform);
-
-    // Apply local offset and rotation
-    placedScrew.transform.localPosition = screwOffset;
-    placedScrew.transform.localRotation = Quaternion.Euler(180f, 0f, 0f); // Flip for visual alignment
-    placedScrew.transform.localScale = Vector3.one;
-
-    // Disable further interaction
-    placedScrew.tag = "Untagged";
-
-    isFilled = true;
-    PlacedType = type;
-
-    // Notify the puzzle manager
-    PuzzleManager.Instance?.NotifyScrewPlaced(this);
-
-    return true;
-}
-
-
-
 }

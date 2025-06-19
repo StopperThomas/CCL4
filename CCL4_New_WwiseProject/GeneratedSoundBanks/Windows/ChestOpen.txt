@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	364247913	Play_Chestopen			\Default Work Unit\Play_Chestopen	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	362102182	Chestopen	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\4B\{4B11F0AC-E12E-2137-3C5D-8605A77665E5}.wem		\Actor-Mixer Hierarchy\Default Work Unit\Chestopen		176496
+
