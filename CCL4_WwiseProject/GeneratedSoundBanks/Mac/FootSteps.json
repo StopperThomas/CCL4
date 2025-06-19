@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{B62A6E88-A7A6-4C76-8A8D-F8B029EC5870}",
     "Language": "SFX",
-    "Hash": "{17186172-B5E4-B9CD-37F5-3563BC2F2F40}",
+    "Hash": "{74BFA41C-26BD-3301-17C4-799DAA3AA33D}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\FootSteps",
     "ShortName": "FootSteps",
     "Path": "FootSteps.bnk",
@@ -70,11 +70,19 @@
        {
         "Id": "951907656"
        }
+      ],
+      "AuxBusRefs": [
+       {
+        "Id": "348963605",
+        "Name": "Reverb",
+        "ObjectPath": "\\Master-Mixer Hierarchy\\Default Work Unit\\Master Audio Bus\\Reverb",
+        "GUID": "{253CF246-AA3A-4E88-937A-3E2515298707}"
+       }
       ]
      }
     ]
    }
   ],
-  "FileHash": "{D9D02A07-9097-1186-CDE7-2A5E18E61C44}"
+  "FileHash": "{4048FE0A-7CC5-BB26-B057-08B9B4CA5644}"
  }
 }

@@ -117,6 +117,9 @@
 						<Reference Name="OutputBus">
 							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8AF0A369-45CB-48F7-9532-2A68DD17F235}"/>
 						</Reference>
+						<Reference Name="UserAuxSend0">
+							<ObjectRef Name="Reverb" ID="{253CF246-AA3A-4E88-937A-3E2515298707}" WorkUnitID="{8AF0A369-45CB-48F7-9532-2A68DD17F235}"/>
+						</Reference>
 					</ReferenceList>
 					<ChildrenList>
 						<Sound Name="FootStep1" ID="{DF491639-8C96-42C2-AC75-F82F7F6E3042}" ShortID="42711670">
@@ -285,6 +288,28 @@
 					</ChildrenList>
 					<ActiveSourceList>
 						<ActiveSource Name="SoundTrackGamePlay" ID="{C16C4578-BDFB-4B1C-9648-4DAEF9094BAB}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+				<Sound Name="StartMenuMusic" ID="{A2363C2C-B494-4584-A43D-6A7EA294B349}" ShortID="687515596">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{5049C17E-4E27-4978-9F77-33FB182F8710}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{8AF0A369-45CB-48F7-9532-2A68DD17F235}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="StartMenuMusic" ID="{ED7E226F-C355-4B00-9989-44C82FCF645E}">
+							<Language>SFX</Language>
+							<AudioFile>StartMenuMusic.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="809898908"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="StartMenuMusic" ID="{ED7E226F-C355-4B00-9989-44C82FCF645E}" Platform="Linked"/>
 					</ActiveSourceList>
 				</Sound>
 			</ChildrenList>
