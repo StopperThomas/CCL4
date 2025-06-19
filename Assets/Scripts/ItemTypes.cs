@@ -5,7 +5,6 @@ public enum ItemType
     Cogwheel,
     Screw,
     Key,
-    Note,
     LightBulb
 }
 

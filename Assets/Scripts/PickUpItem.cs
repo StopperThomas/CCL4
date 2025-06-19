@@ -70,10 +70,6 @@ public class PickupItem : MonoBehaviour
                 item.cogwheelType = cogwheelType;
                 item.prefab3D = ItemAssets.Instance.GetCogwheelPrefab(cogwheelType);
                 break;
-            case ItemType.Note:
-                item.noteID = noteID;
-                item.prefab3D = ItemAssets.Instance.GetNotePrefab(noteID);
-                break;
             case ItemType.LightBulb:
                 item.prefab3D = ItemAssets.Instance.bulbPrefab;
                 break;

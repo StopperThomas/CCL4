@@ -14,7 +14,7 @@ public class ItemAssets : MonoBehaviour
     public Sprite screwDriverPlusSprite;
     public Sprite screwDriverTorxSprite;
     public Sprite screwDriverYSprite;
-    public Sprite screwDriverFlatSprite;
+  
 
     // Screw sprites by type
     public Sprite screwMinusSprite;
@@ -31,17 +31,13 @@ public class ItemAssets : MonoBehaviour
     public Sprite cogwheelMediumSprite;
     public Sprite cogwheelLargeSprite;
 
-    // Note sprites
-    public Sprite note0Sprite;
-    public Sprite note1Sprite;
-    public Sprite note2Sprite;
 
     // Screwdrivers
     public GameObject screwDriverMinusPrefab;
     public GameObject screwDriverPlusPrefab;
     public GameObject screwDriverTorxPrefab;
     public GameObject screwDriverYPrefab;
-    public GameObject screwDriverFlatPrefab;
+   
 
     // Screws
     public GameObject screwMinusPrefab;
@@ -58,10 +54,7 @@ public class ItemAssets : MonoBehaviour
     public GameObject cogwheelMediumPrefab;
     public GameObject cogwheelLargePrefab;
 
-    // Notes
-    public GameObject note0Prefab;
-    public GameObject note1Prefab;
-    public GameObject note2Prefab;
+
 
     // LightBulb
     public Sprite bulbSprite;
@@ -76,7 +69,7 @@ public class ItemAssets : MonoBehaviour
             ScrewdriverType.Plus => screwDriverPlusSprite,
             ScrewdriverType.Torx => screwDriverTorxSprite,
             ScrewdriverType.Y => screwDriverYSprite,
-            ScrewdriverType.Flat => screwDriverFlatSprite,
+        
             _ => null,
         };
     }
@@ -114,17 +107,6 @@ public class ItemAssets : MonoBehaviour
         };
     }
 
-    public Sprite GetNoteSprite(int noteID)
-    {
-        return noteID switch
-        {
-            0 => note0Sprite,
-            1 => note1Sprite,
-            2 => note2Sprite,
-            _ => null,
-        };
-    }
-
 
     public GameObject GetScrewdriverPrefab(ScrewdriverType type)
     {
@@ -134,7 +116,7 @@ public class ItemAssets : MonoBehaviour
             ScrewdriverType.Plus => screwDriverPlusPrefab,
             ScrewdriverType.Torx => screwDriverTorxPrefab,
             ScrewdriverType.Y => screwDriverYPrefab,
-            ScrewdriverType.Flat => screwDriverFlatPrefab,
+            
             _ => null,
         };
     }
@@ -178,16 +160,6 @@ public GameObject GetScrewPrefab(ScrewType type)
         };
     }
 
-    public GameObject GetNotePrefab(int noteID)
-    {
-        return noteID switch
-        {
-            0 => note0Prefab,
-            1 => note1Prefab,
-            2 => note2Prefab,
-            _ => null,
-        };
-    }
 
     public GameObject GetPrefab(ItemType itemType)
     {
@@ -196,12 +168,11 @@ public GameObject GetScrewPrefab(ScrewType type)
             ItemType.ScrewDriver => screwDriverMinusPrefab,
             ItemType.Cogwheel => gearPrefab,
             ItemType.Screw => screwMinusPrefab,
-            ItemType.Note => note0Prefab,
-            
+    
             _ => null,
         };
     }
 
-    // Legacy fallback
-    public GameObject gearPrefab; // optional fallback for cogwheel
+    
+    public GameObject gearPrefab; 
 }

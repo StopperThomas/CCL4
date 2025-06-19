@@ -26,9 +26,8 @@ public class Item
         ItemType.Screw => ItemAssets.Instance.GetScrewSprite(screwType),
         ItemType.Key => ItemAssets.Instance.GetKeySprite(keyType),
         ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelSprite(cogwheelType),
-        ItemType.Note => ItemAssets.Instance.GetNoteSprite(noteID),
         ItemType.LightBulb => ItemAssets.Instance.bulbSprite,
-        _ => null // ✅ catch-all to satisfy compiler
+        _ => null // catch-all to satisfy compiler
     };
 }
 
@@ -43,9 +42,7 @@ public class Item
     {
         ItemType.ScrewDriver => ItemAssets.Instance.GetScrewdriverPrefab(screwdriverType),
         ItemType.Screw => ItemAssets.Instance.GetScrewPrefab(screwType),
-        ItemType.Key => ItemAssets.Instance.GetKeyPrefab(keyType),
-        ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelPrefab(cogwheelType),
-        ItemType.Note => ItemAssets.Instance.GetNotePrefab(noteID),
+        ItemType.Key => ItemAssets.Instance.GetKeyPrefab(keyType),        ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelPrefab(cogwheelType),
         ItemType.LightBulb => ItemAssets.Instance.bulbPrefab,
         _ => null,
     };

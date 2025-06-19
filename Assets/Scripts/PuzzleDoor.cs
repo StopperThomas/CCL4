@@ -61,7 +61,7 @@ public class PuzzleDoor : MonoBehaviour
     private IEnumerator RotateDoor()
     {
         Quaternion startRot = hingeObject.transform.rotation;
-        Quaternion targetRot = startRot * Quaternion.Euler(0, 90f, 0); // Or -90f for opposite swing
+        Quaternion targetRot = startRot * Quaternion.Euler(0, -90f, 0); // Or -90f for opposite swing
 
         float duration = 2f;
         float elapsed = 0f;

@@ -118,6 +118,19 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
+            // Sugar interaction
+            Sugar sugar = hitObj.GetComponent<Sugar>();
+            if (sugar != null)
+            {
+                Highlight(hitObj);
+                uiManager?.ShowPrompt(true, "LMB");
+                if (Input.GetMouseButtonDown(0))
+                {
+                    sugar.OnInteract();
+                }
+                return;
+            }
+
 
 
             // Default fallback

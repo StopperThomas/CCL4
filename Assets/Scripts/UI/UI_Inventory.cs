@@ -37,34 +37,38 @@ public class UI_Inventory : MonoBehaviour
     }
 
     public void RefreshInventoryItems()
+{
+    if (inventory == null)
     {
-        if (inventory == null)
+        Debug.LogError("UI_Inventory: inventory is null! Did you forget to call SetInventory()?");
+        return;
+    }
+
+    foreach (Transform child in itemSlotContainer)
+    {
+        if (child == itemSlotTemplate) continue;
+        Destroy(child.gameObject);
+    }
+
+    List<Item> itemList = inventory.GetItemList();
+    int maxSlots = 20;
+
+    for (int i = 0; i < maxSlots; i++)
+    {
+        Transform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
+        itemSlot.gameObject.SetActive(true);
+
+        Image image = itemSlot.Find("image").GetComponent<Image>();
+        TextMeshProUGUI amountText = itemSlot.Find("amount").GetComponent<TextMeshProUGUI>();
+        Button button = itemSlot.GetComponent<Button>();
+
+        if (i < itemList.Count)
         {
-            Debug.LogError("UI_Inventory: inventory is null! Did you forget to call SetInventory()?");
-            return;
-        }
-
-        foreach (Transform child in itemSlotContainer)
-        {
-            if (child == itemSlotTemplate) continue;
-            Destroy(child.gameObject);
-        }
-
-        List<Item> itemList = inventory.GetItemList();
-        Debug.Log("Refreshing UI. Items in inventory: " + itemList.Count);
-
-        foreach (Item item in itemList)
-        {
-            Transform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
-            itemSlot.gameObject.SetActive(true);
-
-            Image image = itemSlot.Find("image").GetComponent<Image>();
+            Item item = itemList[i];
             image.sprite = item.GetSprite();
-
-            TextMeshProUGUI amountText = itemSlot.Find("amount").GetComponent<TextMeshProUGUI>();
+            image.enabled = true;
             amountText.text = item.amount > 1 ? item.amount.ToString() : "";
 
-            Button button = itemSlot.GetComponent<Button>();
             button.onClick.RemoveAllListeners();
             button.onClick.AddListener(() =>
             {
@@ -72,8 +76,18 @@ public class UI_Inventory : MonoBehaviour
                 FindObjectOfType<ItemInspectorUI>()?.ShowItem(item);
             });
         }
-
+        else
+        {
+            image.sprite = null;
+            image.enabled = false;
+            amountText.text = "";
+            button.onClick.RemoveAllListeners(); // empty slot
+        }
     }
+
+    Debug.Log($"UI_Inventory: Refreshed {Mathf.Min(itemList.Count, maxSlots)} item slots.");
+}
+
 
     public void UpdateEquippedSlot(Item item)
     {

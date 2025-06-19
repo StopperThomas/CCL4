@@ -74,8 +74,7 @@ public class Inventory
             case ItemType.Cogwheel:
                 return a.cogwheelType == b.cogwheelType;
             case ItemType.LightBulb:
-                return true;
-            case ItemType.Note:
+                return true; // Light bulbs can always stack
             case ItemType.Key:
                 return false;
             default:

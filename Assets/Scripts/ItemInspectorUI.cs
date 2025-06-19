@@ -15,6 +15,10 @@ public class ItemInspectorUI : MonoBehaviour
     private GameObject currentRender;
     private Item currentItem;
 
+    private Rigidbody currentRigidbody;
+    private bool originalUseGravity;
+    private bool originalIsKinematic;
+
     private void OnEnable()
     {
         if (dropHintText != null)
@@ -36,9 +40,12 @@ public class ItemInspectorUI : MonoBehaviour
 
     public void ShowItem(Item item)
     {
+
         nameText.text = item.itemName;
         descriptionText.text = item.description;
         currentItem = item;
+
+Debug.Log($"[ShowItem] item: {item.itemName}, prefab3D: {item.prefab3D}, anchor: {renderAnchor}, cam: {renderCamera}");
 
         if (dropHintText != null)
         {
@@ -56,6 +63,16 @@ public class ItemInspectorUI : MonoBehaviour
             currentRender.transform.localRotation = Quaternion.identity;
             currentRender.transform.localScale = Vector3.one;
 
+            //  Disable physics while inspecting
+            currentRigidbody = currentRender.GetComponent<Rigidbody>();
+            if (currentRigidbody != null)
+            {
+                originalUseGravity = currentRigidbody.useGravity;
+                originalIsKinematic = currentRigidbody.isKinematic;
+
+                currentRigidbody.useGravity = false;
+                currentRigidbody.isKinematic = true;
+            }
             int renderLayer = LayerMask.NameToLayer("ItemRenderLayer");
             if (renderLayer != -1)
                 SetLayerRecursively(currentRender, renderLayer);
@@ -97,6 +114,12 @@ public class ItemInspectorUI : MonoBehaviour
         Vector3 dropPosition = Camera.main.transform.position + Camera.main.transform.forward * 1.5f;
         GameObject dropped = Instantiate(item.prefab3D, dropPosition, Quaternion.identity);
         dropped.tag = "InventoryItem";
+        Rigidbody dropRb = dropped.GetComponent<Rigidbody>();
+        if (dropRb != null)
+        {
+            dropRb.useGravity = true;
+            dropRb.isKinematic = false;
+        }
 
         InventoryManager.Instance.inventory.RemoveItem(actualInventoryItem);
         InventoryManager.Instance.uiInventory.RefreshInventoryItems();
@@ -166,37 +189,37 @@ public class ItemInspectorUI : MonoBehaviour
                item.itemType == ItemType.LightBulb;
     }
     private void FitItemInView(GameObject obj)
-{
-    if (renderCamera == null || obj == null) return;
-
-    Renderer renderer = obj.GetComponentInChildren<Renderer>();
-    if (renderer == null) return;
-
-    Bounds bounds = renderer.bounds;
-    float maxSize = Mathf.Max(bounds.size.x, bounds.size.y, bounds.size.z);
-    float padding = 0.8f;
-
-    float distance;
-
-    if (currentItem != null && currentItem.customRenderDistance > 0f)
     {
-        distance = currentItem.customRenderDistance;
+        if (renderCamera == null || obj == null) return;
+
+        Renderer renderer = obj.GetComponentInChildren<Renderer>();
+        if (renderer == null) return;
+
+        Bounds bounds = renderer.bounds;
+        float maxSize = Mathf.Max(bounds.size.x, bounds.size.y, bounds.size.z);
+        float padding = 0.8f;
+
+        float distance;
+
+        if (currentItem != null && currentItem.customRenderDistance > 0f)
+        {
+            distance = currentItem.customRenderDistance;
+        }
+        else
+        {
+            distance = (maxSize * padding) / (2f * Mathf.Tan(Mathf.Deg2Rad * renderCamera.fieldOfView * 0.5f));
+        }
+
+        obj.transform.rotation = Quaternion.LookRotation(-renderCamera.transform.forward);
+        obj.transform.position = renderCamera.transform.position + renderCamera.transform.forward * distance;
+
+        // Centering the object
+        Vector3 centerOffset = renderer.bounds.center - obj.transform.position;
+        obj.transform.position -= centerOffset;
+
+        float scale = currentItem != null ? currentItem.customRenderScale : 1f;
+        obj.transform.localScale = Vector3.one * scale;
     }
-    else
-    {
-        distance = (maxSize * padding) / (2f * Mathf.Tan(Mathf.Deg2Rad * renderCamera.fieldOfView * 0.5f));
-    }
-
-    obj.transform.rotation = Quaternion.LookRotation(-renderCamera.transform.forward);
-    obj.transform.position = renderCamera.transform.position + renderCamera.transform.forward * distance;
-
-    // Centering the object
-    Vector3 centerOffset = renderer.bounds.center - obj.transform.position;
-    obj.transform.position -= centerOffset;
-
-    float scale = currentItem != null ? currentItem.customRenderScale : 1f;
-    obj.transform.localScale = Vector3.one * scale;
-}
 
 
     private void SetLayerRecursively(GameObject obj, int newLayer)

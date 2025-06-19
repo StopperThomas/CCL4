@@ -214,6 +214,7 @@ GameObject:
   - component: {fileID: 8562992270535551817}
   - component: {fileID: 2724938089425281858}
   - component: {fileID: 7735656359015903867}
+  - component: {fileID: 6786521050095026400}
   m_Layer: 0
   m_Name: LightBulb
   m_TagString: InventoryItem
@@ -231,8 +232,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0.2587796, y: 0.016857771, z: 0.0045170253, w: 0.9657787}
   m_LocalPosition: {x: 21.519344, y: 8.2, z: 22.21}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6254363090913793011}
   - {fileID: 4733165790848094428}
@@ -265,15 +266,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0965c831733398a4a97e08af4ef972b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 5
+  itemType: 4
   amount: 1
   screwdriverType: 0
   screwType: 0
   keyType: 0
   cogwheelType: 0
   noteID: 0
-  customName: oohh shiny
-  customDescription: nicec nice
+  customName: Light Bulb
+  customDescription: But what does it light up?
   renderDistanceOverride: -1
   renderScaleOverride: 0.5
 --- !u!65 &7735656359015903867
@@ -297,6 +298,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.15119681, y: 0.28577232, z: 0.12531199}
   m_Center: {x: -0.0052654296, y: -0.008253977, z: 0.018934429}
+--- !u!54 &6786521050095026400
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3793165671887202867}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &4549853162147711391
 GameObject:
   m_ObjectHideFlags: 0

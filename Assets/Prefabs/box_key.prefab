@@ -112,6 +112,8 @@ MonoBehaviour:
   noteID: 0
   customName: adfasd
   customDescription: asdwad
+  renderDistanceOverride: -1
+  renderScaleOverride: 0.5
 --- !u!54 &2556083932797850425
 Rigidbody:
   m_ObjectHideFlags: 0

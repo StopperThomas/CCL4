@@ -110,7 +110,7 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
@@ -136,6 +136,8 @@ MonoBehaviour:
   noteID: 0
   customName: Screwdriver Yellow
   customDescription: Huh another one?
+  renderDistanceOverride: -1
+  renderScaleOverride: 0.5
 --- !u!114 &-9150637498350411524
 MonoBehaviour:
   m_ObjectHideFlags: 0
