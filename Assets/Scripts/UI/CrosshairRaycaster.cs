@@ -110,13 +110,25 @@ public class CrosshairRaycaster : MonoBehaviour
                 Highlight(hitObj);
                 uiManager?.ShowPrompt(true, "LMB");
 
-                if (Input.GetMouseButtonDown(0)) // or whatever input system you're using
+                if (Input.GetMouseButtonDown(0))
                 {
                     potion.FlyToCauldron();
                 }
                 return;
             }
 
+            // Sugar interaction
+            Sugar sugar = hitObj.GetComponent<Sugar>();
+            if (sugar != null)
+            {
+                Highlight(hitObj);
+                uiManager?.ShowPrompt(true, "LMB");
+                if (Input.GetMouseButtonDown(0))
+                {
+                    sugar.OnInteract();
+                }
+                return;
+            }
 
 
             // Default fallback
