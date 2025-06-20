@@ -4,26 +4,28 @@ public class Fixture : MonoBehaviour
 {
     public bool isCorrectSocket; 
     private GameObject placedBulb;
+    
+
 
 public bool TryPlaceBulb(GameObject bulbPrefab)
-{
-    if (placedBulb != null || bulbPrefab == null)
-        return false;
-
-    Quaternion prefabRotation = bulbPrefab.transform.rotation;
-    Vector3 placementPosition = transform.position + transform.up * 0.03f;
-
-    placedBulb = Instantiate(bulbPrefab, placementPosition, prefabRotation);
-    placedBulb.transform.localScale = Vector3.one;
-    
-    Rigidbody rb = placedBulb.GetComponent<Rigidbody>();
-    if (rb != null)
     {
-        rb.useGravity = false;
-        rb.isKinematic = true;
-    }
+        if (placedBulb != null || bulbPrefab == null)
+            return false;
 
-    if (isCorrectSocket)
+        Quaternion prefabRotation = bulbPrefab.transform.rotation;
+        Vector3 placementPosition = transform.position + transform.up * 0.03f;
+
+        placedBulb = Instantiate(bulbPrefab, placementPosition, prefabRotation);
+        placedBulb.transform.localScale = Vector3.one;
+
+        Rigidbody rb = placedBulb.GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.useGravity = false;
+            rb.isKinematic = true;
+        }
+
+        if (isCorrectSocket)
         {
             PowerBulb();
         }
@@ -32,9 +34,9 @@ public bool TryPlaceBulb(GameObject bulbPrefab)
             Debug.Log("Wrong socket. Bulb placed, but no power.");
         }
 
-    // Always return true if bulb was placed
-    return true;
-}
+        // Always return true if bulb was placed
+        return true;
+    }
 
 
 

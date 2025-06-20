@@ -315,7 +315,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 919132149155446097}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2749fb418a7628645bd9c9e6f798c106, type: 3}
+  m_Script: {fileID: 11500000, guid: 72c35663678681c4897f60274e52355e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   targetPosition: {fileID: 0}
@@ -1183,7 +1183,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9177696839621161888}
   m_Layer: 0
-  m_Name: PotionTable
+  m_Name: PotionTable 1
   m_TagString: InventoryItem
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
