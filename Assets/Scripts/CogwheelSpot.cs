@@ -32,14 +32,12 @@ public class CogwheelSpot : MonoBehaviour
         cogwheelObj.tag = "Untagged";
         Destroy(cogwheelObj.GetComponent<Collider>());
 
-        // Ensure Cogwheel component is attached and configured
+        // Ensure Cogwheel component exists
         Cogwheel cogComponent = cogwheelObj.GetComponent<Cogwheel>();
         if (cogComponent == null)
-        {
             cogComponent = cogwheelObj.AddComponent<Cogwheel>();
-        }
-        cogComponent.size = item.cogwheelType;
 
+        cogComponent.size = item.cogwheelType;
         isOccupied = true;
 
         Debug.Log("Cogwheel placed successfully.");
@@ -48,12 +46,11 @@ public class CogwheelSpot : MonoBehaviour
         return true;
     }
 
-
-        public bool HasCorrectCogwheel()
+    public bool HasCorrectCogwheel()
     {
         if (!isOccupied) return false;
 
-        Transform child = transform.GetChild(0); // assuming placed cogwheel is parented
+        Transform child = transform.GetChild(0); // Assumes cogwheel was parented
         if (child == null) return false;
 
         Cogwheel cog = child.GetComponent<Cogwheel>();

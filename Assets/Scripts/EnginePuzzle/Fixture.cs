@@ -2,10 +2,10 @@ using UnityEngine;
 
 public class Fixture : MonoBehaviour
 {
-    public bool isCorrectSocket; 
+    public bool isCorrectSocket;
     private GameObject placedBulb;
 
-    [SerializeField] private AK.Wwise.Event bulbPlaceSound; // Assign in Inspector
+    [SerializeField] private AK.Wwise.Event bulbPlaceSound;
 
     public bool TryPlaceBulb(GameObject bulbPrefab)
     {
@@ -18,10 +18,14 @@ public class Fixture : MonoBehaviour
         placedBulb = Instantiate(bulbPrefab, placementPosition, prefabRotation);
         placedBulb.transform.localScale = Vector3.one;
 
-        if (bulbPlaceSound != null)
+        Rigidbody rb = placedBulb.GetComponent<Rigidbody>();
+        if (rb != null)
         {
-            bulbPlaceSound.Post(gameObject);
+            rb.useGravity = false;
+            rb.isKinematic = true;
         }
+
+        bulbPlaceSound?.Post(gameObject);
 
         if (isCorrectSocket)
         {

@@ -10,9 +10,9 @@ public class Cauldron : MonoBehaviour
     public GameObject rewardCubePrefab;
     public Transform rewardSpawnPoint;
 
-    [SerializeField] private AK.Wwise.Event potionEnterSound; // Assign in Inspector
+    [SerializeField] private AK.Wwise.Event potionEnterSound;
 
-    private List<string> insertedPotions = new List<string>();
+    private List<string> insertedPotions = new();
     private bool isChecking = false;
     private Vector3 originalLiquidPosition;
 
@@ -44,10 +44,7 @@ public class Cauldron : MonoBehaviour
                 return;
             }
 
-            if (potionEnterSound != null)
-            {
-                potionEnterSound.Post(gameObject);
-            }
+            potionEnterSound?.Post(gameObject);
 
             insertedPotions.Add(potion.potionID);
             Debug.Log("Potion added. Current potions in cauldron: " + string.Join(", ", insertedPotions));
@@ -68,7 +65,7 @@ public class Cauldron : MonoBehaviour
         }
     }
 
-    void RaiseLiquid()
+    private void RaiseLiquid()
     {
         if (liquidLayer == null)
         {
@@ -76,12 +73,11 @@ public class Cauldron : MonoBehaviour
             return;
         }
 
-        Debug.Log("Raising liquid by " + liquidRisePerPotion);
         liquidLayer.localPosition += Vector3.up * liquidRisePerPotion;
         Debug.Log("New liquid position: " + liquidLayer.localPosition);
     }
 
-    void CheckCombination()
+    private void CheckCombination()
     {
         var sortedCorrect = correctPotions.OrderBy(x => x).ToList();
         var sortedInput = insertedPotions.OrderBy(x => x).ToList();
@@ -93,7 +89,10 @@ public class Cauldron : MonoBehaviour
         if (sortedInput.SequenceEqual(sortedCorrect))
         {
             Debug.Log("Correct combination! Spawning reward.");
-            Instantiate(rewardCubePrefab, rewardSpawnPoint.position, Quaternion.identity);
+
+            GameObject reward = Instantiate(rewardCubePrefab, rewardSpawnPoint.position, Quaternion.identity);
+            reward.transform.localScale = Vector3.one * 0.5f;
+            reward.SetActive(true);
         }
         else
         {
@@ -102,13 +101,10 @@ public class Cauldron : MonoBehaviour
         }
     }
 
-    void ResetPuzzle()
+    private void ResetPuzzle()
     {
-        Debug.Log("Resetting puzzle...");
-
         foreach (Potion p in Resources.FindObjectsOfTypeAll<Potion>())
         {
-            Debug.Log("Resetting potion: " + p.name);
             p.ResetPotion();
         }
 

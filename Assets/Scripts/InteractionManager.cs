@@ -118,8 +118,7 @@ public class InteractionManager : MonoBehaviour
 
         GameObject hitObject = hit.collider.gameObject;
 
-
-        // Lightbulb placement (only if engine puzzle is solved)
+        // Lightbulb placement
         var fixture = hitObject.GetComponent<Fixture>();
         if (fixture != null && equippedItem != null && equippedItem.itemType == ItemType.LightBulb)
         {
@@ -139,9 +138,7 @@ public class InteractionManager : MonoBehaviour
             bool placed = fixture.TryPlaceBulb(equippedItem.GetPrefab());
             if (placed)
             {
-                InventoryManager.Instance.inventory.RemoveItem(equippedItem);
-                equippedItem.amount--;
-
+                InventoryManager.Instance.inventory.RemoveItem(equippedItem); // handles amount or full removal
                 PromptManager.Instance?.ShowPrompt("You placed the bulb.");
 
                 if (equippedItem.amount <= 0)
@@ -169,8 +166,6 @@ public class InteractionManager : MonoBehaviour
             return;
         }
 
-
-
         // Screw placement
         var screwSocket = hitObject.GetComponent<ScrewSocket>();
         if (screwSocket != null && equippedItem != null && equippedItem.itemType == ItemType.Screw)
@@ -193,8 +188,11 @@ public class InteractionManager : MonoBehaviour
                     InventoryManager.Instance.inventory.RemoveItem(equippedItem);
                     UnequipItem();
                 }
+                else
+                {
+                    InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+                }
 
-                InventoryManager.Instance.uiInventory.RefreshInventoryItems();
                 PromptManager.Instance?.ShowPrompt("Screw placed.");
             }
             else
@@ -204,9 +202,6 @@ public class InteractionManager : MonoBehaviour
 
             return;
         }
-
-
-
 
         var screw = hitObject.GetComponent<Screw>();
         if (screw != null)
@@ -219,7 +214,6 @@ public class InteractionManager : MonoBehaviour
 
             if (!screw.isUnscrewed)
             {
-
                 if (equippedItem != null &&
                     equippedItem.itemType == ItemType.ScrewDriver &&
                     screw.TryUnscrew(equippedItem))
@@ -233,7 +227,6 @@ public class InteractionManager : MonoBehaviour
             }
             else
             {
-                // Screw already unscrewed – allow pickup
                 var pickup = hitObject.GetComponent<PickupItem>();
                 pickup?.OnPickup();
                 PromptManager.Instance?.ShowPrompt("Item picked up.");
@@ -242,7 +235,6 @@ public class InteractionManager : MonoBehaviour
             return;
         }
 
-
         var pickupItem = hitObject.GetComponent<PickupItem>();
         if (pickupItem != null)
         {
@@ -250,7 +242,6 @@ public class InteractionManager : MonoBehaviour
             PromptManager.Instance?.ShowPrompt("Item picked up.");
             return;
         }
-
 
         // Cogwheel pickup
         var cog = hitObject.GetComponent<Cogwheel>();
@@ -269,21 +260,31 @@ public class InteractionManager : MonoBehaviour
             bool placed = spot.TryPlaceEquippedCogwheel(equippedItem);
             if (placed)
             {
-                InventoryManager.Instance.inventory.RemoveItem(equippedItem);
-                InventoryManager.Instance.uiInventory.UpdateEquippedSlot(null);
-                equippedItem = null;
+                equippedItem.amount--;
+
+                if (equippedItem.amount <= 0)
+                {
+                    InventoryManager.Instance.inventory.RemoveItem(equippedItem);
+                    UnequipItem();
+                }
+                else
+                {
+                    InventoryManager.Instance.uiInventory.RefreshInventoryItems();
+                }
+
                 PromptManager.Instance?.ShowPrompt("Cogwheel placed.");
             }
             return;
         }
-        // Book selection
 
+        // Book selection
         var book = hitObject.GetComponent<BookSelectable>();
         if (book != null)
         {
             book.ToggleSelection();
             return;
         }
+
         // Unlock
         var lockComponent = hitObject.GetComponent<BoxLock>();
         lockComponent?.TryUnlock(equippedItem);
@@ -292,6 +293,7 @@ public class InteractionManager : MonoBehaviour
         var box = hitObject.GetComponent<Box>();
         box?.TryOpen();
     }
+
 
     void TryPickupItem(GameObject target)
     {

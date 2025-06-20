@@ -3,13 +3,13 @@ using UnityEngine;
 public class ValveController : MonoBehaviour
 {
     [Header("Valve Settings")]
-    public float rotationAmount = 15f; // How much the pointer turns
-    public float valveSpinDuration = 0.5f; // How long the valve visually spins
+    public float rotationAmount = 15f;            // How much the pointer turns
+    public float valveSpinDuration = 0.5f;        // How long the valve visually spins
 
     [Header("References")]
     public PointerController pointerController;
 
-    [SerializeField] private AK.Wwise.Event valveTurnSound; // Assign in Inspector
+    [SerializeField] private AK.Wwise.Event valveTurnSound; // Optional: Wwise sound
 
     private bool isSpinning = false;
 
@@ -17,12 +17,14 @@ public class ValveController : MonoBehaviour
     {
         if (isSpinning || pointerController == null) return;
 
+        // Prevent further interaction if already solved
         if (TankPuzzleManager.Instance != null && TankPuzzleManager.Instance.tankPuzzleSolved)
         {
             PromptManager.Instance?.ShowPrompt("The tank is already full.");
             return;
         }
 
+        // Play valve sound
         if (valveTurnSound != null)
         {
             valveTurnSound.Post(gameObject);

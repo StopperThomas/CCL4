@@ -10,13 +10,16 @@ public class PuzzleDoor : MonoBehaviour
     [SerializeField] private Material redGlowMaterial;
     [SerializeField] private Material greenGlowMaterial;
 
-    public static PuzzleDoor Instance;
-
     [SerializeField] private CogwheelSpot[] cogwheelSpots;
     [SerializeField] private GameObject doorObject;
 
+    [Header("Wwise & Timing")]
     [SerializeField] private AK.Wwise.Event doorOpenSound; // Add Wwise event in Inspector
     [SerializeField] private float doorOpenDuration = 2f;  // Duration to fully open the door
+
+    public static PuzzleDoor Instance;
+
+    private bool doorOpened = false;
 
     private void Awake()
     {
@@ -41,33 +44,26 @@ public class PuzzleDoor : MonoBehaviour
         OpenDoor();
     }
 
-    private bool doorOpened = false;
-
     private void OpenDoor()
     {
         if (doorOpened) return;
         doorOpened = true;
 
         if (doorOpenSound != null)
-        {
             doorOpenSound.Post(gameObject);
-        }
 
         Debug.Log("Opening door...");
         StartCoroutine(RotateDoor());
 
-        // Change the material of the "Light" object
         MeshRenderer renderer = lightObject.GetComponent<MeshRenderer>();
         if (renderer != null)
-        {
             renderer.material = greenGlowMaterial;
-        }
     }
 
     private IEnumerator RotateDoor()
     {
         Quaternion startRot = hingeObject.transform.rotation;
-        Quaternion targetRot = startRot * Quaternion.Euler(0, -90f, 0); // Or -90f for opposite swing
+        Quaternion targetRot = startRot * Quaternion.Euler(0, -90f, 0);
 
         float elapsed = 0f;
 

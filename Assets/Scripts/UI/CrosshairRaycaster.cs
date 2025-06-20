@@ -6,7 +6,7 @@ public class CrosshairRaycaster : MonoBehaviour
     public InteractionManager interactionManager;
     public InspectUIManager uiManager;
 
-    [SerializeField] private AK.Wwise.Event clickSoundEvent; // Assign in Inspector via Wwise picker
+    [SerializeField] private AK.Wwise.Event clickSoundEvent; // Optional
 
     private GameObject lastHighlighted;
 
@@ -32,12 +32,11 @@ public class CrosshairRaycaster : MonoBehaviour
         if (interactionManager == null) return;
 
         Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit, rayDistance))
+        if (Physics.Raycast(ray, out RaycastHit hit, rayDistance))
         {
             GameObject hitObj = hit.collider.gameObject;
 
+            // Box lock interaction
             BoxLock boxLock = hitObj.GetComponent<BoxLock>();
             if (boxLock != null)
             {
@@ -55,6 +54,7 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
+            // Screw interaction
             Screw screw = hitObj.GetComponent<Screw>();
             if (screw != null)
             {
@@ -72,6 +72,7 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
+            // Inventory pickup
             if (hitObj.CompareTag("InventoryItem"))
             {
                 Highlight(hitObj);
@@ -79,6 +80,7 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
+            // Combination lock digit
             CombinationLockDigit digit = hitObj.GetComponent<CombinationLockDigit>();
             if (digit != null)
             {
@@ -90,10 +92,10 @@ public class CrosshairRaycaster : MonoBehaviour
                     PlayClickSound(hitObj);
                     digit.Interact();
                 }
-
                 return;
             }
 
+            // Book interaction
             if (hitObj.CompareTag("Book"))
             {
                 Highlight(hitObj);
@@ -101,6 +103,7 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
+            // Potion interaction
             Potion potion = hitObj.GetComponent<Potion>();
             if (potion != null)
             {
@@ -115,6 +118,7 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
+            // Sugar interaction
             Sugar sugar = hitObj.GetComponent<Sugar>();
             if (sugar != null)
             {
@@ -129,6 +133,7 @@ public class CrosshairRaycaster : MonoBehaviour
                 return;
             }
 
+            // No valid interaction
             RemoveHighlight();
             uiManager?.ShowPrompt(false);
         }
@@ -170,10 +175,6 @@ public class CrosshairRaycaster : MonoBehaviour
         if (clickSoundEvent != null)
         {
             clickSoundEvent.Post(sourceObj);
-        }
-        else
-        {
-            Debug.LogWarning("Wwise click event not assigned.");
         }
     }
 }

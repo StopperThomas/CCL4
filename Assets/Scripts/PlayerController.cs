@@ -107,10 +107,11 @@ public class PlayerController : MonoBehaviour
         inputActions.Player.DropItem.performed -= ctx => TryDropSelectedItem();
         inputActions.Player.EquipItem.performed -= ctx => TryEquipInspectedItem();
         inputActions.Player.UnequipItem.performed -= ctx => interactionManager?.UnequipItem();
+
         inputActions.Player.Disable();
     }
 
-    private void Update() 
+    private void Update()
     {
         if (isInventoryOpen) return;
 
@@ -183,10 +184,8 @@ public class PlayerController : MonoBehaviour
 
     private void HandleCrouch()
     {
-        // Smoothly transition character controller height
         controller.height = Mathf.Lerp(controller.height, targetHeight, Time.deltaTime * crouchSpeed);
 
-        // Adjust camera to simulate crouching
         float targetY = cameraInitialLocalPos.y + (isCrouching ? cameraCrouchOffset : 0f);
         Vector3 camPos = cameraTransform.localPosition;
         camPos.y = Mathf.Lerp(camPos.y, targetY, Time.deltaTime * crouchSpeed);

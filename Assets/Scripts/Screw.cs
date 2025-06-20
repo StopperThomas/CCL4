@@ -5,7 +5,7 @@ public class Screw : MonoBehaviour
     public string screwID;
     public bool isUnscrewed = false;
 
-    [SerializeField] private AK.Wwise.Event unscrewSound; // Assign in Inspector
+    [SerializeField] private AK.Wwise.Event unscrewSound; // Optional Wwise sound, assign in Inspector
 
     void Start()
     {
@@ -29,9 +29,7 @@ public class Screw : MonoBehaviour
             isUnscrewed = true;
 
             if (unscrewSound != null)
-            {
                 unscrewSound.Post(gameObject);
-            }
 
             GameStateManager.Instance?.MarkScrewUnscrewed(screwID);
             InventoryManager.Instance.inventory.AddItem(pickup.GetItem());

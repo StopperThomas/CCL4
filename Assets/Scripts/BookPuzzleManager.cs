@@ -10,7 +10,7 @@ public class BookPuzzleManager : MonoBehaviour
     public Vector3 slideOffset;
     public float slideDuration = 1f;
 
-    [SerializeField] private AK.Wwise.Event puzzleSolvedSound; // Add Wwise event in Inspector
+    [SerializeField] private AK.Wwise.Event puzzleSolvedSound; // Optional Wwise event
 
     private List<BookSelectable> selectedBooks = new();
     private bool puzzleSolved = false;
@@ -23,7 +23,6 @@ public class BookPuzzleManager : MonoBehaviour
     public bool CanToggle(BookSelectable book)
     {
         if (puzzleSolved) return false;
-
         return selectedBooks.Count < 4 || book.IsSelected();
     }
 
@@ -46,7 +45,7 @@ public class BookPuzzleManager : MonoBehaviour
 
     private void CheckSolution()
     {
-        Debug.Log("📘 Checking selected books:");
+        Debug.Log("Checking selected books:");
         foreach (var book in selectedBooks)
         {
             Debug.Log($"Selected Book ID: {book.bookID}, Correct: {book.isCorrectBook}");
@@ -57,12 +56,7 @@ public class BookPuzzleManager : MonoBehaviour
             if (!book.isCorrectBook)
             {
                 PromptManager.Instance?.ShowPrompt("I know this combination... let's try again.");
-
-                foreach (var b in selectedBooks)
-                {
-                    b.Deselect();
-                }
-
+                foreach (var b in selectedBooks) b.Deselect();
                 selectedBooks.Clear();
                 Debug.Log(" Incorrect combination. Resetting selections.");
                 return;
@@ -71,11 +65,7 @@ public class BookPuzzleManager : MonoBehaviour
 
         puzzleSolved = true;
 
-        if (puzzleSolvedSound != null)
-        {
-            puzzleSolvedSound.Post(gameObject);
-        }
-
+        puzzleSolvedSound?.Post(gameObject);
         PromptManager.Instance?.ShowPrompt("You hear something move behind the shelf...");
         Debug.Log(" Puzzle solved. Sliding bookshelf.");
         SlideBookshelf();

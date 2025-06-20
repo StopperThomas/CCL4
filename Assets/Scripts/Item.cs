@@ -27,7 +27,7 @@ public class Item
         ItemType.Key => ItemAssets.Instance.GetKeySprite(keyType),
         ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelSprite(cogwheelType),
         ItemType.LightBulb => ItemAssets.Instance.bulbSprite,
-        _ => null // catch-all to satisfy compiler
+         _=> null // catch-all to satisfy compiler
     };
 }
 
@@ -42,13 +42,13 @@ public class Item
     {
         ItemType.ScrewDriver => ItemAssets.Instance.GetScrewdriverPrefab(screwdriverType),
         ItemType.Screw => ItemAssets.Instance.GetScrewPrefab(screwType),
-        ItemType.Key => ItemAssets.Instance.GetKeyPrefab(keyType),        ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelPrefab(cogwheelType),
+        ItemType.Key => ItemAssets.Instance.GetKeyPrefab(keyType),
+        ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelPrefab(cogwheelType),
         ItemType.LightBulb => ItemAssets.Instance.bulbPrefab,
-        _ => null,
+         _=> null,
     };
 
     return prefab3D;
 }
 
 }
-

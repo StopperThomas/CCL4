@@ -6,7 +6,7 @@ public class Potion : MonoBehaviour
     public string potionID;
     public Transform cauldronTarget;
 
-    [SerializeField] private AK.Wwise.Event potionFlySound; // Assign in Inspector
+    [SerializeField] private AK.Wwise.Event potionFlySound; // Optional
 
     private Vector3 originalPosition;
     private Quaternion originalRotation;
@@ -22,18 +22,12 @@ public class Potion : MonoBehaviour
     private void CacheComponents()
     {
         if (rb == null)
-        {
             rb = GetComponent<Rigidbody>();
-        }
     }
 
     public void FlyToCauldron()
     {
-        if (potionFlySound != null)
-        {
-            potionFlySound.Post(gameObject);
-        }
-
+        potionFlySound?.Post(gameObject);
         StartCoroutine(FlyRoutine());
     }
 

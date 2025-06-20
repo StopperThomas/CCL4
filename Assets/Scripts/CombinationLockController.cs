@@ -18,7 +18,7 @@ public class CombinationLockController : MonoBehaviour
     public float openSpeed = 2f;
 
     [Header("Audio")]
-    [SerializeField] private AK.Wwise.Event chestOpenSound; // Drag Wwise event here in the Inspector
+    [SerializeField] private AK.Wwise.Event chestOpenSound; // Wwise sound event
 
     private bool isOpen = false;
     private int[] currentCombination = new int[3];
@@ -53,18 +53,13 @@ public class CombinationLockController : MonoBehaviour
 
     void OpenChest()
     {
-        if (!isOpen)
-        {
-            isOpen = true;
+        if (isOpen) return;
+        isOpen = true;
 
-            // Play Wwise chest open sound
-            if (chestOpenSound != null)
-            {
-                chestOpenSound.Post(gameObject); // or chestLidHinge.gameObject if preferred
-            }
+        // Play Wwise audio
+        chestOpenSound?.Post(gameObject);
 
-            StartCoroutine(OpenLid());
-        }
+        StartCoroutine(OpenLid());
     }
 
     System.Collections.IEnumerator OpenLid()

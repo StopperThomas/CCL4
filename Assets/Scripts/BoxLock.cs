@@ -3,7 +3,7 @@ using UnityEngine;
 public class BoxLock : MonoBehaviour
 {
     [SerializeField] private KeyType requiredKeyType = KeyType.Box;
-    [SerializeField] private AK.Wwise.Event unlockSound; // Assign in Inspector
+    [SerializeField] private AK.Wwise.Event unlockSound; // Optional Wwise SFX
 
     private bool isUnlocked = false;
 
@@ -27,10 +27,7 @@ public class BoxLock : MonoBehaviour
         Debug.Log("Lock opened with key: " + equippedItem.itemName);
         isUnlocked = true;
 
-        if (unlockSound != null)
-        {
-            unlockSound.Post(gameObject);
-        }
+        unlockSound?.Post(gameObject);
 
         gameObject.SetActive(false);
         InventoryManager.Instance.inventory.RemoveItem(equippedItem);

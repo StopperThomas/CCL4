@@ -37,57 +37,56 @@ public class UI_Inventory : MonoBehaviour
     }
 
     public void RefreshInventoryItems()
-{
-    if (inventory == null)
     {
-        Debug.LogError("UI_Inventory: inventory is null! Did you forget to call SetInventory()?");
-        return;
-    }
-
-    foreach (Transform child in itemSlotContainer)
-    {
-        if (child == itemSlotTemplate) continue;
-        Destroy(child.gameObject);
-    }
-
-    List<Item> itemList = inventory.GetItemList();
-    int maxSlots = 20;
-
-    for (int i = 0; i < maxSlots; i++)
-    {
-        Transform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
-        itemSlot.gameObject.SetActive(true);
-
-        Image image = itemSlot.Find("image").GetComponent<Image>();
-        TextMeshProUGUI amountText = itemSlot.Find("amount").GetComponent<TextMeshProUGUI>();
-        Button button = itemSlot.GetComponent<Button>();
-
-        if (i < itemList.Count)
+        if (inventory == null)
         {
-            Item item = itemList[i];
-            image.sprite = item.GetSprite();
-            image.enabled = true;
-            amountText.text = item.amount > 1 ? item.amount.ToString() : "";
+            Debug.LogError("UI_Inventory: inventory is null! Did you forget to call SetInventory()?");
+            return;
+        }
 
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() =>
+        foreach (Transform child in itemSlotContainer)
+        {
+            if (child == itemSlotTemplate) continue;
+            Destroy(child.gameObject);
+        }
+
+        List<Item> itemList = inventory.GetItemList();
+        int maxSlots = 20;
+
+        for (int i = 0; i < maxSlots; i++)
+        {
+            Transform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
+            itemSlot.gameObject.SetActive(true);
+
+            Image image = itemSlot.Find("image").GetComponent<Image>();
+            TextMeshProUGUI amountText = itemSlot.Find("amount").GetComponent<TextMeshProUGUI>();
+            Button button = itemSlot.GetComponent<Button>();
+
+            if (i < itemList.Count)
             {
-                selectedItem = item;
-                FindObjectOfType<ItemInspectorUI>()?.ShowItem(item);
-            });
+                Item item = itemList[i];
+                image.sprite = item.GetSprite();
+                image.enabled = true;
+                amountText.text = item.amount > 1 ? item.amount.ToString() : "";
+
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() =>
+                {
+                    selectedItem = item;
+                    FindObjectOfType<ItemInspectorUI>()?.ShowItem(item);
+                });
+            }
+            else
+            {
+                image.sprite = null;
+                image.enabled = false;
+                amountText.text = "";
+                button.onClick.RemoveAllListeners(); // prevent interaction
+            }
         }
-        else
-        {
-            image.sprite = null;
-            image.enabled = false;
-            amountText.text = "";
-            button.onClick.RemoveAllListeners(); // empty slot
-        }
+
+        Debug.Log($"UI_Inventory: Refreshed {Mathf.Min(itemList.Count, maxSlots)} item slots.");
     }
-
-    Debug.Log($"UI_Inventory: Refreshed {Mathf.Min(itemList.Count, maxSlots)} item slots.");
-}
-
 
     public void UpdateEquippedSlot(Item item)
     {
@@ -124,17 +123,16 @@ public class UI_Inventory : MonoBehaviour
         }
     }
 
- private bool IsEquipable(Item item)
-{
-    return item != null && (
-        item.itemType == ItemType.ScrewDriver ||
-        item.itemType == ItemType.Key ||
-        item.itemType == ItemType.Screw ||
-        item.itemType == ItemType.Cogwheel ||
-        item.itemType == ItemType.LightBulb
-    );
-}
-
+    private bool IsEquipable(Item item)
+    {
+        return item != null && (
+            item.itemType == ItemType.ScrewDriver ||
+            item.itemType == ItemType.Key ||
+            item.itemType == ItemType.Screw ||
+            item.itemType == ItemType.Cogwheel ||
+            item.itemType == ItemType.LightBulb
+        );
+    }
 
     public Item GetSelectedItem()
     {
