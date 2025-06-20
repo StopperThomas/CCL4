@@ -11,7 +11,9 @@
 					<GameSyncExclusionList/>
 				</SoundBank>
 				<SoundBank Name="BackGroundMusic" ID="{59A5B7AC-31D6-421E-B327-9040F021425F}">
-					<ObjectInclusionList/>
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_SoundTrackGamePlay_" ID="{9E667FD7-9ED8-4916-A9D7-2E4C853D9E18}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
 				</SoundBank>

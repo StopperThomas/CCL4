@@ -138,6 +138,9 @@
 				<Folder Name="BackGroundMusic" ID="{8A7511D1-54E9-4E30-A370-CC12AD1BB70B}" ShortID="633665763">
 					<ChildrenList>
 						<Sound Name="SoundTrackGamePlay" ID="{A9B84552-0D74-4966-AE15-863B1ADF6217}" ShortID="352206621">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3B50E401-E14B-43A5-84B5-0307A202DB8B}"/>
@@ -805,6 +808,9 @@
 						<Reference Name="Attenuation">
 							<Custom>
 								<Attenuation Name="Attenuation (Custom)" ID="{7AF5B81B-693D-44F7-9A4D-681BC894DBC8}" ShortID="363806452">
+									<PropertyList>
+										<Property Name="RadiusMax" Type="Real64" Value="50"/>
+									</PropertyList>
 									<CurveUsageInfoList>
 										<VolumeDryUsage>
 											<CurveUsageInfo Platform="Linked" CurveToUse="Custom">
@@ -820,7 +826,7 @@
 															<SegmentShape>Log2</SegmentShape>
 														</Point>
 														<Point>
-															<XPos>100</XPos>
+															<XPos>50</XPos>
 															<YPos>-200</YPos>
 															<Flags>37</Flags>
 														</Point>

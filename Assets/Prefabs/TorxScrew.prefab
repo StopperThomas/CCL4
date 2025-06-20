@@ -134,6 +134,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   screwID: Plus
   isUnscrewed: 1
+  unscrewSound:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 0}
 --- !u!65 &1222906479783098630
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -185,10 +189,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0965c831733398a4a97e08af4ef972b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemType: 0
+  itemType: 2
   amount: 1
   screwdriverType: 0
-  screwType: 0
+  screwType: 3
   keyType: 0
   cogwheelType: 0
   noteID: 0

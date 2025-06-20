@@ -1,0 +1,45 @@
+{
+ "SoundBanksInfo": {
+  "Platform": "Windows",
+  "BasePlatform": "Windows",
+  "SchemaVersion": "16",
+  "SoundBankVersion": "154",
+  "SoundBanks": [
+   {
+    "Id": "1991862712",
+    "Type": "User",
+    "GUID": "{22E70B2D-99AC-436F-8E08-28EF960D2562}",
+    "Language": "SFX",
+    "Hash": "{B5A2F414-5F85-5996-A237-969D68CAF72B}",
+    "ObjectPath": "\\SoundBanks\\Default Work Unit\\MainMenuMusic",
+    "ShortName": "MainMenuMusic",
+    "Path": "MainMenuMusic.bnk",
+    "Media": [
+     {
+      "Id": "575356975",
+      "Language": "SFX",
+      "Streaming": "false",
+      "Location": "Memory",
+      "ShortName": "StartMenuMusic.wav",
+      "CachePath": "3C/{3C8B4FB4-5D94-5DC0-EE0E-B6CA3E3749FD}.wem"
+     }
+    ],
+    "Events": [
+     {
+      "Id": "1581295840",
+      "Name": "Play_StartMenuMusic",
+      "ObjectPath": "\\Events\\Default Work Unit\\Play_StartMenuMusic",
+      "GUID": "{9DBB0696-1B31-47AF-852F-AD3D891CC3BA}",
+      "DurationType": "Infinite",
+      "MediaRefs": [
+       {
+        "Id": "575356975"
+       }
+      ]
+     }
+    ]
+   }
+  ],
+  "FileHash": "{9E241B3E-72AA-72DB-BE7E-2BBE7C133A58}"
+ }
+}

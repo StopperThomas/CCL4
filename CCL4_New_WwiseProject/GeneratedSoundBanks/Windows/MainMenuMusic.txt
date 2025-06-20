@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	1581295840	Play_StartMenuMusic			\Default Work Unit\Play_StartMenuMusic	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	575356975	StartMenuMusic	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\3C\{3C8B4FB4-5D94-5DC0-EE0E-B6CA3E3749FD}.wem		\Actor-Mixer Hierarchy\Default Work Unit\BackGroundMusic\StartMenuMusic		1970484
+

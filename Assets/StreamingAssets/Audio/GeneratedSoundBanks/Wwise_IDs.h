@@ -20,8 +20,10 @@ namespace AK
         static const AkUniqueID PLAY_DRAWEROPEN = 3070904089U;
         static const AkUniqueID PLAY_ENDDOOROPEN = 3738987653U;
         static const AkUniqueID PLAY_FOOTSTEPS = 3854155799U;
+        static const AkUniqueID PLAY_GAMEPLAYMUSIC = 2481433679U;
         static const AkUniqueID PLAY_KEYTURN = 522170566U;
         static const AkUniqueID PLAY_POTIONSOUNDS = 239692163U;
+        static const AkUniqueID PLAY_STARTMENUMUSIC = 1581295840U;
         static const AkUniqueID PLAY_TURNSCREW = 1516012301U;
         static const AkUniqueID PLAY_VALVETURN = 704027681U;
     } // namespace EVENTS
@@ -29,7 +31,6 @@ namespace AK
     namespace BANKS
     {
         static const AkUniqueID INIT = 1355168291U;
-        static const AkUniqueID BACKGROUNDMUSIC = 626769978U;
         static const AkUniqueID BOOKSHELFOPEN = 3857466246U;
         static const AkUniqueID CAULDRON = 1482754215U;
         static const AkUniqueID CHESTOPEN = 2892697348U;
@@ -37,7 +38,9 @@ namespace AK
         static const AkUniqueID DRAWEROPEN = 2432269754U;
         static const AkUniqueID ENDDOOROPEN = 1259417468U;
         static const AkUniqueID FOOTSTEPS = 2385628198U;
+        static const AkUniqueID GAMEPLAYMUSIC = 2275179450U;
         static const AkUniqueID KEYTURN = 3841355487U;
+        static const AkUniqueID MAINMENUMUSIC = 1991862712U;
         static const AkUniqueID POTIONSOUNDS = 584054836U;
         static const AkUniqueID TUNRSCREW = 3241605936U;
         static const AkUniqueID VALVESOUND = 396599554U;

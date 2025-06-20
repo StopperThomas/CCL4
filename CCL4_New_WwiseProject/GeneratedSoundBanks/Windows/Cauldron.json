@@ -10,7 +10,7 @@
     "Type": "User",
     "GUID": "{1760FF60-18BB-4B66-8774-B0159F01C1D2}",
     "Language": "SFX",
-    "Hash": "{284B8E76-5284-C761-3FAF-59FED94D7A9C}",
+    "Hash": "{3CFE290A-A87F-63AE-F55B-7C6C37EADD38}",
     "ObjectPath": "\\SoundBanks\\Default Work Unit\\Cauldron",
     "ShortName": "Cauldron",
     "Path": "Cauldron.bnk",
@@ -30,7 +30,7 @@
       "Name": "Play_Cauldron",
       "ObjectPath": "\\Events\\Default Work Unit\\Play_Cauldron",
       "GUID": "{DC12F4C4-29C9-454D-B81A-9A24D60981C1}",
-      "MaxAttenuation": "100",
+      "MaxAttenuation": "50",
       "DurationType": "Infinite",
       "MediaRefs": [
        {
@@ -41,6 +41,6 @@
     ]
    }
   ],
-  "FileHash": "{19769D6B-DBED-4398-AB47-BEB01915F0E0}"
+  "FileHash": "{589EF1D9-E49E-3BFE-AE44-B30DC3151EA5}"
  }
 }

@@ -124,6 +124,17 @@
 						</Action>
 					</ChildrenList>
 				</Event>
+				<Event Name="Play_SoundTrackGamePlay_" ID="{9E667FD7-9ED8-4916-A9D7-2E4C853D9E18}">
+					<ChildrenList>
+						<Action Name="" ID="{BA5B2C7E-88D9-4E2C-8AD3-B53220FE9219}" ShortID="917011441">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="SoundTrackGamePlay" ID="{A9B84552-0D74-4966-AE15-863B1ADF6217}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
 			</ChildrenList>
 		</WorkUnit>
 	</Events>

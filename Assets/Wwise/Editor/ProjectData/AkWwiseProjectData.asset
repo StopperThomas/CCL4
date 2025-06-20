@@ -24,7 +24,7 @@ MonoBehaviour:
     ParentPath: Virtual Acoustics\Default Work Unit
     guid: 3f58793a70415a4ca9e2bdf9d89f561b
     GuidInternal: 
-    m_lastTime: -8584512727880053219
+    m_lastTime: -8584512727874775808
     List: []
   AuxBusWwu:
   - PhysicalPath: Master-Mixer Hierarchy\Default Work Unit.wwu
@@ -38,7 +38,7 @@ MonoBehaviour:
     ParentPath: Master-Mixer Hierarchy\Default Work Unit
     guid: bd28d66c19ffbe40a70641feb1561a57
     GuidInternal: 
-    m_lastTime: -8584512354772090044
+    m_lastTime: -8584512354754775808
     List:
     - name: Master Audio Bus
       guid: d8a41415a61d2a41a17e75ca0c2149f3
@@ -100,7 +100,7 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: a7f24c50c1c3394ebf8104e0db0ca7ca
     GuidInternal: 
-    m_lastTime: -8584512334181859504
+    m_lastTime: -8584511959689626003
     List:
     - name: BackGroundMusic
       guid: acb7a559d6311e42b3279040f021425f
@@ -282,7 +282,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 185cdb2573b74f40889eea3e6b66329b
     GuidInternal: 
-    m_lastTime: -8584512334181756277
+    m_lastTime: -8584511959689715311
     List:
     - name: Play_BookShelfOpen
       guid: 382d12ad70f7f54f9220dd847b6ed16f
@@ -315,7 +315,7 @@ MonoBehaviour:
         ObjectType: 3
         guid: c4f412dcc9294d45b81a9a24d60981c1
       Path: Events\Default Work Unit\Play_Cauldron
-      maxAttenuation: 100
+      maxAttenuation: 50
       maxDuration: 0
       minDuration: 0
     - name: Play_Chestopen
@@ -437,6 +437,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.6120268
       minDuration: 0.4084789
+    - name: Play_SoundTrackGamePlay_
+      guid: d77f669ed89e1649a9d72e4c853d9e18
+      id: 616867959
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_SoundTrackGamePlay_
+        ObjectType: 3
+        guid: d77f669ed89e1649a9d72e4c853d9e18
+      Path: Events\Default Work Unit\Play_SoundTrackGamePlay_
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Play_TurnScrew
       guid: d967d74c8c06f94b8478b9fba9963906
       id: 1516012301
@@ -483,7 +500,7 @@ MonoBehaviour:
     ParentPath: Game Parameters\Default Work Unit
     guid: 96f2e650e2f2184bbdedfe7c23906050
     GuidInternal: 
-    m_lastTime: -8584512727879644504
+    m_lastTime: -8584512727874775808
     List: []
   StateWwu:
   - PhysicalPath: States\Default Work Unit.wwu
@@ -497,7 +514,7 @@ MonoBehaviour:
     ParentPath: States\Default Work Unit
     guid: c873c12584f6f7498ef2f13b9e7644b7
     GuidInternal: 
-    m_lastTime: -8584512727879731547
+    m_lastTime: -8584512727874775808
     List: []
   SwitchWwu:
   - PhysicalPath: Switches\Default Work Unit.wwu
@@ -511,7 +528,7 @@ MonoBehaviour:
     ParentPath: Switches\Default Work Unit
     guid: 391af487446b1c4bbbd1be0c0b37266b
     GuidInternal: 
-    m_lastTime: -8584512727879349591
+    m_lastTime: -8584512727874775808
     List: []
   TriggerWwu:
   - PhysicalPath: Triggers\Default Work Unit.wwu
@@ -525,10 +542,10 @@ MonoBehaviour:
     ParentPath: Triggers\Default Work Unit
     guid: 71bd5613dca44946ac6c42d8cc7bf211
     GuidInternal: 
-    m_lastTime: -8584512727878831312
+    m_lastTime: -8584512727874775808
     List: []
   ExpandedFileSystemItemIds: 
-  ExpandedWaapiItemIds: 0500000006000000070000000b0000000c0000000d0000000e0000000f0000001000000011000000120000001300000014000000150000001b0000001c000000220000002300000028000000290000006600000067000000c5000000c6000000d1000000d2000000d3000000d4000000020100000301000013010000140100001b0100001c0100008701000088010000cc010000cd010000d9010000da010000c7020000
+  ExpandedWaapiItemIds: 0500000006000000070000000b0000000c0000000d0000000e0000000f00000010000000110000001200000013000000140000001500000016000000170000001b0000001c000000220000002300000028000000290000006600000067000000c5000000c6000000d1000000d2000000d3000000d4000000020100000301000013010000140100001b0100001c0100008701000088010000cc010000cd010000d9010000da010000c7020000
   AutoSyncSelection: 0
   autoPopulateEnabled: 1
   currentDataSource: 0

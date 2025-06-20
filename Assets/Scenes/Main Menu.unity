@@ -148,10 +148,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 28701194}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acc9a54c95c5b5049a11a170295b4a1a, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e392a64336f3b641bac143a0124c1c6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneToLoad: GameScene
+  sceneToLoad: RoomSquishy
+  mainMenuScene: Main Menu
   infoPanel: {fileID: 707784137}
 --- !u!4 &28701196
 Transform:
@@ -306,7 +307,7 @@ MonoBehaviour:
     Inventory\nCtrl ------------------- Crouch\nEsc ---------------------- Cancel\n
     (pressing Esc does not complete the game automatically!)\n"
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a6f1e9d23acc014d807b024f0daa8c0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 23d9d55da6ebbe2489172d3a59748ef3, type: 2}
   m_sharedMaterial: {fileID: -4726044723313477863, guid: 2a466f7e2364e1f4d86017d7d5d36448,
     type: 2}
   m_fontSharedMaterials: []
@@ -443,7 +444,7 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a6f1e9d23acc014d807b024f0daa8c0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 23d9d55da6ebbe2489172d3a59748ef3, type: 2}
   m_sharedMaterial: {fileID: -4726044723313477863, guid: 2a466f7e2364e1f4d86017d7d5d36448,
     type: 2}
   m_fontSharedMaterials: []
@@ -907,10 +908,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: QUIT
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a6f1e9d23acc014d807b024f0daa8c0, type: 2}
-  m_sharedMaterial: {fileID: -4726044723313477863, guid: 2a6f1e9d23acc014d807b024f0daa8c0,
+  m_fontAsset: {fileID: 11400000, guid: 23d9d55da6ebbe2489172d3a59748ef3, type: 2}
+  m_sharedMaterial: {fileID: -4726044723313477863, guid: 23d9d55da6ebbe2489172d3a59748ef3,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4726044723313477863, guid: 23d9d55da6ebbe2489172d3a59748ef3, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -983,6 +985,60 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 921039371}
   m_CullTransparentMesh: 1
+--- !u!1 &1069438414
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1069438416}
+  - component: {fileID: 1069438415}
+  m_Layer: 0
+  m_Name: MainMenuMusic
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1069438415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069438414}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ebc945fdc532ba4ebac6a6bc83ab46c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicEvent:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 66f514ca055f87a4fa12eae5ad97013d,
+      type: 2}
+  musicBank:
+    idInternal: 0
+    valueGuidInternal: 
+    WwiseObjectReference: {fileID: 11400000, guid: 5a7c1309c93c8204fbad9689ec9e7383,
+      type: 2}
+--- !u!4 &1069438416
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1069438414}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.457012, y: -16.091871, z: 13.090757}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1142910949
 GameObject:
   m_ObjectHideFlags: 0
@@ -1112,10 +1168,11 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a6f1e9d23acc014d807b024f0daa8c0, type: 2}
-  m_sharedMaterial: {fileID: -4726044723313477863, guid: 2a6f1e9d23acc014d807b024f0daa8c0,
+  m_fontAsset: {fileID: 11400000, guid: 23d9d55da6ebbe2489172d3a59748ef3, type: 2}
+  m_sharedMaterial: {fileID: -4726044723313477863, guid: 23d9d55da6ebbe2489172d3a59748ef3,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4726044723313477863, guid: 23d9d55da6ebbe2489172d3a59748ef3, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1246,7 +1303,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b162a0db63fe95f4498e09ce9594df0d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 162e8a8022d00da418ad39c8b6350fbb, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1457,10 +1514,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: ESC
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 1a4a25042d039ea43a93c7b8ef458a4b, type: 2}
-  m_sharedMaterial: {fileID: -8750998463466864919, guid: 1a4a25042d039ea43a93c7b8ef458a4b,
+  m_fontAsset: {fileID: 11400000, guid: 6720dc5a69f3dd845828c677f2d64796, type: 2}
+  m_sharedMaterial: {fileID: -8750998463466864919, guid: 6720dc5a69f3dd845828c677f2d64796,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -8750998463466864919, guid: 6720dc5a69f3dd845828c677f2d64796, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -1640,6 +1698,64 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &1809956792
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1809956794}
+  - component: {fileID: 1809956793}
+  m_Layer: 0
+  m_Name: WwiseGlobal
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1809956793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809956792}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 169634a070a423047a063d9f7797309f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  InitializationSettings: {fileID: 11400000, guid: d316378cdf8c2604996f25fa9e0dab13,
+    type: 2}
+  basePath: 
+  language: 
+  defaultPoolSize: 0
+  lowerPoolSize: 0
+  streamingPoolSize: 0
+  memoryCutoffThreshold: 0
+  monitorPoolSize: 0
+  monitorQueuePoolSize: 0
+  callbackManagerBufferSize: 0
+  spatialAudioPoolSize: 0
+  maxSoundPropagationDepth: 0
+  engineLogging: 0
+--- !u!4 &1809956794
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1809956792}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1944961331
 GameObject:
   m_ObjectHideFlags: 0
@@ -1784,7 +1900,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2058458326}
   - component: {fileID: 2058458325}
-  - component: {fileID: 2058458324}
+  - component: {fileID: 2058458328}
+  - component: {fileID: 2058458327}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1792,14 +1909,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2058458324
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2058458323}
-  m_Enabled: 1
 --- !u!20 &2058458325
 Camera:
   m_ObjectHideFlags: 0
@@ -1866,6 +1975,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2058458327
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058458323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d1b826fd4917e4996b04654be1a385, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isDefaultListener: 1
+  bOverrideScalingFactor: 0
+  scalingFactor: -1
+  listenerId: 0
+--- !u!114 &2058458328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058458323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49f15fa4f13c90641b1d3dec4f029ea8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_listeners:
+    initialListenerList: []
+    useDefaultListeners: 1
+  isEnvironmentAware: 0
+  isStaticObject: 0
+  usePositionOffsetData: 0
+  m_positionOffsetData:
+    KeepMe: 0
+    positionOffset: {x: 0, y: 0, z: 0}
+  scalingFactor: 1
+  m_posOffsetData: {fileID: 0}
+  listenerMask: 1
 --- !u!1 &2071618618
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,10 +2208,11 @@ MonoBehaviour:
       m_Calls: []
   m_text: START
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 2a6f1e9d23acc014d807b024f0daa8c0, type: 2}
-  m_sharedMaterial: {fileID: -4726044723313477863, guid: 2a6f1e9d23acc014d807b024f0daa8c0,
+  m_fontAsset: {fileID: 11400000, guid: 23d9d55da6ebbe2489172d3a59748ef3, type: 2}
+  m_sharedMaterial: {fileID: -4726044723313477863, guid: 23d9d55da6ebbe2489172d3a59748ef3,
     type: 2}
-  m_fontSharedMaterials: []
+  m_fontSharedMaterials:
+  - {fileID: -4726044723313477863, guid: 23d9d55da6ebbe2489172d3a59748ef3, type: 2}
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
@@ -2144,3 +2294,5 @@ SceneRoots:
   - {fileID: 1714039486}
   - {fileID: 1142910952}
   - {fileID: 28701196}
+  - {fileID: 1809956794}
+  - {fileID: 1069438416}

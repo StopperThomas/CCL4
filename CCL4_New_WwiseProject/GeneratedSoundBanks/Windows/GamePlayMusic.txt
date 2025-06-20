@@ -1,0 +1,6 @@
+Event	ID	Name			Wwise Object Path	Notes
+	2481433679	Play_GamePlayMusic			\Default Work Unit\Play_GamePlayMusic	
+
+In Memory Audio	ID	Name	Audio source file		Wwise Object Path	Notes	Data Size
+	1048739575	GamePlayMusic	C:\Users\michi\Desktop\CCL4_New\CCL4_New_WwiseProject\.cache\1E\{1EAF6439-014E-6D5B-C3EA-688A03FD8EA1}.wem		\Actor-Mixer Hierarchy\Default Work Unit\BackGroundMusic\GamePlayMusic		9084696
+
