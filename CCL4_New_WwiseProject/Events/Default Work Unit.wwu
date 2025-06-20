@@ -124,12 +124,23 @@
 						</Action>
 					</ChildrenList>
 				</Event>
-				<Event Name="Play_SoundTrackGamePlay_" ID="{9E667FD7-9ED8-4916-A9D7-2E4C853D9E18}">
+				<Event Name="Play_GamePlayMusic" ID="{F15D5B6A-5F2F-46D1-A7D8-D1B1D538A50F}">
 					<ChildrenList>
-						<Action Name="" ID="{BA5B2C7E-88D9-4E2C-8AD3-B53220FE9219}" ShortID="917011441">
+						<Action Name="" ID="{858726E9-B603-4D08-B14F-0F4D838B35EE}" ShortID="999227774">
 							<ReferenceList>
 								<Reference Name="Target">
-									<ObjectRef Name="SoundTrackGamePlay" ID="{A9B84552-0D74-4966-AE15-863B1ADF6217}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+									<ObjectRef Name="GamePlayMusic" ID="{A9B84552-0D74-4966-AE15-863B1ADF6217}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
+								</Reference>
+							</ReferenceList>
+						</Action>
+					</ChildrenList>
+				</Event>
+				<Event Name="Play_StartMenuMusic" ID="{9DBB0696-1B31-47AF-852F-AD3D891CC3BA}">
+					<ChildrenList>
+						<Action Name="" ID="{2D97F18E-C278-424D-9FFD-1E57AA101494}" ShortID="259028788">
+							<ReferenceList>
+								<Reference Name="Target">
+									<ObjectRef Name="StartMenuMusic" ID="{74DAF381-B810-4CD7-9950-88F2979E54B0}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}"/>
 								</Reference>
 							</ReferenceList>
 						</Action>

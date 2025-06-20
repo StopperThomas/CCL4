@@ -100,22 +100,8 @@ MonoBehaviour:
     ParentPath: SoundBanks\Default Work Unit
     guid: a7f24c50c1c3394ebf8104e0db0ca7ca
     GuidInternal: 
-    m_lastTime: -8584511959689626003
+    m_lastTime: -8584511839480181206
     List:
-    - name: BackGroundMusic
-      guid: acb7a559d6311e42b3279040f021425f
-      id: 626769978
-      PathAndIcons:
-      - ElementName: SoundBanks
-        ObjectType: 5
-        guid: 00000000000000000000000000000000
-      - ElementName: Default Work Unit
-        ObjectType: 12
-        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
-      - ElementName: BackGroundMusic
-        ObjectType: 7
-        guid: acb7a559d6311e42b3279040f021425f
-      Path: SoundBanks\Default Work Unit\BackGroundMusic
     - name: BookShelfOpen
       guid: c8f45c81e883a84f8166838c2b707699
       id: 3857466246
@@ -214,6 +200,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: e677cee704b5ec44a225670a84e0b48d
       Path: SoundBanks\Default Work Unit\FootSteps
+    - name: GamePlayMusic
+      guid: 05569e1b3c8c664bad5d747d01f71655
+      id: 2275179450
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: GamePlayMusic
+        ObjectType: 7
+        guid: 05569e1b3c8c664bad5d747d01f71655
+      Path: SoundBanks\Default Work Unit\GamePlayMusic
     - name: KeyTurn
       guid: 7b837d5954999b4f81b1db6285413a9c
       id: 3841355487
@@ -228,6 +228,20 @@ MonoBehaviour:
         ObjectType: 7
         guid: 7b837d5954999b4f81b1db6285413a9c
       Path: SoundBanks\Default Work Unit\KeyTurn
+    - name: MainMenuMusic
+      guid: 2d0be722ac996f438e0828ef960d2562
+      id: 1991862712
+      PathAndIcons:
+      - ElementName: SoundBanks
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: a7f24c50c1c3394ebf8104e0db0ca7ca
+      - ElementName: MainMenuMusic
+        ObjectType: 7
+        guid: 2d0be722ac996f438e0828ef960d2562
+      Path: SoundBanks\Default Work Unit\MainMenuMusic
     - name: PotionSounds
       guid: b6261b85faaf884293035c6275714146
       id: 584054836
@@ -282,7 +296,7 @@ MonoBehaviour:
     ParentPath: Events\Default Work Unit
     guid: 185cdb2573b74f40889eea3e6b66329b
     GuidInternal: 
-    m_lastTime: -8584511959689715311
+    m_lastTime: -8584511839480121064
     List:
     - name: Play_BookShelfOpen
       guid: 382d12ad70f7f54f9220dd847b6ed16f
@@ -403,6 +417,23 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.4355758
       minDuration: 0.21199547
+    - name: Play_GamePlayMusic
+      guid: 6a5b5df12f5fd146a7d8d1b1d538a50f
+      id: 2481433679
+      PathAndIcons:
+      - ElementName: Events
+        ObjectType: 5
+        guid: 00000000000000000000000000000000
+      - ElementName: Default Work Unit
+        ObjectType: 12
+        guid: 185cdb2573b74f40889eea3e6b66329b
+      - ElementName: Play_GamePlayMusic
+        ObjectType: 3
+        guid: 6a5b5df12f5fd146a7d8d1b1d538a50f
+      Path: Events\Default Work Unit\Play_GamePlayMusic
+      maxAttenuation: 0
+      maxDuration: 0
+      minDuration: 0
     - name: Play_KeyTurn
       guid: fd65da712bd6a6408f263f181bbeb25a
       id: 522170566
@@ -437,9 +468,9 @@ MonoBehaviour:
       maxAttenuation: 0
       maxDuration: 0.6120268
       minDuration: 0.4084789
-    - name: Play_SoundTrackGamePlay_
-      guid: d77f669ed89e1649a9d72e4c853d9e18
-      id: 616867959
+    - name: Play_StartMenuMusic
+      guid: 9606bb9d311baf47852fad3d891cc3ba
+      id: 1581295840
       PathAndIcons:
       - ElementName: Events
         ObjectType: 5
@@ -447,10 +478,10 @@ MonoBehaviour:
       - ElementName: Default Work Unit
         ObjectType: 12
         guid: 185cdb2573b74f40889eea3e6b66329b
-      - ElementName: Play_SoundTrackGamePlay_
+      - ElementName: Play_StartMenuMusic
         ObjectType: 3
-        guid: d77f669ed89e1649a9d72e4c853d9e18
-      Path: Events\Default Work Unit\Play_SoundTrackGamePlay_
+        guid: 9606bb9d311baf47852fad3d891cc3ba
+      Path: Events\Default Work Unit\Play_StartMenuMusic
       maxAttenuation: 0
       maxDuration: 0
       minDuration: 0

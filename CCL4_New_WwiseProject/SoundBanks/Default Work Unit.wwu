@@ -10,13 +10,6 @@
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>
 				</SoundBank>
-				<SoundBank Name="BackGroundMusic" ID="{59A5B7AC-31D6-421E-B327-9040F021425F}">
-					<ObjectInclusionList>
-						<ObjectRef Name="Play_SoundTrackGamePlay_" ID="{9E667FD7-9ED8-4916-A9D7-2E4C853D9E18}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
-					</ObjectInclusionList>
-					<ObjectExclusionList/>
-					<GameSyncExclusionList/>
-				</SoundBank>
 				<SoundBank Name="CombiLock" ID="{46D73B31-6155-400B-9FDF-D642FB19912E}">
 					<ObjectInclusionList>
 						<ObjectRef Name="CombiLock" ID="{2D48B1AF-F8E0-4A7D-A964-A9273C1DA777}" WorkUnitID="{3E7EDBBA-6D0A-4BB9-AD8C-525EE909B7E0}" Origin="Manual" Filter="7"/>
@@ -83,6 +76,20 @@
 				<SoundBank Name="Cauldron" ID="{1760FF60-18BB-4B66-8774-B0159F01C1D2}">
 					<ObjectInclusionList>
 						<ObjectRef Name="Play_Cauldron" ID="{DC12F4C4-29C9-454D-B81A-9A24D60981C1}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="GamePlayMusic" ID="{1B9E5605-8C3C-4B66-AD5D-747D01F71655}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_GamePlayMusic" ID="{F15D5B6A-5F2F-46D1-A7D8-D1B1D538A50F}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
+					</ObjectInclusionList>
+					<ObjectExclusionList/>
+					<GameSyncExclusionList/>
+				</SoundBank>
+				<SoundBank Name="MainMenuMusic" ID="{22E70B2D-99AC-436F-8E08-28EF960D2562}">
+					<ObjectInclusionList>
+						<ObjectRef Name="Play_StartMenuMusic" ID="{9DBB0696-1B31-47AF-852F-AD3D891CC3BA}" WorkUnitID="{25DB5C18-B773-404F-889E-EA3E6B66329B}" Origin="Manual" Filter="7"/>
 					</ObjectInclusionList>
 					<ObjectExclusionList/>
 					<GameSyncExclusionList/>

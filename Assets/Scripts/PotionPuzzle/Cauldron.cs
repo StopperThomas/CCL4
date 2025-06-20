@@ -10,9 +10,7 @@ public class Cauldron : MonoBehaviour
     public GameObject rewardCubePrefab;
     public Transform rewardSpawnPoint;
 
-    [SerializeField] private AK.Wwise.Event potionEnterSound;
-
-    private List<string> insertedPotions = new();
+    private List<string> insertedPotions = new List<string>();
     private bool isChecking = false;
     private Vector3 originalLiquidPosition;
 
@@ -44,8 +42,6 @@ public class Cauldron : MonoBehaviour
                 return;
             }
 
-            potionEnterSound?.Post(gameObject);
-
             insertedPotions.Add(potion.potionID);
             Debug.Log("Potion added. Current potions in cauldron: " + string.Join(", ", insertedPotions));
 
@@ -65,7 +61,7 @@ public class Cauldron : MonoBehaviour
         }
     }
 
-    private void RaiseLiquid()
+    void RaiseLiquid()
     {
         if (liquidLayer == null)
         {
@@ -73,38 +69,42 @@ public class Cauldron : MonoBehaviour
             return;
         }
 
+        Debug.Log("Raising liquid by " + liquidRisePerPotion);
         liquidLayer.localPosition += Vector3.up * liquidRisePerPotion;
         Debug.Log("New liquid position: " + liquidLayer.localPosition);
     }
 
-    private void CheckCombination()
+void CheckCombination()
+{
+    var sortedCorrect = correctPotions.OrderBy(x => x).ToList();
+    var sortedInput = insertedPotions.OrderBy(x => x).ToList();
+
+    Debug.Log("Checking combination...");
+    Debug.Log("Correct: " + string.Join(", ", sortedCorrect));
+    Debug.Log("Input: " + string.Join(", ", sortedInput));
+
+    if (sortedInput.SequenceEqual(sortedCorrect))
     {
-        var sortedCorrect = correctPotions.OrderBy(x => x).ToList();
-        var sortedInput = insertedPotions.OrderBy(x => x).ToList();
+        Debug.Log("Correct combination! Spawning reward.");
 
-        Debug.Log("Checking combination...");
-        Debug.Log("Correct: " + string.Join(", ", sortedCorrect));
-        Debug.Log("Input: " + string.Join(", ", sortedInput));
-
-        if (sortedInput.SequenceEqual(sortedCorrect))
-        {
-            Debug.Log("Correct combination! Spawning reward.");
-
-            GameObject reward = Instantiate(rewardCubePrefab, rewardSpawnPoint.position, Quaternion.identity);
-            reward.transform.localScale = Vector3.one * 0.5f;
-            reward.SetActive(true);
-        }
-        else
-        {
-            Debug.Log("Incorrect combination. Resetting puzzle.");
-            ResetPuzzle();
-        }
+        GameObject reward = Instantiate(rewardCubePrefab, rewardSpawnPoint.position, Quaternion.identity);
+        reward.transform.localScale = 0.5f * Vector3.one;
+        reward.SetActive(true);
     }
-
-    private void ResetPuzzle()
+    else
     {
+        Debug.Log("Incorrect combination. Resetting puzzle.");
+        ResetPuzzle();
+    }
+}
+
+    void ResetPuzzle()
+    {
+        Debug.Log("Resetting puzzle...");
+
         foreach (Potion p in Resources.FindObjectsOfTypeAll<Potion>())
         {
+            Debug.Log("Resetting potion: " + p.name);
             p.ResetPotion();
         }
 

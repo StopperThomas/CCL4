@@ -137,9 +137,14 @@
 				</RandomSequenceContainer>
 				<Folder Name="BackGroundMusic" ID="{8A7511D1-54E9-4E30-A370-CC12AD1BB70B}" ShortID="633665763">
 					<ChildrenList>
-						<Sound Name="SoundTrackGamePlay" ID="{A9B84552-0D74-4966-AE15-863B1ADF6217}" ShortID="352206621">
+						<Sound Name="GamePlayMusic" ID="{A9B84552-0D74-4966-AE15-863B1ADF6217}" ShortID="352206621">
 							<PropertyList>
 								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+								<Property Name="Volume" Type="Real64">
+									<ValueList>
+										<Value>-7</Value>
+									</ValueList>
+								</Property>
 							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
@@ -163,6 +168,9 @@
 							</ActiveSourceList>
 						</Sound>
 						<Sound Name="StartMenuMusic" ID="{74DAF381-B810-4CD7-9950-88F2979E54B0}" ShortID="754568148">
+							<PropertyList>
+								<Property Name="IsLoopingEnabled" Type="bool" Value="True"/>
+							</PropertyList>
 							<ReferenceList>
 								<Reference Name="Conversion">
 									<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{3B50E401-E14B-43A5-84B5-0307A202DB8B}"/>

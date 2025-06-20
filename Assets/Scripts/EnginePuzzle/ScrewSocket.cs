@@ -8,7 +8,7 @@ public class ScrewSocket : MonoBehaviour
     private bool isFilled = false;
 
     [SerializeField] private Vector3 screwOffset = new Vector3(-0.02f, -0.05f, 0f);
-    [SerializeField] private AK.Wwise.Event screwPlaceSound; // Optional
+
 
     public bool IsFilled => isFilled;
     public ScrewType PlacedType { get; private set; }
@@ -24,14 +24,19 @@ public class ScrewSocket : MonoBehaviour
             return false;
         }
 
+        // Instantiate and parent the screw to this socket
         placedScrew = Instantiate(screwPrefab, transform.position, Quaternion.identity);
         placedScrew.transform.SetParent(transform);
+
+        // Apply local offset and rotation
         placedScrew.transform.localPosition = screwOffset;
         placedScrew.transform.localRotation = Quaternion.Euler(180f, 0f, 0f);
         placedScrew.transform.localScale = Vector3.one;
 
+        // Disable further interaction
         placedScrew.tag = "Untagged";
 
+        // Disable gravity and physics
         Rigidbody rb = placedScrew.GetComponent<Rigidbody>();
         if (rb != null)
         {
@@ -42,9 +47,9 @@ public class ScrewSocket : MonoBehaviour
         isFilled = true;
         PlacedType = type;
 
-        screwPlaceSound?.Post(gameObject);
-
+        // Notify the puzzle manager
         PuzzleManager.Instance?.NotifyScrewPlaced(this);
+
         return true;
     }
 }
