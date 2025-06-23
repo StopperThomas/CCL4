@@ -6,6 +6,7 @@ public class InventoryManager : MonoBehaviour
     public Inventory inventory;
     public UI_Inventory uiInventory;
 
+
     private void Awake()
     {
         if (Instance == null)

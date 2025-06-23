@@ -74,7 +74,6 @@ public class PickupItem : MonoBehaviour
                 Debug.LogWarning($"Unhandled item type in PickupItem: {itemType}");
                 break;
         }
-
         return item;
     }
 }

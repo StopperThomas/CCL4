@@ -20,6 +20,7 @@ public class GameStateManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
     
     public void MarkScrewUnscrewed(string screwID)
     {
@@ -34,6 +35,7 @@ public class GameStateManager : MonoBehaviour
     {
         return unscrewedScrews.Contains(screwID);
     }
+
     
     public void SetEquippedItem(string itemID)
     {

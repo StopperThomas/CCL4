@@ -9,6 +9,8 @@ public class ValveController : MonoBehaviour
     [Header("References")]
     public PointerController pointerController;
 
+    [SerializeField] private AK.Wwise.Event valveTurnSound;
+
     private bool isSpinning = false;
 
     public void ActivateValve()
@@ -17,10 +19,15 @@ public class ValveController : MonoBehaviour
 
         // Prevent further interaction if already solved
         if (TankPuzzleManager.Instance != null && TankPuzzleManager.Instance.tankPuzzleSolved)
-
         {
             PromptManager.Instance?.ShowPrompt("The tank is already full.");
             return;
+        }
+
+        // Play valve sound
+        if (valveTurnSound != null)
+        {
+            valveTurnSound.Post(gameObject);
         }
 
         StartCoroutine(SpinValveVisual());
@@ -35,7 +42,6 @@ public class ValveController : MonoBehaviour
         float elapsed = 0f;
         float endAngle = 90f;
 
-        
         Quaternion initialRotation = transform.localRotation;
         Quaternion targetRotation = initialRotation * Quaternion.Euler(endAngle, 0f, 0f);
 
@@ -48,7 +54,6 @@ public class ValveController : MonoBehaviour
             yield return null;
         }
 
-        
         transform.localRotation = targetRotation;
         isSpinning = false;
     }

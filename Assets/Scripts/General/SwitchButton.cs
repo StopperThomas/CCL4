@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class SwitchButton : MonoBehaviour
 {
-    public float pressDistance = 0.05f;
-    public float pressDuration = 0.1f;
+    public float pressDistance = 0.05f; // How far it moves when pressed
+    public float pressDuration = 0.1f;  // How fast it presses/rebounds
 
     private Vector3 initialPosition;
     private bool isAnimating = false;
@@ -36,7 +36,7 @@ public class SwitchButton : MonoBehaviour
         }
         transform.localPosition = pressedPosition;
 
-        // Pause briefly
+        // Pause briefly (optional)
         yield return new WaitForSeconds(0.05f);
 
         // Return back

@@ -56,6 +56,6 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "CCL4_New.sln",
+    "dotnet.defaultSolution": "Esc_Source.sln",
     "git.ignoreLimitWarning": true
 }

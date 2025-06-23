@@ -12,6 +12,9 @@ public class PromptManager : MonoBehaviour
     private System.Action onConfirm;
     private bool waitingForInput = false;
 
+    private float promptCooldown = 0.5f;
+    private float lastPromptTime = -999f;
+
     private void Awake()
     {
         if (Instance == null)
@@ -20,29 +23,26 @@ public class PromptManager : MonoBehaviour
             Destroy(gameObject);
     }
 
-private float promptCooldown = 0.5f;
-private float lastPromptTime = -999f;
-
-public void ShowPrompt(string message, System.Action onConfirmed = null)
-{
-    if (Time.time - lastPromptTime < promptCooldown)
+    public void ShowPrompt(string message, System.Action onConfirmed = null)
     {
-        Debug.Log($"Prompt blocked: '{message}' (too soon)");
-        return;
+        if (Time.time - lastPromptTime < promptCooldown)
+        {
+            Debug.Log($"Prompt blocked: '{message}' (too soon)");
+            return;
+        }
+
+        lastPromptTime = Time.time;
+
+        Debug.Log($"ShowPrompt called with message: {message}");
+        if (promptText != null)
+            promptText.text = message;
+
+        if (promptPanel != null)
+            promptPanel.SetActive(true);
+
+        onConfirm = onConfirmed;
+        waitingForInput = true;
     }
-
-    lastPromptTime = Time.time;
-
-    Debug.Log($"ShowPrompt called with message: {message}");
-    if (promptText != null)
-        promptText.text = message;
-
-    if (promptPanel != null)
-        promptPanel.SetActive(true);
-
-    onConfirm = onConfirmed;
-    waitingForInput = true;
-}
 
     private void Update()
     {

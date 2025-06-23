@@ -38,6 +38,7 @@ public class Inventory
         InventoryManager.Instance?.uiInventory?.RefreshInventoryItems();
     }
 
+
     public void RemoveItem(Item item)
     {
         Item inventoryItem = null;
@@ -48,7 +49,6 @@ public class Inventory
         }
         else
         {
-            // For unstackables like keys, find exact match
             inventoryItem = itemList.Find(i => i == item);
         }
 
@@ -105,4 +105,5 @@ public class Inventory
                 return false;
         }
     }
+
 }

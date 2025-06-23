@@ -52,12 +52,9 @@ public class UI_Inventory : MonoBehaviour
 
         List<Item> itemList = inventory.GetItemList();
         int maxSlots = 20;
-        int displayCount = Mathf.Min(itemList.Count, maxSlots);
 
-        for (int i = 0; i < displayCount; i++)
+        for (int i = 0; i < maxSlots; i++)
         {
-            Item item = itemList[i];
-
             Transform itemSlot = Instantiate(itemSlotTemplate, itemSlotContainer);
             itemSlot.gameObject.SetActive(true);
 
@@ -65,20 +62,32 @@ public class UI_Inventory : MonoBehaviour
             TextMeshProUGUI amountText = itemSlot.Find("amount").GetComponent<TextMeshProUGUI>();
             Button button = itemSlot.GetComponent<Button>();
 
-            image.sprite = item.GetSprite();
-            image.enabled = true;
-            amountText.text = item.amount > 1 ? item.amount.ToString() : "";
-
-            button.onClick.RemoveAllListeners();
-            button.onClick.AddListener(() =>
+            if (i < itemList.Count)
             {
-                selectedItem = item;
-                FindObjectOfType<ItemInspectorUI>()?.ShowItem(item);
-            });
+                Item item = itemList[i];
+                image.sprite = item.GetSprite();
+                image.enabled = true;
+                amountText.text = item.amount > 1 ? item.amount.ToString() : "";
+
+                button.onClick.RemoveAllListeners();
+                button.onClick.AddListener(() =>
+                {
+                    selectedItem = item;
+                    FindObjectOfType<ItemInspectorUI>()?.ShowItem(item);
+                });
+            }
+            else
+            {
+                image.sprite = null;
+                image.enabled = false;
+                amountText.text = "";
+                button.onClick.RemoveAllListeners(); // prevent interaction
+            }
         }
 
-        Debug.Log($"UI_Inventory: Displaying {displayCount}/{maxSlots} items.");
+        Debug.Log($"UI_Inventory: Refreshed {Mathf.Min(itemList.Count, maxSlots)} item slots.");
     }
+
     public void UpdateEquippedSlot(Item item)
     {
         if (equippedSlotIcon == null || equippedSlotObject == null) return;

@@ -18,7 +18,7 @@ public class ScrewBox : MonoBehaviour
 
     private void Awake()
     {
-        // Ensuring the script is only on valid objects
+        // Ensure this script is only on valid objects
         if (lidObject == null && gameObject.name != "ScrewBox")
         {
             Debug.LogError($"ScrewBox is attached to '{gameObject.name}' but has no lidObject assigned.");
