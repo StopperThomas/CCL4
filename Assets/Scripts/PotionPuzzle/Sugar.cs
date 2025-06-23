@@ -2,8 +2,8 @@ using UnityEngine;
 
 public class Sugar : MonoBehaviour
 {
-    public Transform targetPosition;         // Where the cube flies to
-    public HatchOpener hatchToOpen;          // Reference to the hatch script
+    public Transform targetPosition;
+    public HatchOpener hatchToOpen;
     public float flySpeed = 2f;
 
     private bool isMoving = false;
@@ -18,11 +18,9 @@ public class Sugar : MonoBehaviour
             {
                 isMoving = false;
 
-                // Open the hatch
                 if (hatchToOpen != null)
                     hatchToOpen.OpenHatch();
 
-                // Despawn this object after a short delay (optional fade/anim time)
                 Destroy(gameObject, 0.1f);
             }
         }
