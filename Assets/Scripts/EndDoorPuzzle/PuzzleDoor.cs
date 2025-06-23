@@ -1,6 +1,5 @@
 using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
 public class PuzzleDoor : MonoBehaviour
 {
@@ -10,10 +9,18 @@ public class PuzzleDoor : MonoBehaviour
     [SerializeField] private Material redGlowMaterial;
     [SerializeField] private Material greenGlowMaterial;
 
-    public static PuzzleDoor Instance;
-
     [SerializeField] private CogwheelSpot[] cogwheelSpots;
     [SerializeField] private GameObject doorObject;
+
+    [SerializeField] private GameObject objectToUnhide;
+
+    [Header("Wwise & Timing")]
+    [SerializeField] private AK.Wwise.Event doorOpenSound;
+    [SerializeField] private float doorOpenDuration = 2f;
+
+    public static PuzzleDoor Instance;
+
+    private bool doorOpened = false;
 
     private void Awake()
     {
@@ -38,9 +45,6 @@ public class PuzzleDoor : MonoBehaviour
         OpenDoor();
     }
 
-
-    private bool doorOpened = false;
-
     private void OpenDoor()
     {
         if (doorOpened) return;
@@ -49,10 +53,17 @@ public class PuzzleDoor : MonoBehaviour
         Debug.Log("Opening door...");
         StartCoroutine(RotateDoor());
 
+        // Change light material to green
         MeshRenderer renderer = lightObject.GetComponent<MeshRenderer>();
         if (renderer != null)
         {
             renderer.material = greenGlowMaterial;
+        }
+
+        // Unhide the object (if assigned)
+        if (objectToUnhide != null)
+        {
+            objectToUnhide.SetActive(true);
         }
     }
 

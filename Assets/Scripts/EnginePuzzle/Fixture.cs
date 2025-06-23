@@ -2,10 +2,12 @@ using UnityEngine;
 
 public class Fixture : MonoBehaviour
 {
-    public bool isCorrectSocket; 
+    public bool isCorrectSocket;
     private GameObject placedBulb;
-    
-public bool TryPlaceBulb(GameObject bulbPrefab)
+
+    [SerializeField] private AK.Wwise.Event bulbPlaceSound;
+
+    public bool TryPlaceBulb(GameObject bulbPrefab)
     {
         if (placedBulb != null || bulbPrefab == null)
             return false;
@@ -23,6 +25,8 @@ public bool TryPlaceBulb(GameObject bulbPrefab)
             rb.isKinematic = true;
         }
 
+        bulbPlaceSound?.Post(gameObject);
+
         if (isCorrectSocket)
         {
             PowerBulb();
@@ -32,11 +36,10 @@ public bool TryPlaceBulb(GameObject bulbPrefab)
             Debug.Log("Wrong socket. Bulb placed, but no power.");
         }
 
-        // Always return true if bulb was placed
         return true;
     }
 
-        private void PowerBulb()
+    private void PowerBulb()
     {
         LightBulb bulbScript = placedBulb.GetComponent<LightBulb>();
         if (bulbScript != null)
@@ -49,7 +52,6 @@ public bool TryPlaceBulb(GameObject bulbPrefab)
             Debug.LogWarning("No LightBulb script found on placed bulb!");
         }
 
-        // Change color to yellow
         Renderer rend = placedBulb.GetComponentInChildren<Renderer>();
         if (rend != null)
         {
@@ -58,7 +60,6 @@ public bool TryPlaceBulb(GameObject bulbPrefab)
             rend.material = matInstance;
         }
 
-        // Lock interaction
         placedBulb.tag = "Untagged";
     }
 

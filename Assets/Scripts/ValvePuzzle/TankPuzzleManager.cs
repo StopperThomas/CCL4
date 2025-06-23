@@ -6,6 +6,7 @@ public class TankPuzzleManager : MonoBehaviour
 
     public PointerController pointer;
 
+    
     public float greenStartAngle = 230f;
     public float greenEndAngle = 260f;
 

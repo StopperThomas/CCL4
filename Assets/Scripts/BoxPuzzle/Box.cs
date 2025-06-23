@@ -4,6 +4,7 @@ public class Box : MonoBehaviour
 {
     [SerializeField] private Transform hingeBack;
     [SerializeField] private BoxLock boxLock;
+    [SerializeField] private AK.Wwise.Event openSound;
 
     private bool isOpen = false;
 
@@ -14,6 +15,12 @@ public class Box : MonoBehaviour
         if (boxLock == null || boxLock.IsUnlocked())
         {
             isOpen = true;
+
+            if (openSound != null)
+            {
+                openSound.Post(gameObject);
+            }
+
             RotateHinge();
             Debug.Log("Box opened!");
         }

@@ -98,7 +98,7 @@ public class InteractionManager : MonoBehaviour
         if (screw != null && !screw.isUnscrewed)
         {
             PromptManager.Instance?.ShowPrompt("You need to unscrew it first.");
-            return;
+            return; // Block inspection
         }
 
         // Regular interactable or inventory item
@@ -293,6 +293,7 @@ public class InteractionManager : MonoBehaviour
         var box = hitObject.GetComponent<Box>();
         box?.TryOpen();
     }
+
 
     void TryPickupItem(GameObject target)
     {

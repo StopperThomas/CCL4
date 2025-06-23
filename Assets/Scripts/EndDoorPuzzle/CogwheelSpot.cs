@@ -25,7 +25,7 @@ public class CogwheelSpot : MonoBehaviour
             return false;
         }
 
-        
+
 
         GameObject cogwheelObj = Instantiate(item.prefab3D, transform.position, transform.rotation);
         cogwheelObj.transform.SetParent(transform);

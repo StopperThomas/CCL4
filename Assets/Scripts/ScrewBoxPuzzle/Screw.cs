@@ -5,6 +5,8 @@ public class Screw : MonoBehaviour
     public string screwID;
     public bool isUnscrewed = false;
 
+    [SerializeField] private AK.Wwise.Event unscrewSound;
+
     void Start()
     {
         if (GameStateManager.Instance != null && GameStateManager.Instance.IsScrewUnscrewed(screwID))
@@ -14,7 +16,7 @@ public class Screw : MonoBehaviour
         }
     }
 
-   public bool TryUnscrew(Item equippedItem)
+    public bool TryUnscrew(Item equippedItem)
     {
         if (isUnscrewed || equippedItem == null) return false;
 
@@ -25,12 +27,17 @@ public class Screw : MonoBehaviour
             (ScrewType)equippedItem.screwdriverType == pickup.screwType)
         {
             isUnscrewed = true;
+
+            if (unscrewSound != null)
+                unscrewSound.Post(gameObject);
+
             GameStateManager.Instance?.MarkScrewUnscrewed(screwID);
             InventoryManager.Instance.inventory.AddItem(pickup.GetItem());
             InventoryManager.Instance.uiInventory.RefreshInventoryItems();
             gameObject.SetActive(false);
             return true;
         }
+
         return false;
     }
 }

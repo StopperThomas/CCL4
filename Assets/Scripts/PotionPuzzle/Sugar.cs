@@ -3,8 +3,8 @@ using UnityEngine;
 public class Sugar : MonoBehaviour
 {
     public Transform targetPosition;
-    public Transform gearToReveal;
-    public Vector3 gearMoveOffset = new Vector3(0f, 0.05f, 0f);
+    public Transform gearToReveal; 
+    public Vector3 gearMoveOffset = new Vector3(0f, 0.05f, 0f); 
     public float flySpeed = 2f;
 
     private bool isMoving = false;
@@ -36,7 +36,7 @@ public class Sugar : MonoBehaviour
 
     private void RevealGear()
     {
-        gearToReveal.localPosition += gearMoveOffset;
+        gearToReveal.localPosition += gearMoveOffset; 
         Debug.Log("Gear revealed!");
     }
 }

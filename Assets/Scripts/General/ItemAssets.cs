@@ -15,6 +15,7 @@ public class ItemAssets : MonoBehaviour
     public Sprite screwDriverTorxSprite;
     public Sprite screwDriverYSprite;
   
+
     // Screw sprites by type
     public Sprite screwMinusSprite;
     public Sprite screwPlusSprite;
@@ -30,12 +31,14 @@ public class ItemAssets : MonoBehaviour
     public Sprite cogwheelMediumSprite;
     public Sprite cogwheelLargeSprite;
 
+
     // Screwdrivers
     public GameObject screwDriverMinusPrefab;
     public GameObject screwDriverPlusPrefab;
     public GameObject screwDriverTorxPrefab;
     public GameObject screwDriverYPrefab;
    
+
     // Screws
     public GameObject screwMinusPrefab;
     public GameObject screwPlusPrefab;
@@ -162,6 +165,6 @@ public class ItemAssets : MonoBehaviour
     
             _ => null,
         };
-    }    
+    }
     public GameObject gearPrefab; 
 }

@@ -40,12 +40,11 @@ public class ItemInspectorUI : MonoBehaviour
 
     public void ShowItem(Item item)
     {
-
         nameText.text = item.itemName;
         descriptionText.text = item.description;
         currentItem = item;
 
-    Debug.Log($"[ShowItem] item: {item.itemName}, prefab3D: {item.prefab3D}, anchor: {renderAnchor}, cam: {renderCamera}");
+        Debug.Log($"[ShowItem] item: {item.itemName}, prefab3D: {item.prefab3D}, anchor: {renderAnchor}, cam: {renderCamera}");
 
         if (dropHintText != null)
         {
@@ -102,6 +101,7 @@ public class ItemInspectorUI : MonoBehaviour
     {
         if (item == null || item.prefab3D == null)
             return;
+
 
         Item actualInventoryItem = InventoryManager.Instance.inventory.GetItemList().Find(i => i == item);
         if (actualInventoryItem == null)
@@ -185,7 +185,6 @@ public class ItemInspectorUI : MonoBehaviour
                item.itemType == ItemType.Cogwheel ||
                item.itemType == ItemType.LightBulb;
     }
-
     private void FitItemInView(GameObject obj)
     {
         if (renderCamera == null || obj == null) return;
@@ -230,10 +229,8 @@ public class ItemInspectorUI : MonoBehaviour
                 SetLayerRecursively(child.gameObject, newLayer);
         }
     }
-
     public Item GetCurrentItem()
     {
         return currentItem;
     }
-
 }

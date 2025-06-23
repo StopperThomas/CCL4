@@ -17,6 +17,9 @@ public class CombinationLockController : MonoBehaviour
     public float openAngle = 45f;
     public float openSpeed = 2f;
 
+    [Header("Audio")]
+    [SerializeField] private AK.Wwise.Event chestOpenSound;
+
     private bool isOpen = false;
     private int[] currentCombination = new int[3];
 
@@ -49,11 +52,12 @@ public class CombinationLockController : MonoBehaviour
 
     void OpenChest()
     {
-        if (!isOpen)
-        {
-            isOpen = true;
-            StartCoroutine(OpenLid());
-        }
+        if (isOpen) return;
+        isOpen = true;
+
+        chestOpenSound?.Post(gameObject);
+
+        StartCoroutine(OpenLid());
     }
 
     System.Collections.IEnumerator OpenLid()

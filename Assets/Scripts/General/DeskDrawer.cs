@@ -14,6 +14,8 @@ public class DeskDrawer : MonoBehaviour
     [Header("Puzzle Auto-Open")]
     public bool openOnTankPuzzleSolved = false;
 
+    [SerializeField] private AK.Wwise.Event drawerInteractSound;
+
     private Vector3 closedPosition;
     private Vector3 openPosition;
     private bool isSliding = false;
@@ -34,6 +36,7 @@ public class DeskDrawer : MonoBehaviour
                 PromptManager.Instance?.ShowPrompt("You hear a drawer unlock and slide open...");
                 SlideDrawer(true);
                 hasAutoOpened = true;
+                isLocked = false;
             }
         }
     }
@@ -44,7 +47,9 @@ public class DeskDrawer : MonoBehaviour
 
         if (isLocked)
         {
-            if (equippedItem != null && equippedItem.itemType == ItemType.Key && equippedItem.keyType == requiredKey)
+            if (equippedItem != null &&
+                equippedItem.itemType == ItemType.Key &&
+                equippedItem.keyType == requiredKey)
             {
                 isLocked = false;
                 PromptManager.Instance?.ShowPrompt("Unlocked the drawer.");
@@ -64,6 +69,9 @@ public class DeskDrawer : MonoBehaviour
 
     private void SlideDrawer(bool open)
     {
+        if (drawerInteractSound != null)
+            drawerInteractSound.Post(gameObject);
+
         isOpen = open;
         StartCoroutine(SlideCoroutine(open ? openPosition : closedPosition));
     }

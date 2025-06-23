@@ -18,7 +18,7 @@ public class Item
     public CogwheelType cogwheelType;
     public int noteID;
 
-   public Sprite GetSprite()
+    public Sprite GetSprite()
     {
         return itemType switch
         {
@@ -27,7 +27,7 @@ public class Item
             ItemType.Key => ItemAssets.Instance.GetKeySprite(keyType),
             ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelSprite(cogwheelType),
             ItemType.LightBulb => ItemAssets.Instance.bulbSprite,
-            _ => null
+            _=> null
         };
     }
 
@@ -43,7 +43,7 @@ public class Item
             ItemType.Key => ItemAssets.Instance.GetKeyPrefab(keyType),
             ItemType.Cogwheel => ItemAssets.Instance.GetCogwheelPrefab(cogwheelType),
             ItemType.LightBulb => ItemAssets.Instance.bulbPrefab,
-            _ => null,
+            _=> null,
         };
 
         return prefab3D;
